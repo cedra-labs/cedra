@@ -523,7 +523,7 @@ module collection_offer_tests {
     use std::string;
     use std::option;
 
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_framework::object;
     use aptos_framework::timestamp;
@@ -547,7 +547,7 @@ module collection_offer_tests {
             test_utils::setup(aptos_framework, marketplace, seller, purchaser);
         let (collection, token) = test_utils::mint_tokenv2_with_collection(seller);
         assert!(object::is_owner(token, seller_addr), 0);
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             collection,
             test_utils::fee_schedule(marketplace),
@@ -560,21 +560,21 @@ module collection_offer_tests {
         assert!(collection_offer::price(collection_offer) == 500, 0);
 
         assert!(collection_offer::remaining(collection_offer) == 2, 0);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 1, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 8999, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10000, 0);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 1, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 8999, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10000, 0);
 
-        collection_offer::sell_tokenv2<AptosCoin>(seller, collection_offer, token);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 6, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 8999, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10495, 0);
+        collection_offer::sell_tokenv2<CedraCoin>(seller, collection_offer, token);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 6, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 8999, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10495, 0);
         assert!(object::is_owner(token, purchaser_addr), 0);
         assert!(collection_offer::remaining(collection_offer) == 1, 0);
 
-        collection_offer::sell_tokenv2<AptosCoin>(purchaser, collection_offer, token);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 11, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 9489, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10500, 0);
+        collection_offer::sell_tokenv2<CedraCoin>(purchaser, collection_offer, token);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 11, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 9489, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10500, 0);
         assert!(object::is_owner(token, purchaser_addr), 0);
         assert!(!collection_offer::exists_at(collection_offer), 0);
     }
@@ -590,7 +590,7 @@ module collection_offer_tests {
             test_utils::setup(aptos_framework, marketplace, seller, purchaser);
         let (collection, token) = test_utils::mint_tokenv2_with_collection_royalty(seller, 1, 1);
         assert!(object::is_owner(token, seller_addr), 0);
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             collection,
             test_utils::fee_schedule(marketplace),
@@ -603,15 +603,15 @@ module collection_offer_tests {
         assert!(collection_offer::price(collection_offer) == 500, 0);
 
         assert!(collection_offer::remaining(collection_offer) == 2, 0);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 1, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 8999, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10000, 0);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 1, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 8999, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10000, 0);
 
-        collection_offer::sell_tokenv2<AptosCoin>(seller, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(seller, collection_offer, token);
         assert!(object::is_owner(token, purchaser_addr), 0);
         assert!(collection_offer::remaining(collection_offer) == 1, 0);
 
-        collection_offer::sell_tokenv2<AptosCoin>(purchaser, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(purchaser, collection_offer, token);
         assert!(object::is_owner(token, purchaser_addr), 0);
         assert!(!collection_offer::exists_at(collection_offer), 0);
     }
@@ -634,7 +634,7 @@ module collection_offer_tests {
         let (creator_addr, collection_name, token_name, property_version) =
             tokenv1::get_token_id_fields(&token_id);
 
-        let collection_offer = collection_offer::init_for_tokenv1<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv1<CedraCoin>(
             purchaser,
             creator_addr,
             collection_name,
@@ -645,21 +645,21 @@ module collection_offer_tests {
         );
 
         assert!(collection_offer::remaining(collection_offer) == 2, 0);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 1, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 8999, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10000, 0);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 1, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 8999, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10000, 0);
 
-        collection_offer::sell_tokenv1<AptosCoin>(seller, collection_offer, token_name, property_version);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 6, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 8999, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10495, 0);
+        collection_offer::sell_tokenv1<CedraCoin>(seller, collection_offer, token_name, property_version);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 6, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 8999, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10495, 0);
         assert!(tokenv1::balance_of(purchaser_addr, token_id) == 1, 0);
         assert!(collection_offer::remaining(collection_offer) == 1, 0);
 
-        collection_offer::sell_tokenv1<AptosCoin>(purchaser, collection_offer, token_name, property_version);
-        assert!(coin::balance<AptosCoin>(marketplace_addr) == 11, 0);
-        assert!(coin::balance<AptosCoin>(purchaser_addr) == 9489, 0);
-        assert!(coin::balance<AptosCoin>(seller_addr) == 10500, 0);
+        collection_offer::sell_tokenv1<CedraCoin>(purchaser, collection_offer, token_name, property_version);
+        assert!(coin::balance<CedraCoin>(marketplace_addr) == 11, 0);
+        assert!(coin::balance<CedraCoin>(purchaser_addr) == 9489, 0);
+        assert!(coin::balance<CedraCoin>(seller_addr) == 10500, 0);
         assert!(tokenv1::balance_of(purchaser_addr, token_id) == 1, 0);
         assert!(!collection_offer::exists_at(collection_offer), 0);
     }
@@ -680,7 +680,7 @@ module collection_offer_tests {
         let (creator_addr, collection_name, token_name, property_version) =
             tokenv1::get_token_id_fields(&token_id);
 
-        let collection_offer = collection_offer::init_for_tokenv1<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv1<CedraCoin>(
             purchaser,
             creator_addr,
             collection_name,
@@ -690,7 +690,7 @@ module collection_offer_tests {
             timestamp::now_seconds() + 200,
         );
 
-        let token_container = collection_offer::sell_tokenv1<AptosCoin>(
+        let token_container = collection_offer::sell_tokenv1<CedraCoin>(
             seller,
             collection_offer,
             token_name,
@@ -711,7 +711,7 @@ module collection_offer_tests {
     ) {
         test_utils::setup(aptos_framework, marketplace, seller, purchaser);
         let (collection, token) = test_utils::mint_tokenv2_with_collection(seller);
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             collection,
             test_utils::fee_schedule(marketplace),
@@ -719,7 +719,7 @@ module collection_offer_tests {
             2,
             timestamp::now_seconds() + 200,
         );
-        collection_offer::sell_tokenv2<AptosCoin>(marketplace, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(marketplace, collection_offer, token);
     }
 
     #[test(aptos_framework = @0x1, marketplace = @0x111, seller = @0x222, purchaser = @0x333)]
@@ -735,7 +735,7 @@ module collection_offer_tests {
         let (creator_addr, collection_name, token_name, property_version) =
             tokenv1::get_token_id_fields(&token_id);
 
-        let collection_offer = collection_offer::init_for_tokenv1<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv1<CedraCoin>(
             purchaser,
             creator_addr,
             collection_name,
@@ -745,7 +745,7 @@ module collection_offer_tests {
             timestamp::now_seconds() + 200,
         );
 
-        collection_offer::sell_tokenv1<AptosCoin>(
+        collection_offer::sell_tokenv1<CedraCoin>(
             marketplace,
             collection_offer,
             token_name,
@@ -763,7 +763,7 @@ module collection_offer_tests {
     ) {
         test_utils::setup(aptos_framework, marketplace, seller, purchaser);
         let (collection, token) = test_utils::mint_tokenv2_with_collection(seller);
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             collection,
             test_utils::fee_schedule(marketplace),
@@ -772,7 +772,7 @@ module collection_offer_tests {
             timestamp::now_seconds() + 200,
         );
         test_utils::increment_timestamp(200);
-        collection_offer::sell_tokenv2<AptosCoin>(seller, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(seller, collection_offer, token);
     }
 
     #[test(aptos_framework = @0x1, marketplace = @0x111, seller = @0x222, purchaser = @0x333)]
@@ -785,7 +785,7 @@ module collection_offer_tests {
     ) {
         test_utils::setup(aptos_framework, marketplace, seller, purchaser);
         let (collection, token) = test_utils::mint_tokenv2_with_collection(seller);
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             collection,
             test_utils::fee_schedule(marketplace),
@@ -793,9 +793,9 @@ module collection_offer_tests {
             2,
             timestamp::now_seconds() + 200,
         );
-        collection_offer::sell_tokenv2<AptosCoin>(seller, collection_offer, token);
-        collection_offer::sell_tokenv2<AptosCoin>(purchaser, collection_offer, token);
-        collection_offer::sell_tokenv2<AptosCoin>(purchaser, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(seller, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(purchaser, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(purchaser, collection_offer, token);
     }
 
     #[test(aptos_framework = @0x1, marketplace = @0x111, seller = @0x222, purchaser = @0x333)]
@@ -817,7 +817,7 @@ module collection_offer_tests {
             string::utf8(b"..."),
         );
 
-        let collection_offer = collection_offer::init_for_tokenv2<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv2<CedraCoin>(
             purchaser,
             object::object_from_constructor_ref(&other_collection),
             test_utils::fee_schedule(marketplace),
@@ -825,7 +825,7 @@ module collection_offer_tests {
             2,
             timestamp::now_seconds() + 200,
         );
-        collection_offer::sell_tokenv2<AptosCoin>(marketplace, collection_offer, token);
+        collection_offer::sell_tokenv2<CedraCoin>(marketplace, collection_offer, token);
     }
 
     #[test(aptos_framework = @0x1, marketplace = @0x111, seller = @0x222, purchaser = @0x333)]
@@ -848,7 +848,7 @@ module collection_offer_tests {
             vector[true, true, true],
         );
 
-        let collection_offer = collection_offer::init_for_tokenv1<AptosCoin>(
+        let collection_offer = collection_offer::init_for_tokenv1<CedraCoin>(
             purchaser,
             purchaser_addr,
             string::utf8(b"..."),
@@ -861,7 +861,7 @@ module collection_offer_tests {
         let token_id = test_utils::mint_tokenv1(seller);
         let (_creator_addr, _collection_name, token_name, property_version) =
             tokenv1::get_token_id_fields(&token_id);
-        collection_offer::sell_tokenv1<AptosCoin>(
+        collection_offer::sell_tokenv1<CedraCoin>(
             marketplace,
             collection_offer,
             token_name,

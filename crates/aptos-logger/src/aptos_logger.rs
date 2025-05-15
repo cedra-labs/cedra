@@ -165,7 +165,7 @@ impl LogEntry {
 
         struct JsonVisitor<'a>(&'a mut BTreeMap<Key, serde_json::Value>);
 
-        impl Visitor for JsonVisitor<'_> {
+        impl<'a> Visitor for JsonVisitor<'a> {
             fn visit_pair(&mut self, key: Key, value: Value<'_>) {
                 let v = match value {
                     Value::Debug(d) => serde_json::Value::String(

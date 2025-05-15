@@ -377,13 +377,13 @@ struct LifetimeAnalysisStep<'env, 'state> {
     state: &'state mut LifetimeState,
 }
 
-impl LifeTimeAnalysis<'_> {
+impl<'env> LifeTimeAnalysis<'env> {
     fn new_step<'a>(
         &'a self,
         code_offset: CodeOffset,
         attr_id: AttrId,
         state: &'a mut LifetimeState,
-    ) -> LifetimeAnalysisStep<'a, 'a> {
+    ) -> LifetimeAnalysisStep {
         let alive = self
             .live_var_annotation
             .get_live_var_info_at(code_offset)
@@ -400,7 +400,7 @@ impl LifeTimeAnalysis<'_> {
 // -------------------------------------------------------------------------------------------------
 // Analysing, Diagnosing, and Primitives
 
-impl LifetimeAnalysisStep<'_, '_> {
+impl<'env, 'state> LifetimeAnalysisStep<'env, 'state> {
     /// Get the location associated with bytecode attribute.
     fn loc(&self, id: AttrId) -> Loc {
         self.target().get_bytecode_loc(id)
@@ -748,7 +748,7 @@ impl LifetimeAnalysisStep<'_, '_> {
 // -------------------------------------------------------------------------------------------------
 // Program Steps
 
-impl LifetimeAnalysisStep<'_, '_> {
+impl<'env, 'state> LifetimeAnalysisStep<'env, 'state> {
     fn assign(&mut self, dest: TempIndex, src: TempIndex, kind: AssignKind) {
         if src != dest {
             self.drop(dest);
@@ -1050,7 +1050,7 @@ impl LifetimeAnalysisStep<'_, '_> {
 // -------------------------------------------------------------------------------------------------
 // Transfer Function
 
-impl TransferFunctions for LifeTimeAnalysis<'_> {
+impl<'env> TransferFunctions for LifeTimeAnalysis<'env> {
     type State = LifetimeState;
 
     const BACKWARD: bool = false;
@@ -1117,7 +1117,7 @@ impl TransferFunctions for LifeTimeAnalysis<'_> {
 }
 
 /// Instantiate the data flow analysis framework based on the transfer function
-impl DataflowAnalysis for LifeTimeAnalysis<'_> {}
+impl<'env> DataflowAnalysis for LifeTimeAnalysis<'env> {}
 
 // ===============================================================================
 // Processor
@@ -1197,7 +1197,7 @@ impl Label {
     }
 }
 
-impl Display for LabelDisplay<'_> {
+impl<'a> Display for LabelDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self.1 {
             Label::Local(local) if /*raw*/self.2 => write!(f, "$t{}", local),
@@ -1244,7 +1244,7 @@ impl LifetimeState {
     }
 }
 
-impl Display for LifetimeStateDisplay<'_> {
+impl<'a> Display for LifetimeStateDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let fmt_ref_id = |id: RefID| {
             if self.1.frame_root() == id {

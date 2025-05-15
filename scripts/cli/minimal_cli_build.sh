@@ -26,7 +26,7 @@ OS="$(uname)"
 case "$OS" in
   Linux)
     if command -v apt-get &>/dev/null; then
-      # Ubuntu / Debian based APT-GET
+      # Ubuntu / Debian based Cedra-GET
       sudo apt-get update
       sh install_pkg.sh build-essential pkgconf libssl-dev git libudev-dev lld libdw-dev clang llvm cmake
     elif command -v dnf &>/dev/null; then

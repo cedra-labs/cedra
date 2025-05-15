@@ -186,7 +186,7 @@ impl P2PTransactionGenerator {
                     *to, num_coins,
                 ))
             } else {
-                txn_factory.payload(aptos_stdlib::aptos_coin_transfer(*to, num_coins))
+                txn_factory.payload(aptos_stdlib::cedra_coin_transfer(*to, num_coins))
             },
         )
     }

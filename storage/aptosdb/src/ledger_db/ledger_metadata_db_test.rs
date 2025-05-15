@@ -265,8 +265,7 @@ fn test_block_api() {
             0,
             TypeTag::from(NewBlockEvent::struct_tag()),
             bcs::to_bytes(&events[0]).unwrap(),
-        )
-        .expect("Should always be able to create a new block event"),
+        ),
         &mut batch,
     )
     .unwrap();
@@ -277,8 +276,7 @@ fn test_block_api() {
             1,
             TypeTag::from(NewBlockEvent::struct_tag()),
             bcs::to_bytes(&events[1]).unwrap(),
-        )
-        .expect("Should always be able to create a new block event"),
+        ),
         &mut batch,
     )
     .unwrap();

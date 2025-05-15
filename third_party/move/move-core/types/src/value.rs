@@ -640,7 +640,7 @@ impl<'d> serde::de::DeserializeSeed<'d> for &MoveTypeLayout {
 
 struct VectorElementVisitor<'a>(&'a MoveTypeLayout);
 
-impl<'d> serde::de::Visitor<'d> for VectorElementVisitor<'_> {
+impl<'d, 'a> serde::de::Visitor<'d> for VectorElementVisitor<'a> {
     type Value = Vec<MoveValue>;
 
     fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -661,7 +661,7 @@ impl<'d> serde::de::Visitor<'d> for VectorElementVisitor<'_> {
 
 struct DecoratedStructFieldVisitor<'a>(&'a [MoveFieldLayout]);
 
-impl<'d> serde::de::Visitor<'d> for DecoratedStructFieldVisitor<'_> {
+impl<'d, 'a> serde::de::Visitor<'d> for DecoratedStructFieldVisitor<'a> {
     type Value = Vec<(Identifier, MoveValue)>;
 
     fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -685,7 +685,7 @@ impl<'d> serde::de::Visitor<'d> for DecoratedStructFieldVisitor<'_> {
 
 struct StructFieldVisitor<'a>(&'a [MoveTypeLayout]);
 
-impl<'d> serde::de::Visitor<'d> for StructFieldVisitor<'_> {
+impl<'d, 'a> serde::de::Visitor<'d> for StructFieldVisitor<'a> {
     type Value = Vec<MoveValue>;
 
     fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -709,7 +709,7 @@ impl<'d> serde::de::Visitor<'d> for StructFieldVisitor<'_> {
 
 struct StructVariantVisitor<'a>(&'a [Vec<MoveTypeLayout>]);
 
-impl<'d> serde::de::Visitor<'d> for StructVariantVisitor<'_> {
+impl<'d, 'a> serde::de::Visitor<'d> for StructVariantVisitor<'a> {
     type Value = (u16, Vec<MoveValue>);
 
     fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -853,7 +853,7 @@ impl serde::Serialize for MoveValue {
 
 struct MoveFields<'a>(&'a [(Identifier, MoveValue)]);
 
-impl serde::Serialize for MoveFields<'_> {
+impl<'a> serde::Serialize for MoveFields<'a> {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let mut t = serializer.serialize_map(Some(self.0.len()))?;
         for (f, v) in self.0.iter() {

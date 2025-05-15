@@ -1,13 +1,13 @@
-spec aptos_framework::aptos_coin {
+spec aptos_framework::cedra_coin {
     /// <high-level-req>
     /// No.: 1
-    /// Requirement: The native token, APT, must be initialized during genesis.
+    /// Requirement: The native token, Cedra, must be initialized during genesis.
     /// Criticality: Medium
     /// Implementation: The initialize function is only called once, during genesis.
     /// Enforcement: Formally verified via [high-level-req-1](initialize).
     ///
     /// No.: 2
-    /// Requirement: The APT coin may only be created exactly once.
+    /// Requirement: The Cedra coin may only be created exactly once.
     /// Criticality: Medium
     /// Implementation: The initialization function may only be called once.
     /// Enforcement: Enforced through the [https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
@@ -22,7 +22,7 @@ spec aptos_framework::aptos_coin {
     /// Enforcement: Verified via [high-level-req-3](initialize).
 
     /// No.: 4
-    /// Requirement: Any type of operation on the APT coin should fail if the user has not registered for the coin.
+    /// Requirement: Any type of operation on the Cedra coin should fail if the user has not registered for the coin.
     /// Criticality: Medium
     /// Implementation: Coin operations may succeed only on valid user coin registration.
     /// Enforcement: Enforced through the [https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
@@ -34,7 +34,7 @@ spec aptos_framework::aptos_coin {
         pragma aborts_if_is_partial;
     }
 
-    spec initialize(aptos_framework: &signer): (BurnCapability<AptosCoin>, MintCapability<AptosCoin>) {
+    spec initialize(aptos_framework: &signer): (BurnCapability<CedraCoin>, MintCapability<CedraCoin>) {
         use aptos_framework::aggregator_factory;
         use aptos_framework::permissioned_signer;
 
@@ -43,19 +43,19 @@ spec aptos_framework::aptos_coin {
         aborts_if permissioned_signer::spec_is_permissioned_signer(aptos_framework);
         let addr = signer::address_of(aptos_framework);
         aborts_if addr != @aptos_framework;
-        aborts_if !string::spec_internal_check_utf8(b"Aptos Coin");
-        aborts_if !string::spec_internal_check_utf8(b"APT");
+        aborts_if !string::spec_internal_check_utf8(b"Cedra Coin");
+        aborts_if !string::spec_internal_check_utf8(b"Cedra");
         aborts_if exists<MintCapStore>(addr);
-        aborts_if exists<coin::CoinInfo<AptosCoin>>(addr);
+        aborts_if exists<coin::CoinInfo<CedraCoin>>(addr);
         aborts_if !exists<aggregator_factory::AggregatorFactory>(addr);
         /// [high-level-req-1]
         ensures exists<MintCapStore>(addr);
         // property 3: The abilities to mint Aptos tokens should be transferable, duplicatable, and destroyable.
         /// [high-level-req-3]
-        ensures global<MintCapStore>(addr).mint_cap ==  MintCapability<AptosCoin> {};
-        ensures exists<coin::CoinInfo<AptosCoin>>(addr);
-        ensures result_1 == BurnCapability<AptosCoin> {};
-        ensures result_2 == MintCapability<AptosCoin> {};
+        ensures global<MintCapStore>(addr).mint_cap ==  MintCapability<CedraCoin> {};
+        ensures exists<coin::CoinInfo<CedraCoin>>(addr);
+        ensures result_1 == BurnCapability<CedraCoin> {};
+        ensures result_2 == MintCapability<CedraCoin> {};
     }
 
     spec destroy_mint_cap {
@@ -92,8 +92,8 @@ spec aptos_framework::aptos_coin {
         aborts_if !exists<Delegations>(@core_resources);
     }
 
-    spec schema ExistsAptosCoin {
-        requires exists<coin::CoinInfo<AptosCoin>>(@aptos_framework);
+    spec schema ExistsCedraCoin {
+        requires exists<coin::CoinInfo<CedraCoin>>(@aptos_framework);
     }
 
 }

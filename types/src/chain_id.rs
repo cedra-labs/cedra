@@ -105,7 +105,7 @@ where
 {
     struct ChainIdVisitor;
 
-    impl Visitor<'_> for ChainIdVisitor {
+    impl<'de> Visitor<'de> for ChainIdVisitor {
         type Value = ChainId;
 
         fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

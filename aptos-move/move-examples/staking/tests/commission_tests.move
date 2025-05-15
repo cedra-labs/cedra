@@ -4,8 +4,8 @@ module staking::commission_tests {
     use aptos_std::math128;
     use aptos_framework::account;
     use aptos_framework::aptos_account;
-    use aptos_framework::aptos_coin;
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_framework::timestamp;
     use staking::oracle;
@@ -13,7 +13,7 @@ module staking::commission_tests {
 
     const ONE_YEAR_IN_SECONDS: u64 = 31536000;
     const OPERATOR: address = @0x124;
-    // 1 APT = 5.34378710 USD with 8 decimals of precision
+    // 1 Cedra = 5.34378710 USD with 8 decimals of precision
     const APT_PRICE: u128 = 534378710;
 
     fun set_up() {
@@ -66,7 +66,7 @@ module staking::commission_tests {
         commission::set_yearly_commission_amount(manager, 100000);
         assert!(commission::commission_owed() == 0);
 
-        // Mint 0.1 APT. Not enough to cover the min balance for distribution.
+        // Mint 0.1 Cedra. Not enough to cover the min balance for distribution.
         mint_apt(10000000);
         timestamp::fast_forward_seconds(ONE_YEAR_IN_SECONDS);
         commission::distribute_commission(manager);
@@ -79,12 +79,12 @@ module staking::commission_tests {
         commission::set_yearly_commission_amount(manager, 100000);
         assert!(commission::commission_owed() == 0);
 
-        // Send APT to the commission contract.
+        // Send Cedra to the commission contract.
         let expected_commission_usd = 50000;
         let expected_apt_amount = usd_to_apt(expected_commission_usd);
         mint_apt(expected_apt_amount * 2);
 
-        // Half a year has passed, so the commission owed should be 50,000 USD or ~9356 APT.
+        // Half a year has passed, so the commission owed should be 50,000 USD or ~9356 Cedra.
         timestamp::fast_forward_seconds(ONE_YEAR_IN_SECONDS / 2);
         assert!(commission::commission_owed() == expected_commission_usd);
         assert!(commission::commission_owed_in_apt() == expected_apt_amount);
@@ -92,8 +92,8 @@ module staking::commission_tests {
         // Distribute the commission.
         commission::distribute_commission(manager);
         assert!(commission::commission_owed() == 0);
-        assert!(coin::balance<AptosCoin>(signer::address_of(manager)) == expected_apt_amount);
-        assert!(coin::balance<AptosCoin>(OPERATOR) == expected_apt_amount);
+        assert!(coin::balance<CedraCoin>(signer::address_of(manager)) == expected_apt_amount);
+        assert!(coin::balance<CedraCoin>(OPERATOR) == expected_apt_amount);
     }
 
     #[test(manager = @0x123)]
@@ -102,7 +102,7 @@ module staking::commission_tests {
         commission::set_yearly_commission_amount(manager, 100000);
         assert!(commission::commission_owed() == 0);
 
-        // Send APT to the commission contract. But not enough to cover the commission owed
+        // Send Cedra to the commission contract. But not enough to cover the commission owed
         let expected_commission_usd = 50000;
         let expected_apt_amount = usd_to_apt(expected_commission_usd);
         mint_apt(expected_apt_amount / 2);
@@ -119,8 +119,8 @@ module staking::commission_tests {
         let expected_debt_in_apt = usd_to_apt(expected_debt);
         assert!(commission::commission_owed() == expected_debt);
         assert!(commission::commission_owed_in_apt() == expected_debt_in_apt);
-        assert!(coin::balance<AptosCoin>(signer::address_of(manager)) == 0);
-        assert!(coin::balance<AptosCoin>(OPERATOR) == expected_apt_amount / 2);
+        assert!(coin::balance<CedraCoin>(signer::address_of(manager)) == 0);
+        assert!(coin::balance<CedraCoin>(OPERATOR) == expected_apt_amount / 2);
     }
 
     #[test]
@@ -140,7 +140,7 @@ module staking::commission_tests {
     }
 
     fun mint_apt(amount: u64) {
-        let (burn_cap, mint_cap) = aptos_coin::initialize_for_test(
+        let (burn_cap, mint_cap) = cedra_coin::initialize_for_test(
             &account::create_signer_for_test(@aptos_framework));
         aptos_account::deposit_coins(@staking, coin::mint(amount, &mint_cap));
         coin::destroy_burn_cap(burn_cap);

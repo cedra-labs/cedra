@@ -401,7 +401,7 @@ impl<'a> SpecConverter<'a> {
     }
 }
 
-impl ExpRewriterFunctions for SpecConverter<'_> {
+impl<'a> ExpRewriterFunctions for SpecConverter<'a> {
     fn rewrite_exp(&mut self, exp: Exp) -> Exp {
         use ExpData::*;
         use Operation::*;

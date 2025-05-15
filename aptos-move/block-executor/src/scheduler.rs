@@ -665,7 +665,6 @@ impl TWaitForDependency for Scheduler {
     /// transaction txn_idx will be resumed, and corresponding execution task created.
     /// If false is returned, it is caller's responsibility to repeat the read that caused the
     /// dependency and continue the ongoing execution of txn_idx.
-    #[allow(clippy::literal_string_with_formatting_args)]
     fn wait_for_dependency(
         &self,
         txn_idx: TxnIndex,

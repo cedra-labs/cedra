@@ -33,7 +33,7 @@ use aptos_types::{
     },
     vm_status::{StatusCode, VMStatus},
     write_set::{WriteOp, WriteSetMut},
-    AptosCoinType,
+    CedraCoinType,
 };
 use aptos_vm::VMBlockExecutor;
 use dashmap::{
@@ -129,11 +129,8 @@ impl IncrementalOutput {
     }
 
     fn into_success_output(mut self, gas: u64) -> Result<TransactionOutput> {
-        self.events.push(
-            FeeStatement::new(gas, gas, 0, 0, 0)
-                .create_event_v2()
-                .expect("Creating FeeStatement should always succeed"),
-        );
+        self.events
+            .push(FeeStatement::new(gas, gas, 0, 0, 0).create_event_v2());
 
         Ok(TransactionOutput::new(
             WriteSetMut::new(self.write_set).freeze()?,
@@ -491,7 +488,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<()> {
-        let coin_info = DbAccessUtil::get_value::<CoinInfoResource<AptosCoinType>>(
+        let coin_info = DbAccessUtil::get_value::<CoinInfoResource<CedraCoinType>>(
             &self.db_util.common.apt_coin_info_resource,
             state_view,
         )?
@@ -557,8 +554,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
                     store: sender_store_address,
                     amount: transfer_amount,
                 }
-                .create_event_v2()
-                .expect("Creating WithdrawFAEvent should always succeed"),
+                .create_event_v2(),
             );
         }
 
@@ -573,7 +569,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<()> {
-        let sender_coin_store_key = self.db_util.new_state_key_aptos_coin(&sender_address);
+        let sender_coin_store_key = self.db_util.new_state_key_cedra_coin(&sender_address);
         let sender_coin_store_opt = {
             let _timer = TIMER
                 .with_label_values(&["read_sender_coin_store"])
@@ -670,8 +666,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
                     store: recipient_store_address,
                     amount: transfer_amount,
                 }
-                .create_event_v2()
-                .expect("Creating DepositFAEvent should always succeed"),
+                .create_event_v2(),
             )
         }
 
@@ -685,7 +680,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<bool> {
-        let recipient_coin_store_key = self.db_util.new_state_key_aptos_coin(&recipient_address);
+        let recipient_coin_store_key = self.db_util.new_state_key_cedra_coin(&recipient_address);
 
         let (mut recipient_coin_store, recipient_coin_store_existed) =
             match DbAccessUtil::get_apt_coin_store(&recipient_coin_store_key, state_view)? {
@@ -694,10 +689,9 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
                     output.events.push(
                         CoinRegister {
                             account: AccountAddress::ONE,
-                            type_info: DbAccessUtil::new_type_info_resource::<AptosCoinType>()?,
+                            type_info: DbAccessUtil::new_type_info_resource::<CedraCoinType>()?,
                         }
-                        .create_event_v2()
-                        .expect("Creating CoinRegister should always succeed"),
+                        .create_event_v2(),
                     );
                     (
                         DbAccessUtil::new_apt_coin_store(0, recipient_address),
@@ -776,8 +770,8 @@ enum CachedResource {
     Account(AccountResource),
     FungibleStore(FungibleStoreResource),
     FungibleSupply(ConcurrentSupplyResource),
-    AptCoinStore(CoinStoreResource<AptosCoinType>),
-    AptCoinInfo(CoinInfoResource<AptosCoinType>),
+    AptCoinStore(CoinStoreResource<CedraCoinType>),
+    AptCoinInfo(CoinInfoResource<CedraCoinType>),
     AptCoinSupply(CoinSupply),
     SupplyDecrement(SupplyWithDecrement),
 }
@@ -906,7 +900,7 @@ impl CommonNativeRawTransactionExecutor for NativeValueCacheRawTransactionExecut
             let entry =
                 self.cache_get_mut_or_init(&self.db_util.common.apt_coin_info_resource, |key| {
                     CachedResource::AptCoinInfo(
-                        DbAccessUtil::get_value::<CoinInfoResource<AptosCoinType>>(key, state_view)
+                        DbAccessUtil::get_value::<CoinInfoResource<CedraCoinType>>(key, state_view)
                             .unwrap()
                             .unwrap(),
                     )
@@ -1108,7 +1102,7 @@ impl NativeValueCacheRawTransactionExecutor {
         decrement: u64,
         fail_on_missing: bool,
     ) -> bool {
-        let coin_store_key = self.db_util.new_state_key_aptos_coin(&account);
+        let coin_store_key = self.db_util.new_state_key_cedra_coin(&account);
         let mut exists = true;
 
         let mut entry = self.cache_get_mut_or_init(&coin_store_key, |key| {

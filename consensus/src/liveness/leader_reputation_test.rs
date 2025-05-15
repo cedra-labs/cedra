@@ -454,8 +454,7 @@ impl MockDbReader {
                     *self.last_timestamp.lock(),
                 ))
                 .unwrap(),
-            )
-            .expect("Should always be able to create a new block event"),
+            ),
         ));
         *self.last_timestamp.lock() += 100;
         (*epoch, *round)

@@ -17,7 +17,7 @@ use std::fmt::{self, Display};
 /// desirable for textual outputs and flamegraphs.
 pub(crate) struct Render<'a, T>(pub &'a T);
 
-impl Display for Render<'_, AccountAddress> {
+impl<'a> Display for Render<'a, AccountAddress> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let addr_short = self.0.short_str_lossless();
         write!(f, "0x")?;
@@ -29,7 +29,7 @@ impl Display for Render<'_, AccountAddress> {
     }
 }
 
-impl Display for Render<'_, ModuleId> {
+impl<'a> Display for Render<'a, ModuleId> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}::{}", Render(self.0.address()), self.0.name())
     }
@@ -71,7 +71,7 @@ impl Display for FrameName {
     }
 }
 
-impl Display for Render<'_, Path> {
+impl<'a> Display for Render<'a, Path> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.0 {
             Path::Code(module_id) => write!(f, "{}", Render(module_id)),
@@ -81,7 +81,7 @@ impl Display for Render<'_, Path> {
     }
 }
 
-impl Display for Render<'_, TableHandle> {
+impl<'a> Display for Render<'a, TableHandle> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", Render(&self.0 .0))
     }
@@ -91,14 +91,14 @@ pub struct TableKey<'a> {
     pub bytes: &'a [u8],
 }
 
-impl Display for TableKey<'_> {
+impl<'a> Display for TableKey<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         assert!(self.bytes.len() > 2);
         write!(f, "0x{:02x}{:02x}..", self.bytes[0], self.bytes[1])
     }
 }
 
-impl Display for Render<'_, StateKey> {
+impl<'a> Display for Render<'a, StateKey> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         use aptos_types::state_store::state_key::inner::StateKeyInner::*;
 
@@ -116,7 +116,7 @@ impl Display for Render<'_, StateKey> {
     }
 }
 
-impl Display for Render<'_, WriteOpType> {
+impl<'a> Display for Render<'a, WriteOpType> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         use WriteOpType::*;
 
@@ -128,7 +128,7 @@ impl Display for Render<'_, WriteOpType> {
     }
 }
 
-impl Display for Render<'_, TypeTag> {
+impl<'a> Display for Render<'a, TypeTag> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.0)
     }

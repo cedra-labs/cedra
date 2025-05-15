@@ -121,7 +121,7 @@ impl ExecutionAndIOCosts {
             )
         }
 
-        impl Rec<'_> {
+        impl<'a> Rec<'a> {
             fn visit(&mut self, frame: &CallFrame) {
                 self.path.push(format!("{}", frame.name));
 

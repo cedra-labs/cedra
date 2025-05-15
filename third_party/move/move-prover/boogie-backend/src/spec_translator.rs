@@ -144,7 +144,7 @@ impl<'env> SpecTranslator<'env> {
 // Axioms
 // ======
 
-impl SpecTranslator<'_> {
+impl<'env> SpecTranslator<'env> {
     pub fn translate_axioms(&self, env: &GlobalEnv, mono_info: &MonoInfo) {
         let type_display_ctx = env.get_type_display_ctx();
         for (axiom, type_insts) in &mono_info.axioms {
@@ -174,7 +174,7 @@ impl SpecTranslator<'_> {
 // Specification Variables
 // =======================
 
-impl SpecTranslator<'_> {
+impl<'env> SpecTranslator<'env> {
     pub fn translate_spec_vars(&self, module_env: &ModuleEnv<'_>, mono_info: &MonoInfo) {
         let empty = &BTreeSet::new();
         let mut translated = BTreeSet::new();
@@ -226,7 +226,7 @@ impl SpecTranslator<'_> {
 // Specification Functions
 // =======================
 
-impl SpecTranslator<'_> {
+impl<'env> SpecTranslator<'env> {
     pub fn translate_spec_funs(&self, module_env: &ModuleEnv<'_>, mono_info: &MonoInfo) {
         let empty = &BTreeSet::new();
         let mut translated = BTreeSet::new();
@@ -347,7 +347,6 @@ impl SpecTranslator<'_> {
         }
     }
 
-    #[allow(clippy::literal_string_with_formatting_args)]
     fn translate_spec_fun(&self, module_env: &ModuleEnv, id: SpecFunId, fun: &SpecFunDecl) {
         if fun.body.is_none() && !fun.uninterpreted {
             // This function is native and expected to be found in the prelude.
@@ -415,7 +414,7 @@ impl SpecTranslator<'_> {
                         .type_inst
                         .get(i)
                         .cloned()
-                        .unwrap_or(Type::TypeParameter(i as u16));
+                        .unwrap_or_else(|| Type::TypeParameter(i as u16));
                     // There can be name clashes after instantiation. Parameters still need
                     // to be there but all are instantiated with the same type. We escape
                     // the redundant parameters.
@@ -548,13 +547,12 @@ impl SpecTranslator<'_> {
 // Emit any finalization items
 // ============================
 
-impl SpecTranslator<'_> {
+impl<'env> SpecTranslator<'env> {
     pub(crate) fn finalize(&self) {
         self.translate_choice_functions();
     }
 
     /// Translate lifted functions for choice expressions.
-    #[allow(clippy::literal_string_with_formatting_args)]
     fn translate_choice_functions(&self) {
         let env = self.env;
         let infos_ref = self.lifted_choice_infos.borrow();
@@ -752,7 +750,7 @@ impl SpecTranslator<'_> {
 // Expressions
 // ===========
 
-impl SpecTranslator<'_> {
+impl<'env> SpecTranslator<'env> {
     pub(crate) fn translate(&self, exp: &Exp, type_inst: &[Type]) {
         *self.fresh_var_count.borrow_mut() = 0;
         if type_inst.is_empty() {

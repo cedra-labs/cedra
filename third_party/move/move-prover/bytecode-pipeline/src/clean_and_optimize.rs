@@ -86,7 +86,7 @@ struct Optimizer<'a> {
     target: &'a FunctionTarget<'a>,
 }
 
-impl TransferFunctions for Optimizer<'_> {
+impl<'a> TransferFunctions for Optimizer<'a> {
     type State = AnalysisState;
 
     const BACKWARD: bool = false;
@@ -147,12 +147,12 @@ fn is_custom_borrow(fun_env: &FunctionEnv, borrow_natives: &Vec<String>) -> bool
     false
 }
 
-impl DataflowAnalysis for Optimizer<'_> {}
+impl<'a> DataflowAnalysis for Optimizer<'a> {}
 
 // Transformation
 // ==============
 
-impl Optimizer<'_> {
+impl<'a> Optimizer<'a> {
     fn run(&mut self, instrs: Vec<Bytecode>) -> Vec<Bytecode> {
         // Rum Analysis
         let cfg = StacklessControlFlowGraph::new_forward(&instrs);

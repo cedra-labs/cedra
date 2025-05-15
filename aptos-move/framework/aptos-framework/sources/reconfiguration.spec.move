@@ -126,7 +126,7 @@ spec aptos_framework::reconfiguration {
     }
 
     spec reconfigure {
-        use aptos_framework::aptos_coin;
+        use aptos_framework::cedra_coin;
         use aptos_framework::staking_config;
 
         // TODO: set because of timeout (property proved)
@@ -136,7 +136,7 @@ spec aptos_framework::reconfiguration {
         let success = !(chain_status::is_genesis() || timestamp::spec_now_microseconds() == 0 || !reconfiguration_enabled())
             && timestamp::spec_now_microseconds() != global<Configuration>(@aptos_framework).last_reconfiguration_time;
         include features::spec_periodical_reward_rate_decrease_enabled() ==> staking_config::StakingRewardsConfigEnabledRequirement;
-        include success ==> aptos_coin::ExistsAptosCoin;
+        include success ==> cedra_coin::ExistsCedraCoin;
         aborts_if false;
         // The ensure conditions of the reconfigure function are not fully written, because there is a new cycle in it,
         // but its existing ensure conditions satisfy hp.

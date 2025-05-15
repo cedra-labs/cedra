@@ -77,7 +77,7 @@ async fn test_indexer() {
         .unwrap();
 
     let txn = account1.sign_with_transaction_builder(
-        factory.payload(aptos_stdlib::aptos_coin_transfer(account2.address(), 10)),
+        factory.payload(aptos_stdlib::cedra_coin_transfer(account2.address(), 10)),
     );
 
     client.submit_and_wait(&txn).await.unwrap();
@@ -95,7 +95,7 @@ async fn wait_for_account_balance(client: &RestClient, address: AccountAddress) 
     let start = std::time::Instant::now();
     while start.elapsed() < DEFAULT_WAIT_TIMEOUT {
         if client
-            .get_account_balance(address, "0x1::aptos_coin::AptosCoin")
+            .get_account_balance(address, "0x1::cedra_coin::CedraCoin")
             .await
             .unwrap()
             .into_inner()

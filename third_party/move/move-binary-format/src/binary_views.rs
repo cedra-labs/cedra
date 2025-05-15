@@ -37,7 +37,7 @@ pub enum BinaryIndexedView<'a> {
     Script(&'a CompiledScript),
 }
 
-impl BinaryIndexedView<'_> {
+impl<'a> BinaryIndexedView<'a> {
     pub fn module_handles(&self) -> &[ModuleHandle] {
         match self {
             BinaryIndexedView::Module(module) => module.module_handles(),

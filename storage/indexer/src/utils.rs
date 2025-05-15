@@ -74,7 +74,7 @@ impl<'a> PrefixedStateValueIterator<'a> {
     }
 }
 
-impl Iterator for PrefixedStateValueIterator<'_> {
+impl<'a> Iterator for PrefixedStateValueIterator<'a> {
     type Item = anyhow::Result<(StateKey, StateValue)>;
 
     fn next(&mut self) -> Option<Self::Item> {

@@ -1,4 +1,4 @@
-/// Module used to read the price of APT from the oracle.
+/// Module used to read the price of Cedra from the oracle.
 ///
 /// Note that this is the bare minimum implementation of the oracle module. More controls beyond price staleness check
 /// can be added and developers using this module should consider various security and economic implications when using

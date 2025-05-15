@@ -2,14 +2,14 @@
 /// 1. Manager: The account that can set the commission rate and change the operator account.
 /// 2. Operator: The account that receives the commission in dollars in exchange for running the node.
 ///
-/// The commission rate is set in dollars and will be used to determine how much APT the operator receives.
+/// The commission rate is set in dollars and will be used to determine how much Cedra the operator receives.
 /// The commission is distributed to the operator and remaining amount to the manager. If there's not enough balance
-/// to pay the commission, either commission rate is set too high or APT price is low. In this case, the commission
+/// to pay the commission, either commission rate is set too high or Cedra price is low. In this case, the commission
 /// debt will be updated and the operator will receive the remaining balance in the next distribution.
 ///
 /// Important notes:
 ///
-/// 1. There are rounding errors that can lead to 1 octa (1e-8 APT) and $1 rounding errors on conversions during
+/// 1. There are rounding errors that can lead to 1 octa (1e-8 Cedra) and $1 rounding errors on conversions during
 /// distribution. Although the commission amount can be adjusted to make up for these rounding errors for operators,
 /// developers using this contract can also add decimals to the dollar amount (e.g. 2 decimals) to reduce the rounding
 /// errors.
@@ -22,7 +22,7 @@
 module staking::commission {
     use aptos_framework::account::{Self, SignerCapability};
     use aptos_framework::aptos_account;
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_framework::resource_account;
     use aptos_framework::timestamp;
@@ -35,7 +35,7 @@ module staking::commission {
     const INITIAL_COMMISSION_AMOUNT: u64 = 100000;
     const ONE_YEAR_IN_SECONDS: u64 = 31536000;
     const OCTAS_IN_ONE_APT: u128 = 100000000; // 1e8
-    const MIN_BALANCE_FOR_DISTRIBUTION: u64 = 100000000; // 1 APT
+    const MIN_BALANCE_FOR_DISTRIBUTION: u64 = 100000000; // 1 Cedra
 
     /// Account is not authorized to call this function.
     const EUNAUTHORIZED: u64 = 1;
@@ -49,14 +49,14 @@ module staking::commission {
         manager: address,
         /// The operator who receives the specified commission in dollars in exchange for running the node.
         operator: address,
-        /// The yearly commission rate in dollars. Will be used to determine how much APT the operator receives.
+        /// The yearly commission rate in dollars. Will be used to determine how much Cedra the operator receives.
         yearly_commission_amount: u64,
         /// Used to withdraw commission.
         signer_cap: SignerCapability,
         /// Timestamp for tracking yearly commission.
         last_update_secs: u64,
         /// Amount of debt in dollars owed to the operator due to insufficient amount received from node commission.
-        /// This can happen if the commission rate is set too high or APT price is too low.
+        /// This can happen if the commission rate is set too high or Cedra price is too low.
         commission_debt: u64
     }
 
@@ -167,11 +167,11 @@ module staking::commission {
     public entry fun distribute_commission(account: &signer) acquires CommissionConfig {
         assert_manager_or_operator(account);
 
-        let balance = coin::balance<AptosCoin>(@staking);
+        let balance = coin::balance<CedraCoin>(@staking);
         assert!(balance >= MIN_BALANCE_FOR_DISTRIBUTION, EINSUFFICIENT_BALANCE_FOR_DISTRIBUTION);
 
         // Commission owed so far plus any debt.
-        // There can be a rounding error of 1 octa here when converting from USD to APT. This is negligible.
+        // There can be a rounding error of 1 octa here when converting from USD to Cedra. This is negligible.
         let commission_in_apt = commission_owed_in_apt();
 
         // Only manager or operator can call this function.
@@ -181,12 +181,12 @@ module staking::commission {
         config.commission_debt = 0;
 
         let commission_signer = &account::create_signer_with_capability(&config.signer_cap);
-        // If there's not enough balance to pay the commission, either commission rate is set too high or APT price is low.
-        // Otherwise, pay the operator the commission in APT and send remaining balance to the manager.
+        // If there's not enough balance to pay the commission, either commission rate is set too high or Cedra price is low.
+        // Otherwise, pay the operator the commission in Cedra and send remaining balance to the manager.
         if (balance <= commission_in_apt) {
-            // If balance is exactly equal to commission in APT, this will set commission_debt to 0.
+            // If balance is exactly equal to commission in Cedra, this will set commission_debt to 0.
             let debt_apt = commission_in_apt - balance;
-            // There can be rounding error here when converting from APT to USD. If this is of concern, the amount of
+            // There can be rounding error here when converting from Cedra to USD. If this is of concern, the amount of
             // commission can be set higher to cover the rounding error.
             config.commission_debt = apt_to_usd(debt_apt);
         } else {
@@ -194,7 +194,7 @@ module staking::commission {
             aptos_account::transfer(commission_signer, config.manager, surplus_balance);
         };
 
-        let remaining_balance = coin::balance<AptosCoin>(@staking);
+        let remaining_balance = coin::balance<CedraCoin>(@staking);
         aptos_account::transfer(commission_signer, config.operator, remaining_balance);
 
         event::emit(CommissionDistributed {
@@ -219,13 +219,13 @@ module staking::commission {
 
     inline fun usd_to_apt(usd_amount: u64): u64 {
         let apt_price = oracle::get_apt_price();
-        // Amount in APT octas = amount * number of octas in one APT / APT price.
+        // Amount in Cedra octas = amount * number of octas in one Cedra / Cedra price.
         math128::mul_div((usd_amount as u128) * OCTAS_IN_ONE_APT, oracle::precision(), apt_price) as u64
     }
 
     inline fun apt_to_usd(apt_amount: u64): u64 {
         let apt_price = oracle::get_apt_price();
-        // Amount in USD = amount * APT price / precision / number of octas in one APT.
+        // Amount in USD = amount * Cedra price / precision / number of octas in one Cedra.
         math128::mul_div((apt_amount as u128), apt_price, oracle::precision() * OCTAS_IN_ONE_APT) as u64
     }
 

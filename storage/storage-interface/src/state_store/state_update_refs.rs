@@ -20,7 +20,6 @@ pub struct PerVersionStateUpdateRefs<'kv> {
     pub first_version: Version,
     pub num_versions: usize,
     /// Converting to Vec to Box<[]> to release over-allocated memory during construction
-    /// TODO(HotState): let WriteOp always carry StateSlot, so we can use &'kv StateSlot here
     pub shards: [Box<[(&'kv StateKey, StateUpdateRef<'kv>)]>; NUM_STATE_SHARDS],
 }
 
@@ -64,7 +63,7 @@ pub struct BatchedStateUpdateRefs<'kv> {
     pub shards: [HashMap<&'kv StateKey, StateUpdateRef<'kv>>; NUM_STATE_SHARDS],
 }
 
-impl BatchedStateUpdateRefs<'_> {
+impl<'kv> BatchedStateUpdateRefs<'kv> {
     pub fn new_empty(first_version: Version, num_versions: usize) -> Self {
         Self {
             first_version,
