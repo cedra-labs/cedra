@@ -19,7 +19,7 @@ impl NetworkTest for ReconfigurationTest {
     async fn run<'a>(&self, _ctx: NetworkContextSynchronizer<'a>) -> Result<()> {
         Err(anyhow!("Not supported in aptos-framework yet"))
     }
-    // TODO(https://github.com/cedra-labs/cedra-core/issues/317): add back after support those transactions in aptos-framework
+    // TODO(https://github.com/cedra-labs/cedra/issues/317): add back after support those transactions in aptos-framework
     //     let rt = Runtime::new()?;
     //
     //     let mut rng = StdRng::from_seed(OsRng.gen());

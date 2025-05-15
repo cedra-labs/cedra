@@ -1,7 +1,7 @@
 ---
 id: consensus
 title: Consensus
-custom_edit_url: https://github.com/cedra-labs/cedra-core/edit/main/consensus/README.md
+custom_edit_url: https://github.com/cedra-labs/cedra/edit/main/consensus/README.md
 ---
 
 

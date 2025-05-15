@@ -1182,7 +1182,7 @@ impl TestContext {
     }
 
     // Currently we still run our tests with warp.
-    // https://github.com/cedra-labs/cedra-core/issues/2966
+    // https://github.com/cedra-labs/cedra/issues/2966
     pub fn get_routes_with_poem(
         &self,
         poem_address: SocketAddr,

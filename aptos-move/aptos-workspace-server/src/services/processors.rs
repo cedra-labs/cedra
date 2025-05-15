@@ -7,8 +7,8 @@ use crate::{
     no_panic_println,
 };
 use anyhow::{anyhow, Context, Result};
-use aptos_indexer_processor_sdk::{
-    aptos_indexer_transaction_stream::TransactionStreamConfig,
+use cedra_indexer_processor_sdk::{
+    cedra_indexer_transaction_stream::TransactionStreamConfig,
     postgres::utils::database::run_pending_migrations, server_framework::RunnableConfig,
 };
 use aptos_localnet::{health_checker::HealthChecker, processors::get_processor_config};

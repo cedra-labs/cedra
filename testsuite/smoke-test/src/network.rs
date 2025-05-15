@@ -170,7 +170,7 @@ async fn test_rest_discovery() {
         .unwrap();
 }
 
-// Currently this test seems flaky: https://github.com/cedra-labs/cedra-core/issues/670
+// Currently this test seems flaky: https://github.com/cedra-labs/cedra/issues/670
 #[ignore]
 #[tokio::test]
 async fn test_file_discovery() {

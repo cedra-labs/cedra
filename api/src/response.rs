@@ -27,7 +27,7 @@
 //! returned by each function and its callers is enforced at compile time.
 //! See generate_error_traits and its invocations for more on this topic.
 
-// TODO: https://github.com/cedra-labs/cedra-core/issues/2279
+// TODO: https://github.com/cedra-labs/cedra/issues/2279
 
 use super::{accept_type::AcceptType, bcs_payload::Bcs};
 use aptos_api_types::{Address, AptosError, AptosErrorCode, HashValue, LedgerInfo};

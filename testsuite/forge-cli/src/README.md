@@ -1,7 +1,7 @@
 ---
 id: forge cli
 title: Forge CLI
-custom_edit_url: https://github.com/cedra-labs/cedra-core/edit/main/testsuite/forge-cli/README.md
+custom_edit_url: https://github.com/cedra-labs/cedra/edit/main/testsuite/forge-cli/README.md
 ---
 
 # Forge CLI
@@ -65,7 +65,7 @@ cargo run -p aptos-faucet-cli -- --amount 10 --accounts <account_address> --key 
 ```
 
 :::tip Faucet and Aptos CLI
-See more on how the faucet works in the [README](https://github.com/cedra-labs/cedra-core/tree/main/crates/aptos-faucet).
+See more on how the faucet works in the [README](https://github.com/cedra-labs/cedra/tree/main/crates/aptos-faucet).
 
 Also see how to use the [Aptos CLI](../cli-tools/aptos-cli/use-cli/use-aptos-cli.md#account-examples) with an existing faucet.
 :::

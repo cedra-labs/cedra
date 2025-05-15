@@ -10,7 +10,7 @@ Our goal is to make contributing to Aptos Core easy and transparent. See [Aptos 
 ## Aptos Core
 
 To contribute to the Aptos Core implementation, first start with the proper development copy.
-You may want to use the GitHub interface to fork [aptos-core](https://github.com/cedra-labs/cedra-core) and check out your fork.
+You may want to use the GitHub interface to fork [aptos-core](https://github.com/cedra-labs/cedra) and check out your fork.
 For development environment setup and first build, see [Building Aptos From Source](https://aptos.dev/guides/building-from-source)
 
 ## Our Development Process
@@ -106,4 +106,4 @@ It is important that the project history is bisect-able so that when regressions
 
 ## Issues
 
-Aptos Core uses [GitHub issues](https://github.com/cedra-labs/cedra-core/issues) to track bugs. Please include necessary information and instructions to reproduce your issue.
+Aptos Core uses [GitHub issues](https://github.com/cedra-labs/cedra/issues) to track bugs. Please include necessary information and instructions to reproduce your issue.

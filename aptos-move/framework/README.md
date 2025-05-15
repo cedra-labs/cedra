@@ -1,7 +1,7 @@
 ---
 id: Aptos-framework
 title: Aptos Framework
-custom_edit_url: https://github.com/cedra-labs/cedra-core/edit/main/Aptos-move/Aptos-framework/README.md
+custom_edit_url: https://github.com/cedra-labs/cedra/edit/main/Aptos-move/Aptos-framework/README.md
 ---
 
 ## The Aptos Framework
@@ -18,10 +18,10 @@ files. See the [Layout](#layout) section for a more detailed overview of the str
 
 Each of the main components of the Aptos Framework and contributing guidelines are documented separately. See them by version below:
 
-* *Aptos tokens* - [main](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-token/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra-core/blob/testnet/aptos-move/framework/aptos-token/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra-core/blob/devnet/aptos-move/framework/aptos-token/doc/overview.md)
-* *Aptos framework* - [main](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-framework/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra-core/blob/testnet/aptos-move/framework/aptos-framework/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra-core/blob/devnet/aptos-move/framework/aptos-framework/doc/overview.md)
-* *Aptos stdlib* - [main](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-stdlib/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra-core/blob/testnet/aptos-move/framework/aptos-stdlib/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra-core/blob/devnet/aptos-move/framework/aptos-stdlib/doc/overview.md)
-* *Move stdlib* - [main](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/move-stdlib/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra-core/blob/testnet/aptos-move/framework/move-stdlib/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra-core/blob/devnet/aptos-move/framework/move-stdlib/doc/overview.md)
+* *Aptos tokens* - [main](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-token/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra/blob/testnet/aptos-move/framework/aptos-token/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra/blob/devnet/aptos-move/framework/aptos-token/doc/overview.md)
+* *Aptos framework* - [main](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-framework/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra/blob/testnet/aptos-move/framework/aptos-framework/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra/blob/devnet/aptos-move/framework/aptos-framework/doc/overview.md)
+* *Aptos stdlib* - [main](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-stdlib/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra/blob/testnet/aptos-move/framework/aptos-stdlib/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra/blob/devnet/aptos-move/framework/aptos-stdlib/doc/overview.md)
+* *Move stdlib* - [main](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/move-stdlib/doc/overview.md), [testnet](https://github.com/cedra-labs/cedra/blob/testnet/aptos-move/framework/move-stdlib/doc/overview.md), [devnet](https://github.com/cedra-labs/cedra/blob/devnet/aptos-move/framework/move-stdlib/doc/overview.md)
 
 Follow our [contributing guidelines](CONTRIBUTING.md) and basic coding standards for the Aptos Framework.
 

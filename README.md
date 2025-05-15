@@ -5,7 +5,7 @@
 ---
 
 [![License](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE)
-[![Lint+Test](https://github.com/cedra-labs/cedra-core/actions/workflows/lint-test.yaml/badge.svg)](https://github.com/cedra-labs/cedra-core/actions/workflows/lint-test.yaml)
+[![Lint+Test](https://github.com/cedra-labs/cedra/actions/workflows/lint-test.yaml/badge.svg)](https://github.com/cedra-labs/cedra/actions/workflows/lint-test.yaml)
 [![codecov](https://codecov.io/gh/aptos-labs/aptos-core/branch/main/graph/badge.svg?token=X01RKXSGDE)](https://codecov.io/gh/aptos-labs/aptos-core)
 [![Discord chat](https://img.shields.io/discord/945856774056083548?style=flat-square)](https://discord.gg/aptosnetwork)
 
@@ -22,6 +22,6 @@ Aptos is a layer 1 blockchain bringing a paradigm shift to Web3 through better t
 
 ## Contributing
 
-You can learn more about contributing to the Aptos project by reading our [Contribution Guide](https://github.com/cedra-labs/cedra-core/blob/main/CONTRIBUTING.md) and by viewing our [Code of Conduct](https://github.com/cedra-labs/cedra-core/blob/main/CODE_OF_CONDUCT.md).
+You can learn more about contributing to the Aptos project by reading our [Contribution Guide](https://github.com/cedra-labs/cedra/blob/main/CONTRIBUTING.md) and by viewing our [Code of Conduct](https://github.com/cedra-labs/cedra/blob/main/CODE_OF_CONDUCT.md).
 
-Aptos Core is licensed under [Apache 2.0](https://github.com/cedra-labs/cedra-core/blob/main/LICENSE).
+Aptos Core is licensed under [Apache 2.0](https://github.com/cedra-labs/cedra/blob/main/LICENSE).

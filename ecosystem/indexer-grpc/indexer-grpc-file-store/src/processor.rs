@@ -11,7 +11,7 @@ use aptos_indexer_grpc_utils::{
     file_store_operator::FileStoreOperator,
     types::RedisUrl,
 };
-use aptos_moving_average::MovingAverage;
+use cedra_moving_average::MovingAverage;
 use std::time::Duration;
 use tracing::debug;
 

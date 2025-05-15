@@ -3,8 +3,8 @@
 
 use super::{health_checker::HealthChecker, traits::ServiceManager, RunLocalnet};
 use anyhow::{bail, Context, Result};
-use aptos_indexer_processor_sdk::{
-    aptos_indexer_transaction_stream::TransactionStreamConfig,
+use cedra_indexer_processor_sdk::{
+    cedra_indexer_transaction_stream::TransactionStreamConfig,
     postgres::utils::database::run_pending_migrations, server_framework::RunnableConfig,
 };
 pub use aptos_localnet::processors::get_processor_config;

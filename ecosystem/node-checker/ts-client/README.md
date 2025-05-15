@@ -88,7 +88,7 @@ pnpm test
 
 ## References
 
-[repo]: https://github.com/cedra-labs/cedra-core
+[repo]: https://github.com/cedra-labs/cedra
 [npm-image-version]: https://img.shields.io/npm/v/aptos.svg
 [npm-image-downloads]: https://img.shields.io/npm/dm/aptos.svg
 [npm-url]: https://npmjs.org/package/aptos-node-checker-client

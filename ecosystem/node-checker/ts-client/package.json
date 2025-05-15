@@ -17,11 +17,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cedra-labs/cedra-core.git"
+    "url": "https://github.com/cedra-labs/cedra.git"
   },
-  "homepage": "https://github.com/cedra-labs/cedra-core",
+  "homepage": "https://github.com/cedra-labs/cedra",
   "bugs": {
-    "url": "https://github.com/cedra-labs/cedra-core/issues"
+    "url": "https://github.com/cedra-labs/cedra/issues"
   },
   "author": "aptoslabs.com",
   "keywords": [

@@ -94,7 +94,7 @@ impl MempoolNotificationSender for MempoolNotifier {
             .collect();
 
         // Mempool needs to be notified about all transactions (user and non-user transactions).
-        // See https://github.com/cedra-labs/cedra-core/issues/1882 for more details.
+        // See https://github.com/cedra-labs/cedra/issues/1882 for more details.
         let commit_notification = MempoolCommitNotification {
             transactions: user_transactions,
             block_timestamp_usecs,

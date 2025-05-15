@@ -8,7 +8,7 @@ Additional components for aptos-nodes testnet
 
 ## Source Code
 
-* <https://github.com/cedra-labs/cedra-core>
+* <https://github.com/cedra-labs/cedra>
 
 ## Values
 

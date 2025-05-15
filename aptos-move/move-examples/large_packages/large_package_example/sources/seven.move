@@ -399,9 +399,9 @@
 ///
 /// ### Table
 ///
-/// - A [**table**](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-stdlib/doc/table.md) implements the Table type and in Aptos is used to store information as key-value data within an account at large scale.
+/// - A [**table**](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-stdlib/doc/table.md) implements the Table type and in Aptos is used to store information as key-value data within an account at large scale.
 ///
-/// See [`table.move`](https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-stdlib/sources/table.move) for the associated Aptos source file.
+/// See [`table.move`](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-stdlib/sources/table.move) for the associated Aptos source file.
 ///
 /// ### Testnet
 ///

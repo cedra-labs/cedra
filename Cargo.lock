@@ -314,7 +314,6 @@ dependencies = [
  "aptos-github-client",
  "aptos-global-constants",
  "aptos-indexer-grpc-server-framework",
- "aptos-indexer-processor-sdk",
  "aptos-keygen",
  "aptos-ledger",
  "aptos-localnet",
@@ -337,8 +336,9 @@ dependencies = [
  "async-trait",
  "backoff",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bollard",
+ "cedra-indexer-processor-sdk",
  "chrono",
  "clap 4.5.38",
  "clap_complete",
@@ -430,7 +430,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-system-utils 0.1.0",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "futures-channel",
  "http 0.2.12",
  "hyper 0.14.32",
@@ -444,7 +444,7 @@ name = "aptos-aggregator"
 version = "0.1.0"
 dependencies = [
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "move-binary-format",
  "move-core-types",
@@ -479,7 +479,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-types",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "fail",
  "futures",
@@ -530,7 +530,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-logging",
  "aptos-vm-validator",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "goldenfile",
  "hyper 0.14.32",
@@ -580,7 +580,7 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "hex",
  "indoc",
@@ -620,7 +620,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-environment",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "clap 4.5.38",
  "csv",
@@ -659,7 +659,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-temppath",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "hyper 0.14.32",
  "once_cell",
@@ -682,7 +682,7 @@ dependencies = [
 name = "aptos-bitvec"
 version = "0.1.0"
 dependencies = [
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "proptest",
  "proptest-derive",
  "serde",
@@ -708,7 +708,7 @@ dependencies = [
  "aptos-vm-logging",
  "aptos-vm-types",
  "arc-swap",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "cfg-if",
  "claims",
@@ -742,7 +742,7 @@ dependencies = [
  "aptos-logger",
  "aptos-metrics-core",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "criterion",
  "dashmap 5.5.3",
@@ -779,7 +779,7 @@ dependencies = [
  "aptos-framework",
  "aptos-package-builder",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "move-core-types",
  "once_cell",
  "proptest",
@@ -841,7 +841,7 @@ dependencies = [
  "aptos-types",
  "aptos-validator-interface",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "futures",
  "itertools 0.13.0",
@@ -865,7 +865,7 @@ dependencies = [
  "aptos-logger",
  "aptos-metrics-core",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "lz4",
  "once_cell",
  "rand 0.7.3",
@@ -886,7 +886,7 @@ dependencies = [
  "aptos-temppath",
  "aptos-types",
  "arr_macro",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "byteorder",
  "cfg-if",
  "get_if_addrs",
@@ -948,7 +948,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-validator",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "byteorder",
  "bytes",
  "chrono",
@@ -1018,7 +1018,7 @@ dependencies = [
  "aptos-logger",
  "aptos-short-hex-str",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "derivative",
  "fail",
  "futures",
@@ -1061,7 +1061,7 @@ dependencies = [
  "ark-serialize",
  "ark-std",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bitvec 1.0.1",
  "blake2",
  "blake2-rfc",
@@ -1140,7 +1140,7 @@ dependencies = [
  "aptos-types",
  "arc-swap",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "dashmap 5.5.3",
  "futures",
@@ -1208,7 +1208,7 @@ dependencies = [
  "aptos-types",
  "arc-swap",
  "arr_macro",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "byteorder",
  "claims",
  "clap 4.5.38",
@@ -1248,7 +1248,7 @@ dependencies = [
  "aptos-schemadb",
  "aptos-storage-interface",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "dashmap 5.5.3",
  "move-core-types",
@@ -1266,7 +1266,7 @@ dependencies = [
  "aptos-schemadb",
  "aptos-storage-interface",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "byteorder",
  "proptest",
  "proptest-derive",
@@ -1294,7 +1294,7 @@ dependencies = [
  "aptos-temppath",
  "aptos-types",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "itertools 0.13.0",
  "rayon",
@@ -1325,7 +1325,7 @@ dependencies = [
  "aptos-crypto",
  "aptos-crypto-derive",
  "aptos-runtimes",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "blst",
  "blstrs",
  "criterion",
@@ -1373,7 +1373,7 @@ dependencies = [
  "aptos-types",
  "aptos-validator-transaction-pool",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "fail",
  "futures",
@@ -1404,7 +1404,7 @@ version = "0.1.1"
 dependencies = [
  "anyhow",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "e2e-move-tests",
  "getrandom 0.2.16",
  "hex",
@@ -1445,7 +1445,7 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "aptos-vm-genesis",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "futures",
  "move-binary-format",
@@ -1483,7 +1483,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-genesis",
  "arr_macro",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "criterion",
  "fail",
@@ -1531,7 +1531,7 @@ dependencies = [
  "aptos-vm-logging",
  "aptos-vm-types",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "chrono",
  "clap 4.5.38",
@@ -1571,7 +1571,7 @@ dependencies = [
  "aptos-transaction-simulation",
  "aptos-types",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "crossbeam-channel",
  "ctrlc",
@@ -1619,7 +1619,7 @@ dependencies = [
  "aptos-secure-net",
  "aptos-storage-interface",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "criterion",
  "derive_more 0.99.20",
  "itertools 0.13.0",
@@ -1640,7 +1640,7 @@ dependencies = [
  "aptos-sdk",
  "aptos-transaction-emitter-lib",
  "aptos-transaction-generator-lib",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "chrono",
  "clap 4.5.38",
  "futures",
@@ -1926,7 +1926,7 @@ dependencies = [
  "ark-ff",
  "ark-serialize",
  "ark-std",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "better_any",
  "blake2-rfc",
  "bulletproofs",
@@ -1996,7 +1996,7 @@ dependencies = [
  "aptos-gas-schedule",
  "aptos-language-e2e-tests",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "float-cmp",
  "move-binary-format",
@@ -2061,7 +2061,7 @@ dependencies = [
  "aptos-gas-schedule",
  "aptos-package-builder",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "move-core-types",
  "move-model",
@@ -2086,7 +2086,7 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "aptos-vm-genesis",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "rand 0.7.3",
  "serde",
  "serde_yaml 0.8.26",
@@ -2129,7 +2129,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-types",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bigdecimal",
  "chrono",
  "diesel",
@@ -2153,9 +2153,9 @@ dependencies = [
  "aptos-indexer-grpc-server-framework",
  "aptos-indexer-grpc-utils",
  "aptos-metrics-core",
- "aptos-moving-average 0.1.0 (git+https://github.com/cedra-labs/cedra-indexer-processors.git?rev=62beedc881d1b76632318ceb186ee9065236468e)",
  "aptos-protos 1.3.1",
  "async-trait",
+ "cedra-moving-average",
  "clap 4.5.38",
  "futures",
  "futures-core",
@@ -2180,10 +2180,10 @@ dependencies = [
  "aptos-indexer-grpc-server-framework",
  "aptos-indexer-grpc-utils",
  "aptos-metrics-core",
- "aptos-moving-average 0.1.0 (git+https://github.com/cedra-labs/cedra-indexer-processors.git?rev=62beedc881d1b76632318ceb186ee9065236468e)",
  "aptos-protos 1.3.1",
  "aptos-transaction-filter 0.1.0",
  "async-trait",
+ "cedra-moving-average",
  "clap 4.5.38",
  "futures",
  "jemallocator",
@@ -2258,8 +2258,8 @@ dependencies = [
  "aptos-indexer-grpc-server-framework",
  "aptos-indexer-grpc-utils",
  "aptos-metrics-core",
- "aptos-moving-average 0.1.0 (git+https://github.com/cedra-labs/cedra-indexer-processors.git?rev=62beedc881d1b76632318ceb186ee9065236468e)",
  "async-trait",
+ "cedra-moving-average",
  "clap 4.5.38",
  "futures",
  "jemallocator",
@@ -2312,7 +2312,6 @@ dependencies = [
  "aptos-mempool",
  "aptos-mempool-notifications",
  "aptos-metrics-core",
- "aptos-moving-average 0.1.0 (git+https://github.com/cedra-labs/cedra-indexer-processors.git?rev=62beedc881d1b76632318ceb186ee9065236468e)",
  "aptos-proptest-helpers",
  "aptos-protos 1.3.1",
  "aptos-runtimes",
@@ -2323,8 +2322,9 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "aptos-vm-validator",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
+ "cedra-moving-average",
  "chrono",
  "futures",
  "goldenfile",
@@ -2477,58 +2477,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "aptos-indexer-processor-sdk"
-version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d#bfb07a2b6985743fbc275d6fc621a80453f6742d"
-dependencies = [
- "ahash 0.8.12",
- "anyhow",
- "aptos-indexer-transaction-stream",
- "aptos-protos 1.3.1 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
- "aptos-system-utils 0.1.0 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
- "async-trait",
- "autometrics",
- "axum 0.7.9",
- "backtrace",
- "bcs 0.1.4 (git+https://github.com/aptos-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
- "bigdecimal",
- "chrono",
- "clap 4.5.38",
- "derive_builder",
- "diesel",
- "diesel-async",
- "diesel_migrations",
- "field_count",
- "futures",
- "futures-util",
- "hex",
- "indexmap 2.9.0",
- "instrumented-channel",
- "kanal",
- "mockall 0.12.1",
- "native-tls",
- "num_cpus",
- "once_cell",
- "petgraph 0.6.5",
- "postgres-native-tls",
- "prometheus",
- "prometheus-client",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "sha2 0.9.9",
- "tempfile",
- "thiserror 1.0.69",
- "tiny-keccak",
- "tokio",
- "tokio-postgres",
- "toml 0.7.8",
- "tracing",
- "tracing-subscriber 0.3.19",
- "url",
-]
-
-[[package]]
 name = "aptos-indexer-test-transactions"
 version = "1.0.0"
 dependencies = [
@@ -2558,28 +2506,6 @@ dependencies = [
  "tokio-stream",
  "toml 0.7.8",
  "tonic 0.12.3",
- "url",
-]
-
-[[package]]
-name = "aptos-indexer-transaction-stream"
-version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d#bfb07a2b6985743fbc275d6fc621a80453f6742d"
-dependencies = [
- "anyhow",
- "aptos-moving-average 0.1.0 (git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d)",
- "aptos-protos 1.3.1 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
- "aptos-transaction-filter 0.1.0 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
- "chrono",
- "futures-util",
- "once_cell",
- "prometheus",
- "prost 0.13.5",
- "sample",
- "serde",
- "tokio",
- "tonic 0.12.3",
- "tracing",
  "url",
 ]
 
@@ -2629,7 +2555,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-types",
  "arr_macro",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "byteorder",
  "itertools 0.13.0",
  "num-derive",
@@ -2716,7 +2642,7 @@ dependencies = [
  "ark-ff",
  "ark-serialize",
  "ark-std",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "blstrs",
  "derivation-path",
  "ed25519-dalek 1.0.1",
@@ -2741,7 +2667,7 @@ dependencies = [
  "aptos-types",
  "ark-bls12-381",
  "ark-serialize",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "firestore",
  "hex",
  "reqwest 0.11.27",
@@ -2768,7 +2694,7 @@ dependencies = [
  "ark-ff",
  "ark-groth16",
  "ark-serialize",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "dashmap 5.5.3",
  "firestore",
  "hex",
@@ -2813,7 +2739,7 @@ dependencies = [
  "aptos-vm-genesis",
  "aptos-vm-logging",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "goldenfile",
@@ -2941,7 +2867,7 @@ dependencies = [
  "aptos-time-service",
  "aptos-types",
  "aptos-vm-validator",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "enum_dispatch",
  "fail",
  "futures",
@@ -3008,7 +2934,7 @@ dependencies = [
  "aptos-vm-environment",
  "aptos-vm-logging",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "itertools 0.13.0",
  "regex",
@@ -3056,7 +2982,7 @@ dependencies = [
  "aptos-gas-schedule",
  "aptos-native-interface",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "dir-diff",
  "file_diff",
  "move-cli",
@@ -3069,22 +2995,6 @@ dependencies = [
  "sha3 0.9.1",
  "smallvec",
  "tempfile",
-]
-
-[[package]]
-name = "aptos-moving-average"
-version = "0.1.0"
-source = "git+https://github.com/cedra-labs/cedra-indexer-processors.git?rev=62beedc881d1b76632318ceb186ee9065236468e#62beedc881d1b76632318ceb186ee9065236468e"
-dependencies = [
- "chrono",
-]
-
-[[package]]
-name = "aptos-moving-average"
-version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d#bfb07a2b6985743fbc275d6fc621a80453f6742d"
-dependencies = [
- "chrono",
 ]
 
 [[package]]
@@ -3117,7 +3027,7 @@ dependencies = [
  "aptos-gas-algebra",
  "aptos-gas-schedule",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "move-binary-format",
  "move-core-types",
@@ -3166,7 +3076,7 @@ dependencies = [
  "aptos-types",
  "arc-swap",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "futures",
  "futures-util",
@@ -3224,7 +3134,7 @@ dependencies = [
  "aptos-network-discovery",
  "aptos-time-service",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "futures",
  "maplit",
  "rand 0.7.3",
@@ -3266,7 +3176,7 @@ dependencies = [
  "aptos-temppath",
  "aptos-time-service",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "futures",
  "once_cell",
  "rand 0.7.3",
@@ -3363,7 +3273,7 @@ dependencies = [
  "aptos-validator-transaction-pool",
  "aptos-vm",
  "aptos-vm-environment",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "either",
  "fail",
@@ -3500,7 +3410,7 @@ dependencies = [
  "aptos-peer-monitoring-service-types",
  "aptos-time-service",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "enum_dispatch",
  "futures",
  "maplit",
@@ -3531,7 +3441,7 @@ dependencies = [
  "aptos-storage-interface",
  "aptos-time-service",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "futures",
@@ -3550,7 +3460,7 @@ version = "0.1.0"
 dependencies = [
  "aptos-config",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "serde",
  "thiserror 1.0.69",
 ]
@@ -3570,7 +3480,7 @@ dependencies = [
 [[package]]
 name = "aptos-profiler"
 version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917#4bb4cd9799c05099f60c3a2c3813b12cc96ea917"
+source = "git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686#2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686"
 dependencies = [
  "anyhow",
  "backtrace",
@@ -3602,7 +3512,7 @@ dependencies = [
 [[package]]
 name = "aptos-protos"
 version = "1.3.1"
-source = "git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917#4bb4cd9799c05099f60c3a2c3813b12cc96ea917"
+source = "git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686#2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686"
 dependencies = [
  "pbjson",
  "prost 0.13.5",
@@ -3666,7 +3576,7 @@ dependencies = [
  "aptos-vm-environment",
  "aptos-vm-logging",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "futures",
  "git2 0.16.1",
@@ -3728,7 +3638,7 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "aptos-vm-environment",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "clap 4.5.38",
  "colored",
@@ -3764,7 +3674,7 @@ dependencies = [
  "aptos-infallible",
  "aptos-logger",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "clap 4.5.38",
  "hex",
@@ -3809,7 +3719,7 @@ dependencies = [
  "aptos-sdk",
  "aptos-types",
  "aptos-warp-webserver",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "futures",
  "hex",
@@ -3929,7 +3839,7 @@ dependencies = [
  "aptos-rest-client",
  "aptos-types",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "ed25519-dalek-bip32",
  "hex",
  "lazy_static",
@@ -3953,7 +3863,7 @@ dependencies = [
  "aptos-cached-packages",
  "aptos-framework",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "heck 0.4.1",
  "move-core-types",
@@ -3974,7 +3884,7 @@ dependencies = [
  "aptos-logger",
  "aptos-metrics-core",
  "aptos-protos 1.3.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "crossbeam-channel",
  "once_cell",
  "serde",
@@ -3996,7 +3906,7 @@ dependencies = [
  "aptos-time-service",
  "aptos-vault-client",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "chrono",
  "enum_dispatch",
  "rand 0.7.3",
@@ -4065,7 +3975,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-genesis",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "futures",
  "mockall 0.11.4",
@@ -4091,7 +4001,7 @@ dependencies = [
  "aptos-secure-net",
  "aptos-types",
  "arr_macro",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "dashmap 5.5.3",
  "derive_more 0.99.20",
  "itertools 0.13.0",
@@ -4149,7 +4059,7 @@ dependencies = [
  "aptos-time-service",
  "aptos-types",
  "arc-swap",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "dashmap 5.5.3",
@@ -4173,7 +4083,7 @@ dependencies = [
  "aptos-crypto",
  "aptos-time-service",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "num-traits",
  "proptest",
@@ -4204,10 +4114,10 @@ dependencies = [
 [[package]]
 name = "aptos-system-utils"
 version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917#4bb4cd9799c05099f60c3a2c3813b12cc96ea917"
+source = "git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686#2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686"
 dependencies = [
  "anyhow",
- "aptos-profiler 0.1.0 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
+ "aptos-profiler 0.1.0 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
  "async-mutex",
  "http 0.2.12",
  "hyper 0.14.32",
@@ -4290,7 +4200,7 @@ dependencies = [
  "aptos-rest-client",
  "aptos-types",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "chrono",
  "claims",
  "clap 4.5.38",
@@ -4345,7 +4255,7 @@ dependencies = [
  "aptos-types",
  "assert_approx_eq",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "csv",
  "futures",
  "hex",
@@ -4462,10 +4372,10 @@ dependencies = [
 [[package]]
 name = "aptos-transaction-filter"
 version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917#4bb4cd9799c05099f60c3a2c3813b12cc96ea917"
+source = "git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686#2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686"
 dependencies = [
  "anyhow",
- "aptos-protos 1.3.1 (git+https://github.com/aptos-labs/aptos-core.git?rev=4bb4cd9799c05099f60c3a2c3813b12cc96ea917)",
+ "aptos-protos 1.3.1 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
  "derivative",
  "derive_builder",
  "memchr",
@@ -4505,7 +4415,7 @@ dependencies = [
  "aptos-keygen",
  "aptos-types",
  "aptos-vm-genesis",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "move-binary-format",
  "move-core-types",
@@ -4549,7 +4459,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-environment",
  "aptos-vm-genesis",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "codespan-reporting",
  "datatest-stable",
@@ -4590,7 +4500,7 @@ dependencies = [
  "ark-std",
  "async-trait",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "chrono",
  "chrono-tz 0.10.3",
@@ -4658,7 +4568,7 @@ dependencies = [
  "aptos-types",
  "async-recursion",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "lru 0.7.8",
  "move-core-types",
  "tokio",
@@ -4725,7 +4635,7 @@ dependencies = [
  "aptos-vm-types",
  "ark-bn254",
  "ark-groth16",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "crossbeam-channel",
@@ -4758,7 +4668,7 @@ dependencies = [
  "aptos-framework",
  "aptos-language-e2e-tests",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "move-binary-format",
  "move-core-types",
@@ -4776,7 +4686,7 @@ dependencies = [
  "aptos-table-natives",
  "aptos-types",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "move-binary-format",
  "move-bytecode-verifier",
  "move-core-types",
@@ -4799,7 +4709,7 @@ dependencies = [
  "aptos-types",
  "aptos-vm",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "move-binary-format",
@@ -4841,7 +4751,7 @@ dependencies = [
  "aptos-transaction-simulation",
  "aptos-types",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "glob",
  "move-binary-format",
@@ -4866,7 +4776,7 @@ dependencies = [
  "aptos-transaction-simulation",
  "aptos-types",
  "aptos-vm",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "claims",
  "either",
@@ -4913,7 +4823,7 @@ dependencies = [
  "aptos-api-types",
  "aptos-config",
  "aptos-logger",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "hyper 0.14.32",
  "serde",
  "serde_json",
@@ -4928,11 +4838,11 @@ dependencies = [
  "aptos-cached-packages",
  "aptos-config",
  "aptos-faucet-core",
- "aptos-indexer-processor-sdk",
  "aptos-localnet",
  "aptos-node",
  "aptos-types",
  "bollard",
+ "cedra-indexer-processor-sdk",
  "clap 4.5.38",
  "diesel",
  "diesel-async",
@@ -5765,15 +5675,6 @@ dependencies = [
 [[package]]
 name = "bcs"
 version = "0.1.4"
-source = "git+https://github.com/aptos-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d#d31fab9d81748e2594be5cd5cdf845786a30562d"
-dependencies = [
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "bcs"
-version = "0.1.4"
 source = "git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d#d31fab9d81748e2594be5cd5cdf845786a30562d"
 dependencies = [
  "serde",
@@ -6433,6 +6334,88 @@ dependencies = [
 ]
 
 [[package]]
+name = "cedra-indexer-processor-sdk"
+version = "0.1.0"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processor-sdk.git?rev=58a542e8a7440ba497edae0d240a673d6485c8c5#58a542e8a7440ba497edae0d240a673d6485c8c5"
+dependencies = [
+ "ahash 0.8.12",
+ "anyhow",
+ "aptos-protos 1.3.1 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
+ "aptos-system-utils 0.1.0 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
+ "async-trait",
+ "autometrics",
+ "axum 0.7.9",
+ "backtrace",
+ "bcs 0.1.4",
+ "bigdecimal",
+ "cedra-indexer-transaction-stream",
+ "chrono",
+ "clap 4.5.38",
+ "derive_builder",
+ "diesel",
+ "diesel-async",
+ "diesel_migrations",
+ "field_count",
+ "futures",
+ "futures-util",
+ "hex",
+ "indexmap 2.9.0",
+ "instrumented-channel",
+ "kanal",
+ "mockall 0.12.1",
+ "native-tls",
+ "num_cpus",
+ "once_cell",
+ "petgraph 0.6.5",
+ "postgres-native-tls",
+ "prometheus",
+ "prometheus-client",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "sha2 0.9.9",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tiny-keccak",
+ "tokio",
+ "tokio-postgres",
+ "toml 0.7.8",
+ "tracing",
+ "tracing-subscriber 0.3.19",
+ "url",
+]
+
+[[package]]
+name = "cedra-indexer-transaction-stream"
+version = "0.1.0"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processor-sdk.git?rev=58a542e8a7440ba497edae0d240a673d6485c8c5#58a542e8a7440ba497edae0d240a673d6485c8c5"
+dependencies = [
+ "anyhow",
+ "aptos-protos 1.3.1 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
+ "aptos-transaction-filter 0.1.0 (git+https://github.com/cedra-labs/cedra.git?rev=2dd9c73b27fdcbe78c7391fd43c9a5d00b93e686)",
+ "cedra-moving-average",
+ "chrono",
+ "futures-util",
+ "once_cell",
+ "prometheus",
+ "prost 0.13.5",
+ "sample",
+ "serde",
+ "tokio",
+ "tonic 0.12.3",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "cedra-moving-average"
+version = "0.1.0"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processor-sdk.git?rev=58a542e8a7440ba497edae0d240a673d6485c8c5#58a542e8a7440ba497edae0d240a673d6485c8c5"
+dependencies = [
+ "chrono",
+]
+
+[[package]]
 name = "cexpr"
 version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6930,9 +6913,9 @@ dependencies = [
 
 [[package]]
 name = "const-hex"
-version = "1.14.0"
+version = "1.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4b0485bab839b018a8f1723fc5391819fea5f8f0f32288ef8a735fd096b6160c"
+checksum = "83e22e0ed40b96a48d3db274f72fd365bd78f67af39b6bbd47e8a15e1c6207ff"
 dependencies = [
  "cfg-if",
  "cpufeatures",
@@ -8098,7 +8081,7 @@ dependencies = [
  "aptos-vm",
  "aptos-vm-environment",
  "aptos-vm-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "claims",
  "hex",
  "move-binary-format",
@@ -9079,9 +9062,8 @@ checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
 
 [[package]]
 name = "futures"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65bc07b1a8bc7c85c5f2e110c476c7389b4554ba72af57d8445ea63a576b0876"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 dependencies = [
  "futures-channel",
  "futures-core",
@@ -9094,9 +9076,8 @@ dependencies = [
 
 [[package]]
 name = "futures-channel"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2dff15bf788c671c1934e366d07e30c1814a8ef514e1af724a602e8a2fbe1b10"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 dependencies = [
  "futures-core",
  "futures-sink",
@@ -9104,15 +9085,13 @@ dependencies = [
 
 [[package]]
 name = "futures-core"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05f29059c0c2090612e8d742178b0580d2dc940c837851ad723096f87af6663e"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 
 [[package]]
 name = "futures-executor"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e28d1d997f585e54aebc3f97d39e72338912123a67330d723fdbb564d646c9f"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 dependencies = [
  "futures-core",
  "futures-task",
@@ -9121,9 +9100,8 @@ dependencies = [
 
 [[package]]
 name = "futures-io"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e5c1b78ca4aae1ac06c48a526a655760685149f0d465d21f37abfe57ce075c6"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 
 [[package]]
 name = "futures-lite"
@@ -9165,9 +9143,8 @@ dependencies = [
 
 [[package]]
 name = "futures-macro"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "162ee34ebcb7c64a8abebc059ce0fee27c2262618d7b60ed8faf72fef13c3650"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -9176,15 +9153,13 @@ dependencies = [
 
 [[package]]
 name = "futures-sink"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e575fab7d1e0dcb8d0c7bcf9a63ee213816ab51902e6d244a95819acacf1d4f7"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 
 [[package]]
 name = "futures-task"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f90f7dce0722e95104fcb095585910c0977252f286e354b5e3bd38902cd99988"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 
 [[package]]
 name = "futures-timer"
@@ -9198,9 +9173,8 @@ dependencies = [
 
 [[package]]
 name = "futures-util"
-version = "0.3.31"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9fa08315bb612088cc391249efdc3bc77536f16c91f6cf495e6fbe85b20a4a81"
+version = "0.3.30"
+source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
 dependencies = [
  "futures-channel",
  "futures-core",
@@ -9222,7 +9196,7 @@ dependencies = [
  "aptos-types",
  "arbitrary",
  "base64 0.21.7",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "csv",
  "dearbitrary",
@@ -9249,7 +9223,7 @@ dependencies = [
  "aptos-vm-environment",
  "arbitrary",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "libfuzzer-sys",
  "move-binary-format",
  "move-bytecode-verifier",
@@ -9340,7 +9314,7 @@ dependencies = [
  "aptos-crypto-derive",
  "aptos-network",
  "aptos-types",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "move-core-types",
  "rand 0.7.3",
@@ -10727,7 +10701,7 @@ dependencies = [
 [[package]]
 name = "instrumented-channel"
 version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d#bfb07a2b6985743fbc275d6fc621a80453f6742d"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processor-sdk.git?rev=58a542e8a7440ba497edae0d240a673d6485c8c5#58a542e8a7440ba497edae0d240a673d6485c8c5"
 dependencies = [
  "delegate",
  "derive_builder",
@@ -11281,7 +11255,7 @@ name = "legacy-move-compiler"
 version = "0.0.1"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "codespan-reporting",
  "hex",
@@ -11920,7 +11894,7 @@ name = "move-abigen"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "codespan-reporting",
  "datatest-stable",
  "heck 0.4.1",
@@ -11978,7 +11952,7 @@ name = "move-bytecode-source-map"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "move-binary-format",
  "move-command-line-common",
  "move-core-types",
@@ -12098,7 +12072,7 @@ version = "0.1.0"
 dependencies = [
  "abstract-domain-derive",
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "codespan",
  "codespan-reporting",
@@ -12148,7 +12122,7 @@ version = "0.0.4"
 dependencies = [
  "anyhow",
  "arbitrary",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bytes",
  "dearbitrary",
  "ethnum",
@@ -12174,7 +12148,7 @@ name = "move-coverage"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "codespan",
  "colored",
@@ -12192,7 +12166,7 @@ name = "move-decompiler"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "codespan",
  "codespan-reporting",
@@ -12272,7 +12246,7 @@ name = "move-ir-compiler"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "clap 4.5.38",
  "move-binary-format",
  "move-bytecode-source-map",
@@ -12787,7 +12761,7 @@ name = "move-vm-types"
 version = "0.1.0"
 dependencies = [
  "ambassador",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "better_any",
  "bytes",
  "claims",
@@ -14720,18 +14694,18 @@ dependencies = [
 [[package]]
 name = "processor"
 version = "0.1.0"
-source = "git+https://github.com/cedra-labs/cedra-indexer-processors-v2.git?rev=1449895f6e69425e2873b85c14182ac448732109#1449895f6e69425e2873b85c14182ac448732109"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processors-v2.git?rev=b0edf2a3710dac6577cec922693f97e8b95f1dc3#b0edf2a3710dac6577cec922693f97e8b95f1dc3"
 dependencies = [
  "ahash 0.8.12",
  "allocative",
  "allocative_derive",
  "anyhow",
- "aptos-indexer-processor-sdk",
  "async-trait",
- "bcs 0.1.4 (git+https://github.com/aptos-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "bigdecimal",
  "bitflags 2.9.1",
  "canonical_json",
+ "cedra-indexer-processor-sdk",
  "chrono",
  "clap 4.5.38",
  "const_format",
@@ -16206,7 +16180,7 @@ dependencies = [
 [[package]]
 name = "sample"
 version = "0.1.0"
-source = "git+https://github.com/aptos-labs/aptos-indexer-processor-sdk.git?rev=bfb07a2b6985743fbc275d6fc621a80453f6742d#bfb07a2b6985743fbc275d6fc621a80453f6742d"
+source = "git+https://github.com/cedra-labs/cedra-indexer-processor-sdk.git?rev=58a542e8a7440ba497edae0d240a673d6485c8c5#58a542e8a7440ba497edae0d240a673d6485c8c5"
 dependencies = [
  "tracing",
 ]
@@ -17043,7 +17017,7 @@ dependencies = [
  "aptos-vault-client",
  "aptos-vm",
  "base64 0.13.1",
- "bcs 0.1.4 (git+https://github.com/cedra-labs/bcs.git?rev=d31fab9d81748e2594be5cd5cdf845786a30562d)",
+ "bcs 0.1.4",
  "diesel",
  "digest 0.9.0",
  "ethers",
@@ -19146,9 +19120,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-streams"
-version = "0.4.2"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15053d8d85c7eccdbefef60f06769760a563c7f0a9d6902a13d35c7800b0ad65"
+checksum = "4e072d4e72f700fb3443d8fe94a39315df013eef1104903cdb0a2abd322bbecd"
 dependencies = [
  "futures-util",
  "js-sys",
@@ -20022,48 +19996,3 @@ checksum = "73ab332fe2f6680068f3582b16a24f90ad7096d5d39b974d1c0aff0125116f02"
 dependencies = [
  "simd-adler32",
 ]
-
-[[patch.unused]]
-name = "futures"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-channel"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-core"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-executor"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-io"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-macro"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-sink"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-task"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"
-
-[[patch.unused]]
-name = "futures-util"
-version = "0.3.30"
-source = "git+https://github.com/cedra-labs/futures-rs?branch=backport#1845d7d36bc4bccbc0b57be68fbc05abd0b8bc68"

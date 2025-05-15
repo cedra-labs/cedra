@@ -283,7 +283,7 @@ edition = "2021"
 homepage = "https://aptoslabs.com"
 license = "Apache-2.0"
 publish = false
-repository = "https://github.com/cedra-labs/cedra-core"
+repository = "https://github.com/cedra-labs/cedra"
 rust-version = "1.80.1"
 
 [workspace.dependencies]
@@ -493,10 +493,10 @@ ark-groth16 = "0.4.0"
 ark-relations = "0.4.0"
 ark-serialize = "0.4.0"
 ark-std = { version = "0.4.0", features = ["getrandom"] }
-aptos-indexer-processor-sdk = { git = "https://github.com/aptos-labs/aptos-indexer-processor-sdk.git", rev = "bfb07a2b6985743fbc275d6fc621a80453f6742d", features = [
+cedra-indexer-processor-sdk = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev ="58a542e8a7440ba497edae0d240a673d6485c8c5", features = [
     "postgres_partial",
 ] }
-aptos-moving-average = { git = "https://github.com/cedra-labs/cedra-indexer-processors.git", rev = "62beedc881d1b76632318ceb186ee9065236468e" }
+cedra-moving-average = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev ="58a542e8a7440ba497edae0d240a673d6485c8c5"}
 assert_approx_eq = "1.1.0"
 async-channel = "1.7.1"
 async-mutex = "1.4.0"
@@ -691,8 +691,8 @@ pprof = { version = "0.11", features = ["flamegraph", "protobuf-codec"] }
 pretty = "0.10.0"
 pretty_assertions = "1.2.1"
 # We set default-features to false so we don't onboard the libpq dep. See more here:
-# https://github.com/cedra-labs/cedra-core/pull/12568
-processor = { git = "https://github.com/cedra-labs/cedra-indexer-processors-v2.git", rev = "1449895f6e69425e2873b85c14182ac448732109", default-features = false }
+# https://github.com/cedra-labs/cedra/pull/12568
+processor = { git = "https://github.com/cedra-labs/cedra-indexer-processors-v2.git", rev = "b0edf2a3710dac6577cec922693f97e8b95f1dc3", default-features = false }
 procfs = "0.14.1"
 proc-macro2 = "1.0.38"
 project-root = "0.2.2"
@@ -918,3 +918,4 @@ futures-sink = { git = "https://github.com/cedra-labs/futures-rs", branch = "bac
 futures-io = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
 futures-task = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
 futures-macro = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+

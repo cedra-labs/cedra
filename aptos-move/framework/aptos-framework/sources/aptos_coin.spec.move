@@ -10,7 +10,7 @@ spec aptos_framework::aptos_coin {
     /// Requirement: The APT coin may only be created exactly once.
     /// Criticality: Medium
     /// Implementation: The initialization function may only be called once.
-    /// Enforcement: Enforced through the [https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
+    /// Enforcement: Enforced through the [https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
     /// module, which has been audited.
     ///
     /// No.: 3
@@ -25,7 +25,7 @@ spec aptos_framework::aptos_coin {
     /// Requirement: Any type of operation on the APT coin should fail if the user has not registered for the coin.
     /// Criticality: Medium
     /// Implementation: Coin operations may succeed only on valid user coin registration.
-    /// Enforcement: Enforced through the [https://github.com/cedra-labs/cedra-core/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
+    /// Enforcement: Enforced through the [https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-framework/sources/coin.move](coin)
     /// module, which has been audited.
     /// </high-level-req>
     ///

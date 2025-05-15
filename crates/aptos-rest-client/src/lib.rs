@@ -394,7 +394,7 @@ impl Client {
         Ok(response.and_then(|inner| bcs::from_bytes(&inner))?)
     }
 
-    // TODO: Remove this, just use `get_index`: https://github.com/cedra-labs/cedra-core/issues/5597.
+    // TODO: Remove this, just use `get_index`: https://github.com/cedra-labs/cedra/issues/5597.
     pub async fn get_ledger_information(&self) -> AptosResult<Response<State>> {
         let response = self.get_index_bcs().await?.map(|r| State {
             chain_id: r.chain_id,

@@ -274,7 +274,7 @@ where
                 self.handle_new_connection_event(conn);
             },
             TransportNotification::Disconnected(lost_conn_metadata, reason) => {
-                // See: https://github.com/cedra-labs/cedra-core/issues/3128#issuecomment-605351504 for
+                // See: https://github.com/cedra-labs/cedra/issues/3128#issuecomment-605351504 for
                 // detailed reasoning on `Disconnected` events should be handled correctly.
                 info!(
                     NetworkSchema::new(&self.network_context)
