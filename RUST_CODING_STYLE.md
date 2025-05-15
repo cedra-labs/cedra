@@ -1,6 +1,6 @@
 # Coding Guidelines for Aptos Core
 
-This document describes the coding guidelines for the [Aptos Core](https://github.com/aptos-labs/aptos-core) Rust codebase. For the Move language, see the [Move Coding Conventions](https://aptos.dev/move/book/SUMMARY).
+This document describes the coding guidelines for the [Aptos Core](https://github.com/cedra-labs/cedra-core) Rust codebase. For the Move language, see the [Move Coding Conventions](https://aptos.dev/move/book/SUMMARY).
 Secure coding guidance is provided in the [Aptos Rust Secure Coding Guidelines](./RUST_SECURE_CODING.md).
 
 ## Code formatting & Code analysis

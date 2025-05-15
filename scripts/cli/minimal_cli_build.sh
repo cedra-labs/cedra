@@ -73,7 +73,7 @@ case "$OS" in
 esac
 
 # TODO: Determine how best to install on it's own
-#git clone https://github.com/aptos-labs/aptos-core.git
+#git clone https://github.com/cedra-labs/cedra-core.git
 #cd aptos-core || exit 1
 
 # If cargo is installed correctly use it, but otherwise, you may need to initialize rustup, depends on OS

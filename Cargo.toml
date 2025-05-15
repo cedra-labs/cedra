@@ -283,7 +283,7 @@ edition = "2021"
 homepage = "https://aptoslabs.com"
 license = "Apache-2.0"
 publish = false
-repository = "https://github.com/aptos-labs/aptos-core"
+repository = "https://github.com/cedra-labs/cedra-core"
 rust-version = "1.80.1"
 
 [workspace.dependencies]
@@ -496,7 +496,7 @@ ark-std = { version = "0.4.0", features = ["getrandom"] }
 aptos-indexer-processor-sdk = { git = "https://github.com/aptos-labs/aptos-indexer-processor-sdk.git", rev = "bfb07a2b6985743fbc275d6fc621a80453f6742d", features = [
     "postgres_partial",
 ] }
-aptos-moving-average = { git = "https://github.com/aptos-labs/aptos-indexer-processors.git", rev = "62beedc881d1b76632318ceb186ee9065236468e" }
+aptos-moving-average = { git = "https://github.com/cedra-labs/cedra-indexer-processors.git", rev = "62beedc881d1b76632318ceb186ee9065236468e" }
 assert_approx_eq = "1.1.0"
 async-channel = "1.7.1"
 async-mutex = "1.4.0"
@@ -506,7 +506,7 @@ axum = "0.7.5"
 base64 = "0.13.0"
 backoff = { version = "0.4.0", features = ["tokio"] }
 backtrace = "0.3.58"
-bcs = { git = "https://github.com/aptos-labs/bcs.git", rev = "d31fab9d81748e2594be5cd5cdf845786a30562d" }
+bcs = { git = "https://github.com/cedra-labs/bcs.git", rev = "d31fab9d81748e2594be5cd5cdf845786a30562d" }
 better_any = "0.1.1"
 bigdecimal = { version = "0.4.0", features = ["serde"] }
 version-compare = "0.1.1"
@@ -593,7 +593,7 @@ ff = { version = "0.13", features = ["derive"] }
 field_count = "0.1.1"
 figment = { version = "0.10.19", features = ["yaml", "env"] }
 file_diff = "1.0.0"
-firebase-token = { git = "https://github.com/aptos-labs/firebase-token", rev = "34ea512d3d1fad6c11df3e7d82ff72beccc05836" }
+firebase-token = { git = "https://github.com/cedra-labs/firebase-token", rev = "34ea512d3d1fad6c11df3e7d82ff72beccc05836" }
 firestore = "0.43.0"
 fixed = "1.25.1"
 flate2 = "1.0.24"
@@ -691,8 +691,8 @@ pprof = { version = "0.11", features = ["flamegraph", "protobuf-codec"] }
 pretty = "0.10.0"
 pretty_assertions = "1.2.1"
 # We set default-features to false so we don't onboard the libpq dep. See more here:
-# https://github.com/aptos-labs/aptos-core/pull/12568
-processor = { git = "https://github.com/aptos-labs/aptos-indexer-processors-v2.git", rev = "1449895f6e69425e2873b85c14182ac448732109", default-features = false }
+# https://github.com/cedra-labs/cedra-core/pull/12568
+processor = { git = "https://github.com/cedra-labs/cedra-indexer-processors-v2.git", rev = "1449895f6e69425e2873b85c14182ac448732109", default-features = false }
 procfs = "0.14.1"
 proc-macro2 = "1.0.38"
 project-root = "0.2.2"
@@ -754,8 +754,8 @@ serde_json = { version = "1.0.81", features = [
 serde_repr = "0.1"
 serde_merge = "0.1.3"
 serde-name = "0.1.1"
-serde-generate = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
-serde-reflection = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+serde-generate = { git = "https://github.com/cedra-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+serde-reflection = { git = "https://github.com/cedra-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
 serde_with = "3.4.0"
 serde_yaml = "0.8.24"
 set_env = "1.3.4"
@@ -823,7 +823,7 @@ wasm-bindgen-futures = "0.4.50"
 which = "4.2.5"
 whoami = "1.5.0"
 # This allows for zeroize 1.6 to be used. Version 1.2.0 of x25519-dalek locks zeroize to 1.3.
-x25519-dalek = { git = "https://github.com/aptos-labs/x25519-dalek", rev = "b9cdbaf36bf2a83438d9f660e5a708c82ed60d8e" }
+x25519-dalek = { git = "https://github.com/cedra-labs/x25519-dalek", rev = "b9cdbaf36bf2a83438d9f660e5a708c82ed60d8e" }
 z3tracer = "0.8.0"
 
 # MOVE DEPENDENCIES
@@ -907,14 +907,14 @@ debug-assertions = true
 debug = true
 
 [patch.crates-io]
-serde-reflection = { git = "https://github.com/aptos-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
-merlin = { git = "https://github.com/aptos-labs/merlin" }
-futures = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-channel = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-executor = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-core = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-util = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-sink = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-io = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-task = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
-futures-macro = { git = "https://github.com/aptos-labs/futures-rs", branch = "backport" }
+serde-reflection = { git = "https://github.com/cedra-labs/serde-reflection", rev = "73b6bbf748334b71ff6d7d09d06a29e3062ca075" }
+merlin = { git = "https://github.com/cedra-labs/merlin" }
+futures = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-channel = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-executor = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-core = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-util = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-sink = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-io = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-task = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }
+futures-macro = { git = "https://github.com/cedra-labs/futures-rs", branch = "backport" }

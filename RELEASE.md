@@ -49,7 +49,7 @@ The aptos cli release tags are created to track the CLI versions for community t
 
 ## Release Announcement
 * Each of the network release will be announced on Aptos Network [Discord](https://discord.gg/aptosnetwork). Follow mainnet-release, testnet-release, devnet-release channel to get updates.
-* When a release is ready to deploy, a [Github release page](https://github.com/aptos-labs/aptos-core/releases) will be created in this repo as well. You can search for the most recent release version titled with "[Mainnet]" for production usage.
+* When a release is ready to deploy, a [Github release page](https://github.com/cedra-labs/cedra-core/releases) will be created in this repo as well. You can search for the most recent release version titled with "[Mainnet]" for production usage.
 
 ## How we test each release at Aptos
 ### Blockchain

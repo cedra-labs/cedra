@@ -11,12 +11,12 @@
 //! serialize them as strings, e.g. EntryFunctionId.
 //!
 //! For potential future improvements here, see:
-//! <https://github.com/aptos-labs/aptos-core/issues/2319>
+//! <https://github.com/cedra-labs/cedra-core/issues/2319>
 
 // READ ME: You'll see that some of the examples (specifically those for hex
 // strings) have a space at the end. This is necessary to make sure the UI
 // displays the example value correctly. See more here:
-// https://github.com/aptos-labs/aptos-core/pull/2703
+// https://github.com/cedra-labs/cedra-core/pull/2703
 
 use crate::{
     move_types::{MoveAbility, MoveStructValue},
@@ -205,7 +205,7 @@ impl_poem_type!(
               `{ \"created\": \"0xa550c18\", \"role_id\": \"0\" }`
 
             **Special serialization for Move stdlib types**:
-              - [0x1::string::String](https://github.com/aptos-labs/aptos-core/blob/main/third_party/move/move-stdlib/docs/ascii.md)
+              - [0x1::string::String](https://github.com/cedra-labs/cedra-core/blob/main/third_party/move/move-stdlib/docs/ascii.md)
                 is serialized into `string`. For example, struct value `0x1::string::String{bytes: b\"Hello World!\"}`
                 is serialized as `\"Hello World!\"` in JSON.
         "})
