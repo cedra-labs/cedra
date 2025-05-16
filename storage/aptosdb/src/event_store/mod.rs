@@ -347,7 +347,7 @@ impl<'a> EventHashReader<'a> {
     }
 }
 
-impl HashReader for EventHashReader<'_> {
+impl<'a> HashReader for EventHashReader<'a> {
     fn get(&self, position: Position) -> Result<HashValue, anyhow::Error> {
         self.store
             .event_db

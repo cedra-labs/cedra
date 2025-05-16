@@ -150,7 +150,6 @@ impl<'env> BoogieTranslator<'env> {
         }
     }
 
-    #[allow(clippy::literal_string_with_formatting_args)]
     pub fn translate(&mut self) {
         let writer = self.writer;
         let env = self.env;
@@ -400,7 +399,7 @@ impl<'env> BoogieTranslator<'env> {
 // =================================================================================================
 // Struct Translation
 
-impl StructTranslator<'_> {
+impl<'env> StructTranslator<'env> {
     fn inst(&self, ty: &Type) -> Type {
         ty.instantiate(self.type_inst)
     }
@@ -808,7 +807,6 @@ impl StructTranslator<'_> {
         emitln!(writer);
     }
 
-    #[allow(clippy::literal_string_with_formatting_args)]
     fn emit_function(&self, signature: &str, body_fn: impl Fn()) {
         self.emit_function_with_attr("{:inline} ", signature, body_fn)
     }
@@ -826,7 +824,7 @@ impl StructTranslator<'_> {
 // =================================================================================================
 // Function Translation
 
-impl FunctionTranslator<'_> {
+impl<'env> FunctionTranslator<'env> {
     /// Return whether a specific TempIndex involves in bitwise operations
     pub fn bv_flag_from_map(&self, i: &usize, operation_map: &FuncOperationMap) -> bool {
         let mid = self.fun_target.module_env().get_id();
@@ -1212,7 +1210,7 @@ impl FunctionTranslator<'_> {
 // =================================================================================================
 // Bytecode Translation
 
-impl FunctionTranslator<'_> {
+impl<'env> FunctionTranslator<'env> {
     /// Translates one bytecode instruction.
     fn translate_bytecode(
         &self,

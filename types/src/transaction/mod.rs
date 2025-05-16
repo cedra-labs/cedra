@@ -719,7 +719,7 @@ pub enum TransactionExecutableRef<'a> {
     Empty,
 }
 
-impl TransactionExecutableRef<'_> {
+impl<'a> TransactionExecutableRef<'a> {
     pub fn is_empty(&self) -> bool {
         matches!(self, Self::Empty)
     }

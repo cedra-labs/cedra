@@ -96,7 +96,7 @@ module aptos_framework::staking_proxy {
     }
 
     #[test_only]
-    const INITIAL_BALANCE: u64 = 100000000000000; // 1M APT coins with 8 decimals.
+    const INITIAL_BALANCE: u64 = 100000000000000; // 1M Cedra coins with 8 decimals.
 
     #[test(
         aptos_framework = @0x1,

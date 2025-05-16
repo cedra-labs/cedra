@@ -13,7 +13,7 @@ pub struct LogSchema<'a> {
     message: Option<&'a str>,
 }
 
-impl LogSchema<'_> {
+impl<'a> LogSchema<'a> {
     pub fn new(name: LogEntry) -> Self {
         Self {
             name,

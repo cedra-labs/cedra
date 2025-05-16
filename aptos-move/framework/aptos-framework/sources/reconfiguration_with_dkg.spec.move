@@ -29,7 +29,7 @@ spec aptos_framework::reconfiguration_with_dkg {
         use std::signer;
         use std::features;
         use aptos_framework::coin::CoinInfo;
-        use aptos_framework::aptos_coin::AptosCoin;
+        use aptos_framework::cedra_coin::CedraCoin;
         use aptos_framework::staking_config;
         use aptos_framework::config_buffer;
         use aptos_framework::version;
@@ -42,7 +42,7 @@ spec aptos_framework::reconfiguration_with_dkg {
         framework: signer;
         requires signer::address_of(framework) == @aptos_framework;
         requires chain_status::is_operating();
-        requires exists<CoinInfo<AptosCoin>>(@aptos_framework);
+        requires exists<CoinInfo<CedraCoin>>(@aptos_framework);
         include staking_config::StakingRewardsConfigRequirement;
         requires exists<features::Features>(@std);
         include config_buffer::OnNewEpochRequirement<version::Version>;

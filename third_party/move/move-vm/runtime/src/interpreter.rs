@@ -102,7 +102,7 @@ struct TypeWithRuntimeEnvironment<'a, 'b> {
     runtime_environment: &'b RuntimeEnvironment,
 }
 
-impl TypeView for TypeWithRuntimeEnvironment<'_, '_> {
+impl<'a, 'b> TypeView for TypeWithRuntimeEnvironment<'a, 'b> {
     fn to_type_tag(&self) -> TypeTag {
         self.runtime_environment.ty_to_ty_tag(self.ty).unwrap()
     }

@@ -1816,7 +1816,7 @@ struct ExpRewriter<'a> {
     pattern_rewriter: &'a mut dyn FnMut(&Pattern, bool) -> Option<Pattern>,
 }
 
-impl ExpRewriterFunctions for ExpRewriter<'_> {
+impl<'a> ExpRewriterFunctions for ExpRewriter<'a> {
     fn rewrite_exp(&mut self, exp: Exp) -> Exp {
         match (*self.exp_rewriter)(exp) {
             RewriteResult::Rewritten(new_exp) => new_exp,
@@ -2184,17 +2184,20 @@ impl Pattern {
         pats: &[Pattern],
         exprs: &[Exp],
     ) -> bool {
-        pats.iter().zip_longest(exprs.iter()).all(|pair| {
-            match pair {
-                EitherOrBoth::Both(pat, expr) => {
-                    Self::collect_vars_exprs_from_expr(r, pat, Some(expr))
-                },
-                EitherOrBoth::Left(pat) => Self::collect_vars_exprs_from_expr(r, pat, None),
-                EitherOrBoth::Right(_) => {
-                    false // there are extra exprs
-                },
-            }
-        })
+        pats.iter()
+            .zip_longest(exprs.iter())
+            .map(|pair| {
+                match pair {
+                    EitherOrBoth::Both(pat, expr) => {
+                        Self::collect_vars_exprs_from_expr(r, pat, Some(expr))
+                    },
+                    EitherOrBoth::Left(pat) => Self::collect_vars_exprs_from_expr(r, pat, None),
+                    EitherOrBoth::Right(_) => {
+                        false // there are extra exprs
+                    },
+                }
+            })
+            .all(|b| b)
     }
 
     // Helper function for `vars_and_exprs`, to match a vector of `Pattern` with a vector of `Value`.
@@ -2209,13 +2212,16 @@ impl Pattern {
         pats: &[Pattern],
         vals: &[Value],
     ) -> bool {
-        pats.iter().zip_longest(vals.iter()).all(|pair| match pair {
-            EitherOrBoth::Both(pat, value) => {
-                Self::collect_vars_exprs_from_value(r, pat, Some(value))
-            },
-            EitherOrBoth::Left(pat) => Self::collect_vars_exprs_from_value(r, pat, None),
-            EitherOrBoth::Right(_) => false,
-        })
+        pats.iter()
+            .zip_longest(vals.iter())
+            .map(|pair| match pair {
+                EitherOrBoth::Both(pat, value) => {
+                    Self::collect_vars_exprs_from_value(r, pat, Some(value))
+                },
+                EitherOrBoth::Left(pat) => Self::collect_vars_exprs_from_value(r, pat, None),
+                EitherOrBoth::Right(_) => false,
+            })
+            .all(|b| b)
     }
 
     // Helper function for `vars_and_exprs`, to match a vector of `Pattern` with no binding.
@@ -2229,7 +2235,8 @@ impl Pattern {
         pats: &[Pattern],
     ) -> bool {
         pats.iter()
-            .all(|pat| Self::collect_vars_exprs_from_value(r, pat, None))
+            .map(|pat| Self::collect_vars_exprs_from_value(r, pat, None))
+            .all(|b| b)
     }
 
     // Returns a new pattern which is a copy of `self` but with
@@ -2382,7 +2389,7 @@ pub struct PatDisplay<'a> {
     show_type: bool,
 }
 
-impl PatDisplay<'_> {
+impl<'a> PatDisplay<'a> {
     fn set_show_type(self, show_type: bool) -> Self {
         Self { show_type, ..self }
     }
@@ -2481,7 +2488,7 @@ impl PatDisplay<'_> {
     }
 }
 
-impl fmt::Display for PatDisplay<'_> {
+impl<'a> fmt::Display for PatDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         self.fmt_pattern(f)
     }
@@ -2619,7 +2626,7 @@ impl Value {
 }
 
 // enables `env.display(&value)`
-impl fmt::Display for EnvDisplay<'_, Value> {
+impl<'a> fmt::Display for EnvDisplay<'a, Value> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         match self.val {
             Value::Address(address) => write!(f, "{}", self.env.display(address)),
@@ -2980,7 +2987,7 @@ impl Address {
 }
 
 // enables `env.display(address)`
-impl fmt::Display for EnvDisplay<'_, Address> {
+impl<'a> fmt::Display for EnvDisplay<'a, Address> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self.val {
             Address::Numerical(addr) => write!(f, "0x{}", addr.short_str_lossless()),
@@ -3068,7 +3075,7 @@ pub struct ModuleNameDisplay<'a> {
     with_address: bool,
 }
 
-impl fmt::Display for ModuleNameDisplay<'_> {
+impl<'a> fmt::Display for ModuleNameDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         if self.with_address && !self.name.is_script() {
             write!(f, "{}::", self.env.display(&self.name.0))?
@@ -3126,7 +3133,7 @@ pub struct QualifiedSymbolDisplay<'a> {
     with_address: bool,
 }
 
-impl fmt::Display for QualifiedSymbolDisplay<'_> {
+impl<'a> fmt::Display for QualifiedSymbolDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         if self.with_module {
             write!(
@@ -3231,7 +3238,7 @@ impl<'a> ExpDisplay<'a> {
     }
 }
 
-impl fmt::Display for ExpDisplay<'_> {
+impl<'a> fmt::Display for ExpDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         use ExpData::*;
         if self.verbose {
@@ -3459,7 +3466,7 @@ fn indent(fmt: impl fmt::Display) -> String {
     s.replace('\n', "\n  ")
 }
 
-impl ExpDisplay<'_> {
+impl<'a> ExpDisplay<'a> {
     fn type_ctx(&self) -> TypeDisplayContext {
         if let Some(fe) = &self.fun_env {
             fe.get_type_display_ctx()
@@ -3559,7 +3566,7 @@ impl<'a> OperationDisplay<'a> {
     }
 }
 
-impl fmt::Display for OperationDisplay<'_> {
+impl<'a> fmt::Display for OperationDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         use Operation::*;
         match self.oper {
@@ -3660,7 +3667,7 @@ impl fmt::Display for OperationDisplay<'_> {
     }
 }
 
-impl OperationDisplay<'_> {
+impl<'a> OperationDisplay<'a> {
     fn fun_str(&self, mid: &ModuleId, fid: &SpecFunId) -> String {
         let module_env = self.env.get_module(*mid);
         let fun = module_env.get_spec_fun(*fid);
@@ -3708,7 +3715,7 @@ impl fmt::Display for MemoryLabel {
     }
 }
 
-impl fmt::Display for EnvDisplay<'_, Condition> {
+impl<'a> fmt::Display for EnvDisplay<'a, Condition> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match &self.val.kind {
             ConditionKind::LetPre(name, _loc) => write!(
@@ -3748,7 +3755,7 @@ impl fmt::Display for EnvDisplay<'_, Condition> {
     }
 }
 
-impl fmt::Display for EnvDisplay<'_, Spec> {
+impl<'a> fmt::Display for EnvDisplay<'a, Spec> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         writeln!(f, "spec {{")?;
         for cond in &self.val.conditions {

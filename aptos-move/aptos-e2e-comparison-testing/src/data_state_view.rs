@@ -57,7 +57,7 @@ impl TStateView for DataStateView {
     fn get_state_value(&self, state_key: &StateKey) -> StateViewResult<Option<StateValue>> {
         if let Some(code) = &self.code_data {
             if code.contains_state_value(state_key)? {
-                return code.get_state_value(state_key);
+                return code.get_state_value(state_key).map_err(Into::into);
             }
         }
         let ret = self.debugger_view.get_state_value(state_key);

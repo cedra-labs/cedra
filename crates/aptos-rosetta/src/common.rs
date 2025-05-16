@@ -5,7 +5,7 @@ use crate::{
     error::{ApiError, ApiResult},
     types::{
         Currency, CurrencyMetadata, MetadataRequest, NetworkIdentifier, PartialBlockIdentifier,
-        APTOS_COIN_MODULE, APTOS_COIN_RESOURCE,
+        CEDRA_COIN_MODULE, CEDRA_COIN_RESOURCE,
     },
     RosettaContext,
 };
@@ -145,10 +145,10 @@ pub fn decode_key<T: DeserializeOwned + ValidCryptoMaterial>(
     T::from_encoded_string(str).map_err(|_| ApiError::deserialization_failed(type_name))
 }
 
-const APT_SYMBOL: &str = "APT";
+const APT_SYMBOL: &str = "Cedra";
 const APT_DECIMALS: u8 = 8;
 
-/// Provides the [Currency] for 0x1::aptos_coin::AptosCoin aka APT
+/// Provides the [Currency] for 0x1::cedra_coin::CedraCoin aka Cedra
 ///
 /// Note that 0xA is the address for FA, but it has to be skipped in order to have backwards compatibility
 pub fn native_coin() -> Currency {
@@ -162,12 +162,12 @@ pub fn native_coin() -> Currency {
     }
 }
 
-/// Provides the [TypeTag] for 0x1::aptos_coin::AptosCoin aka APT
+/// Provides the [TypeTag] for 0x1::cedra_coin::CedraCoin aka Cedra
 pub fn native_coin_tag() -> TypeTag {
     TypeTag::Struct(Box::new(StructTag {
         address: AccountAddress::ONE,
-        module: ident_str!(APTOS_COIN_MODULE).into(),
-        name: ident_str!(APTOS_COIN_RESOURCE).into(),
+        module: ident_str!(CEDRA_COIN_MODULE).into(),
+        name: ident_str!(CEDRA_COIN_RESOURCE).into(),
         type_args: vec![],
     }))
 }

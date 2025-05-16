@@ -189,7 +189,7 @@ impl AptosPublicInfo {
     pub async fn mint(&mut self, addr: AccountAddress, amount: u64) -> Result<()> {
         let mint_txn = self.root_account.sign_with_transaction_builder(
             self.transaction_factory()
-                .payload(aptos_stdlib::aptos_coin_mint(addr, amount)),
+                .payload(aptos_stdlib::cedra_coin_mint(addr, amount)),
         );
         self.rest_client.submit_and_wait(&mint_txn).await?;
         Ok(())
@@ -202,7 +202,7 @@ impl AptosPublicInfo {
         amount: u64,
     ) -> Result<PendingTransaction> {
         let tx = from_account.sign_with_transaction_builder(self.transaction_factory().payload(
-            aptos_stdlib::aptos_coin_transfer(to_account.address(), amount),
+            aptos_stdlib::cedra_coin_transfer(to_account.address(), amount),
         ));
         let pending_txn = self.rest_client.submit(&tx).await?.into_inner();
         Ok(pending_txn)
@@ -250,7 +250,7 @@ impl AptosPublicInfo {
 
     pub async fn get_balance(&self, address: AccountAddress) -> u64 {
         self.rest_client
-            .get_account_balance(address, "0x1::aptos_coin::AptosCoin")
+            .get_account_balance(address, "0x1::cedra_coin::CedraCoin")
             .await
             .unwrap()
             .into_inner()

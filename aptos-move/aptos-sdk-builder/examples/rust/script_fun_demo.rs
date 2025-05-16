@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use aptos_framework::{aptos_coin_transfer, EntryFunctionCall};
+use aptos_framework::{cedra_coin_transfer, EntryFunctionCall};
 use aptos_types::AccountAddress;
 
 fn demo_p2p_entry_function() {
@@ -14,10 +14,10 @@ fn demo_p2p_entry_function() {
     let amount = 1234567;
 
     // Now encode and decode a peer to peer transaction entry function.
-    let payload = aptos_coin_transfer(payee.clone(), amount);
+    let payload = cedra_coin_transfer(payee.clone(), amount);
     let function_call = EntryFunctionCall::decode(&payload);
     match function_call {
-        Some(EntryFunctionCall::AptosCoinTransfer { amount: a, to: p }) => {
+        Some(EntryFunctionCall::CedraCoinTransfer { amount: a, to: p }) => {
             assert_eq!(a, amount);
             assert_eq!(p, payee.clone());
         }

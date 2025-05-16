@@ -37,6 +37,7 @@ fn gen_join_field(field: proc_macro2::TokenStream) -> proc_macro2::TokenStream {
 /// use abstract_domain_derive::AbstractDomain;
 /// pub struct BorrowInfo {
 ///     live_nodes: SetDomain<BorrowNode>,
+
 ///     borrowed_by: MapDomain<BorrowNode, SetDomain<(BorrowNode, BorrowEdge)>>,
 ///     /// Backward borrow information. This field is not used during analysis, but computed once
 ///     /// analysis is done.

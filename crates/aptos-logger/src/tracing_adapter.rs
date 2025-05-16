@@ -65,7 +65,7 @@ struct KeyValueVisitorAdapter<'a> {
     visitor: &'a mut dyn dl::Visitor,
 }
 
-impl tracing::field::Visit for KeyValueVisitorAdapter<'_> {
+impl<'a> tracing::field::Visit for KeyValueVisitorAdapter<'a> {
     fn record_str(&mut self, field: &Field, value: &str) {
         self.visitor
             .visit_pair(dl::Key::new(field.name()), dl::Value::Display(&value))
@@ -107,7 +107,7 @@ struct EventKeyValueAdapter<'a, 'b> {
     event: &'a Event<'b>,
 }
 
-impl dl::Schema for EventKeyValueAdapter<'_, '_> {
+impl<'a, 'b> dl::Schema for EventKeyValueAdapter<'a, 'b> {
     fn visit(&self, visitor: &mut dyn dl::Visitor) {
         self.event.record(&mut KeyValueVisitorAdapter { visitor })
     }

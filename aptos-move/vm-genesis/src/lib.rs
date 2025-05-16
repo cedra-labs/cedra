@@ -91,7 +91,7 @@ const RECONFIGURATION_STATE_MODULE_NAME: &str = "reconfiguration_state";
 
 const NUM_SECONDS_PER_YEAR: u64 = 365 * 24 * 60 * 60;
 const MICRO_SECONDS_PER_SECOND: u64 = 1_000_000;
-const APTOS_COINS_BASE_WITH_DECIMALS: u64 = u64::pow(10, 8);
+const CEDRA_COINS_BASE_WITH_DECIMALS: u64 = u64::pow(10, 8);
 
 pub struct GenesisConfiguration {
     pub allow_new_validators: bool,
@@ -177,7 +177,7 @@ pub fn encode_aptos_mainnet_genesis_transaction(
             .clone()
             .map(Features::into_flag_vec),
     );
-    initialize_aptos_coin(&mut session, &module_storage);
+    initialize_cedra_coin(&mut session, &module_storage);
     initialize_on_chain_governance(&mut session, &module_storage, genesis_config);
     create_accounts(&mut session, &module_storage, accounts);
     create_employee_validators(&mut session, &module_storage, employees, genesis_config);
@@ -277,9 +277,9 @@ pub fn encode_genesis_change_set(
             .map(Features::into_flag_vec),
     );
     if genesis_config.is_test {
-        initialize_core_resources_and_aptos_coin(&mut session, &module_storage, core_resources_key);
+        initialize_core_resources_and_cedra_coin(&mut session, &module_storage, core_resources_key);
     } else {
-        initialize_aptos_coin(&mut session, &module_storage);
+        initialize_cedra_coin(&mut session, &module_storage);
     }
     initialize_config_buffer(&mut session, &module_storage);
     initialize_dkg(&mut session, &module_storage);
@@ -381,6 +381,10 @@ fn exec_function(
     ty_args: Vec<TypeTag>,
     args: Vec<Vec<u8>>,
 ) {
+    println!("exec_function genesis vm");
+    println!("{:?}", function_name);
+    println!("{:?}", module_name);
+    println!("{:?}", CORE_CODE_ADDRESS);
     let storage = TraversalStorage::new();
     session
         .execute_function_bypass_visibility(
@@ -482,7 +486,7 @@ fn initialize_features(
     );
 }
 
-fn initialize_aptos_coin(
+fn initialize_cedra_coin(
     session: &mut SessionExt<impl AptosMoveResolver>,
     module_storage: &impl AptosModuleStorage,
 ) {
@@ -490,7 +494,7 @@ fn initialize_aptos_coin(
         session,
         module_storage,
         GENESIS_MODULE_NAME,
-        "initialize_aptos_coin",
+        "initialize_cedra_coin",
         vec![],
         serialize_values(&vec![MoveValue::Signer(CORE_CODE_ADDRESS)]),
     );
@@ -706,7 +710,7 @@ fn set_genesis_end(
     );
 }
 
-fn initialize_core_resources_and_aptos_coin(
+fn initialize_core_resources_and_cedra_coin(
     session: &mut SessionExt<impl AptosMoveResolver>,
     module_storage: &impl AptosModuleStorage,
     core_resources_key: &Ed25519PublicKey,
@@ -716,7 +720,7 @@ fn initialize_core_resources_and_aptos_coin(
         session,
         module_storage,
         GENESIS_MODULE_NAME,
-        "initialize_core_resources_and_aptos_coin",
+        "initialize_core_resources_and_cedra_coin",
         vec![],
         serialize_values(&vec![
             MoveValue::Signer(CORE_CODE_ADDRESS),
@@ -1183,7 +1187,11 @@ impl TestValidator {
         let network_address = [0u8; 0].to_vec();
         let full_node_network_address = [0u8; 0].to_vec();
 
-        let stake_amount = initial_stake.unwrap_or(1);
+        let stake_amount = if let Some(amount) = initial_stake {
+            amount
+        } else {
+            1
+        };
         let data = Validator {
             owner_address,
             consensus_pubkey,
@@ -1271,12 +1279,12 @@ fn mainnet_genesis_config() -> GenesisConfiguration {
         allow_new_validators: true,
         epoch_duration_secs: 2 * 3600, // 2 hours
         is_test: false,
-        min_stake: 1_000_000 * APTOS_COINS_BASE_WITH_DECIMALS, // 1M APT
-        // 400M APT
-        min_voting_threshold: (400_000_000 * APTOS_COINS_BASE_WITH_DECIMALS as u128),
-        max_stake: 50_000_000 * APTOS_COINS_BASE_WITH_DECIMALS, // 50M APT.
+        min_stake: 1_000_000 * CEDRA_COINS_BASE_WITH_DECIMALS, // 1M Cedra
+        // 400M Cedra
+        min_voting_threshold: (400_000_000 * CEDRA_COINS_BASE_WITH_DECIMALS as u128),
+        max_stake: 50_000_000 * CEDRA_COINS_BASE_WITH_DECIMALS, // 50M Cedra.
         recurring_lockup_duration_secs: 30 * 24 * 3600,         // 1 month
-        required_proposer_stake: 1_000_000 * APTOS_COINS_BASE_WITH_DECIMALS, // 1M APT
+        required_proposer_stake: 1_000_000 * CEDRA_COINS_BASE_WITH_DECIMALS, // 1M Cedra
         rewards_apy_percentage: 10,
         voting_duration_secs: 7 * 24 * 3600, // 7 days
         voting_power_increase_limit: 30,
@@ -1342,8 +1350,8 @@ pub fn test_mainnet_end_to_end() {
         write_set::{TransactionWrite, WriteSet},
     };
 
-    let balance = 10_000_000 * APTOS_COINS_BASE_WITH_DECIMALS;
-    let non_validator_balance = 10 * APTOS_COINS_BASE_WITH_DECIMALS;
+    let balance = 10_000_000 * CEDRA_COINS_BASE_WITH_DECIMALS;
+    let non_validator_balance = 10 * CEDRA_COINS_BASE_WITH_DECIMALS;
 
     // currently just test that all functions have the right interface
     let account44 = AccountAddress::from_hex_literal("0x44").unwrap();

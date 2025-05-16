@@ -77,6 +77,6 @@ where
 }
 
 pub fn get_deposit_dst(events: &[ContractEvent]) -> Result<AccountAddress> {
-    let deposit_event: DepositMoveStruct = search_single_event_data(events, "0000000000000000000000000000000000000000000000000000000000000001::coin::Deposit<0000000000000000000000000000000000000000000000000000000000000001::aptos_coin::AptosCoin>")?;
+    let deposit_event: DepositMoveStruct = search_single_event_data(events, "0000000000000000000000000000000000000000000000000000000000000001::coin::Deposit<0000000000000000000000000000000000000000000000000000000000000001::cedra_coin::CedraCoin>")?;
     Ok(deposit_event.account)
 }

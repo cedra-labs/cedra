@@ -241,7 +241,7 @@ pub struct BitIterator<'a> {
     pos: std::ops::Range<usize>,
 }
 
-impl Peekable for BitIterator<'_> {
+impl<'a> Peekable for BitIterator<'a> {
     /// Returns the `next()` value without advancing the iterator.
     fn peek(&self) -> Option<Self::Item> {
         if self.pos.start < self.pos.end {
@@ -253,7 +253,7 @@ impl Peekable for BitIterator<'_> {
 }
 
 /// BitIterator spits out a boolean each time. True/false denotes 1/0.
-impl Iterator for BitIterator<'_> {
+impl<'a> Iterator for BitIterator<'a> {
     type Item = bool;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -262,7 +262,7 @@ impl Iterator for BitIterator<'_> {
 }
 
 /// Support iterating bits in reversed order.
-impl DoubleEndedIterator for BitIterator<'_> {
+impl<'a> DoubleEndedIterator for BitIterator<'a> {
     fn next_back(&mut self) -> Option<Self::Item> {
         self.pos.next_back().map(|i| self.nibble_path.get_bit(i))
     }
@@ -288,7 +288,7 @@ pub struct NibbleIterator<'a> {
 }
 
 /// NibbleIterator spits out a byte each time. Each byte must be in range [0, 16).
-impl Iterator for NibbleIterator<'_> {
+impl<'a> Iterator for NibbleIterator<'a> {
     type Item = Nibble;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -296,7 +296,7 @@ impl Iterator for NibbleIterator<'_> {
     }
 }
 
-impl Peekable for NibbleIterator<'_> {
+impl<'a> Peekable for NibbleIterator<'a> {
     /// Returns the `next()` value without advancing the iterator.
     fn peek(&self) -> Option<Self::Item> {
         if self.pos.start < self.pos.end {

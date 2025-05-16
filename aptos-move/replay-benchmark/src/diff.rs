@@ -8,7 +8,7 @@ use aptos_types::{
     state_store::state_key::StateKey,
     transaction::{ExecutionStatus, TransactionOutput},
     write_set::{WriteOp, WriteSet, TOTAL_SUPPLY_STATE_KEY},
-    AptosCoinType,
+    CedraCoinType,
 };
 use claims::{assert_ok, assert_some};
 use move_core_types::{
@@ -148,7 +148,7 @@ pub(crate) struct TransactionDiffBuilder {
     /// If true, differences related to the gas usage are ignored. These include:
     ///   - total gas used is not compared,
     ///   - `EmitFeeStatement` event is not compared,
-    ///   - total APT supply is not compared,
+    ///   - total Cedra supply is not compared,
     ///   - account balances are no compared.
     allow_different_gas_usage: bool,
 }
@@ -266,7 +266,7 @@ impl TransactionDiffBuilder {
             }
 
             if self.allow_different_gas_usage {
-                // Skip total APT supply comparisons. Those should always be part of the write set.
+                // Skip total Cedra supply comparisons. Those should always be part of the write set.
                 if state_key == *TOTAL_SUPPLY_STATE_KEY {
                     assert_some!(maybe_right_write_op);
                     continue;
@@ -277,7 +277,7 @@ impl TransactionDiffBuilder {
                     if state_key
                         == StateKey::resource(
                             &fee_payer,
-                            &CoinStoreResource::<AptosCoinType>::struct_tag(),
+                            &CoinStoreResource::<CedraCoinType>::struct_tag(),
                         )
                         .unwrap()
                     {
@@ -428,9 +428,10 @@ mod tests {
     fn test_diff_events_allow_different_gas_usage() {
         let fee_statement_tag = TypeTag::Struct(Box::new(FeeStatement::struct_tag()));
 
-        let events_1 =
-            vec![ContractEvent::new_v2(fee_statement_tag.clone(), vec![0, 1, 2]).unwrap()];
-        let events_2 = vec![ContractEvent::new_v2(fee_statement_tag, vec![0, 1, 3]).unwrap()];
+        let events_1 = vec![ContractEvent::new_v2(fee_statement_tag.clone(), vec![
+            0, 1, 2,
+        ])];
+        let events_2 = vec![ContractEvent::new_v2(fee_statement_tag, vec![0, 1, 3])];
 
         let diffs = TransactionDiffBuilder::new(true).diff_events(events_1.clone(), events_2);
         assert!(diffs.is_empty());

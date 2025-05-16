@@ -23,11 +23,11 @@ spec aptos_framework::genesis {
     ///
     /// No.: 3
     /// Requirement: The Aptos coin should be initialized during genesis and only the Aptos framework account should own
-    /// the mint and burn capabilities for the APT token.
+    /// the mint and burn capabilities for the Cedra token.
     /// Criticality: Critical
-    /// Implementation: Both mint and burn capabilities are wrapped inside the stake::AptosCoinCapabilities and
-    /// transaction_fee::AptosCoinCapabilities resources which are stored under the aptos framework account.
-    /// Enforcement: Formally verified via [high-level-req-3](initialize_aptos_coin).
+    /// Implementation: Both mint and burn capabilities are wrapped inside the stake::CedraCoinCapabilities and
+    /// transaction_fee::CedraCoinCapabilities resources which are stored under the aptos framework account.
+    /// Enforcement: Formally verified via [high-level-req-3](initialize_cedra_coin).
     ///
     /// No.: 4
     /// Requirement: An initial set of validators should exist before the end of genesis.
@@ -98,14 +98,14 @@ spec aptos_framework::genesis {
         ensures exists<staking_config::StakingConfig>(@aptos_framework);
     }
 
-    spec initialize_aptos_coin {
+    spec initialize_cedra_coin {
         // property 3: The Aptos coin should be initialized during genesis and only the Aptos framework account should
-        // own the mint and burn capabilities for the APT token.
+        // own the mint and burn capabilities for the Cedra token.
         /// [high-level-req-3]
-        requires !exists<stake::AptosCoinCapabilities>(@aptos_framework);
-        ensures exists<stake::AptosCoinCapabilities>(@aptos_framework);
-        requires exists<transaction_fee::AptosCoinCapabilities>(@aptos_framework);
-        ensures exists<transaction_fee::AptosCoinCapabilities>(@aptos_framework);
+        requires !exists<stake::CedraCoinCapabilities>(@aptos_framework);
+        ensures exists<stake::CedraCoinCapabilities>(@aptos_framework);
+        requires exists<transaction_fee::CedraCoinCapabilities>(@aptos_framework);
+        ensures exists<transaction_fee::CedraCoinCapabilities>(@aptos_framework);
     }
 
     spec initialize_validator {
@@ -118,7 +118,7 @@ spec aptos_framework::genesis {
         include stake::ResourceRequirement;
         include stake::GetReconfigStartTimeRequirement;
         include CompareTimeRequires;
-        include aptos_coin::ExistsAptosCoin;
+        include cedra_coin::ExistsCedraCoin;
     }
 
     spec create_initialize_validators {
@@ -127,7 +127,7 @@ spec aptos_framework::genesis {
         include stake::ResourceRequirement;
         include stake::GetReconfigStartTimeRequirement;
         include CompareTimeRequires;
-        include aptos_coin::ExistsAptosCoin;
+        include cedra_coin::ExistsCedraCoin;
     }
 
     spec create_initialize_validator {
@@ -162,7 +162,7 @@ spec aptos_framework::genesis {
         requires chain_status::is_operating();
         requires len(execution_config) > 0;
         requires exists<staking_config::StakingRewardsConfig>(@aptos_framework);
-        requires exists<coin::CoinInfo<AptosCoin>>(@aptos_framework);
+        requires exists<coin::CoinInfo<CedraCoin>>(@aptos_framework);
         include CompareTimeRequires;
     }
 

@@ -23,7 +23,7 @@ pub struct SafetyLogSchema<'a> {
     author: Option<Author>,
 }
 
-impl SafetyLogSchema<'_> {
+impl<'a> SafetyLogSchema<'a> {
     pub fn new(name: LogEntry, event: LogEvent) -> Self {
         Self {
             name,

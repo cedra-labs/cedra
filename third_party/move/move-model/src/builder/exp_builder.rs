@@ -836,7 +836,9 @@ impl<'env, 'translator, 'module_translator> ExpTranslator<'env, 'translator, 'mo
 
 /// # Unification Context
 
-impl UnificationContext for ExpTranslator<'_, '_, '_> {
+impl<'env, 'builder, 'module_builder> UnificationContext
+    for ExpTranslator<'env, 'builder, 'module_builder>
+{
     fn get_struct_field_decls(
         &self,
         id: &QualifiedInstId<StructId>,
@@ -889,7 +891,9 @@ impl UnificationContext for ExpTranslator<'_, '_, '_> {
 
 /// # Ability Context
 
-impl AbilityContext for ExpTranslator<'_, '_, '_> {
+impl<'env, 'builder, 'module_builder> AbilityContext
+    for ExpTranslator<'env, 'builder, 'module_builder>
+{
     fn type_param(&self, idx: u16) -> TypeParameter {
         let (name, _, kind, loc) = &self.type_params[idx as usize];
         TypeParameter(*name, kind.clone(), loc.clone())
@@ -918,7 +922,7 @@ impl AbilityContext for ExpTranslator<'_, '_, '_> {
 
 /// # Type Translation
 
-impl ExpTranslator<'_, '_, '_> {
+impl<'env, 'translator, 'module_translator> ExpTranslator<'env, 'translator, 'module_translator> {
     /// Translates a source AST type into a target AST type.
     pub fn translate_type(&mut self, ty: &EA::Type) -> Type {
         use EA::Type_::*;
@@ -1144,7 +1148,7 @@ impl ExpTranslator<'_, '_, '_> {
 
 /// # Access Specifier Translation
 
-impl ExpTranslator<'_, '_, '_> {
+impl<'env, 'translator, 'module_translator> ExpTranslator<'env, 'translator, 'module_translator> {
     pub(crate) fn translate_access_specifiers(
         &mut self,
         specifiers: &Option<Vec<EA::AccessSpecifier>>,
@@ -1394,7 +1398,7 @@ impl ExpTranslator<'_, '_, '_> {
 
 /// # Expression Translation
 
-impl ExpTranslator<'_, '_, '_> {
+impl<'env, 'translator, 'module_translator> ExpTranslator<'env, 'translator, 'module_translator> {
     /// Translates an expression representing a modify target
     pub fn translate_modify_target(&mut self, exp: &EA::Exp) -> ExpData {
         let loc = self.to_loc(&exp.loc);

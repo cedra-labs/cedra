@@ -438,7 +438,7 @@ impl<'a> LambdaLifter<'a> {
     }
 }
 
-impl ExpRewriterFunctions for LambdaLifter<'_> {
+impl<'a> ExpRewriterFunctions for LambdaLifter<'a> {
     fn rewrite_exp(&mut self, exp: Exp) -> Exp {
         // Intercept descent and compute lambdas being exempted from lifting, currently
         // those passed as parameters to inline functions.

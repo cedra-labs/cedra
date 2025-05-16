@@ -60,7 +60,7 @@ pub struct CompiledState<'a> {
     temp_file_mapping: BTreeMap<String, String>,
 }
 
-impl CompiledState<'_> {
+impl<'a> CompiledState<'a> {
     pub fn resolve_named_address(&self, s: &str) -> AccountAddress {
         if let Some(addr) = self
             .named_address_mapping

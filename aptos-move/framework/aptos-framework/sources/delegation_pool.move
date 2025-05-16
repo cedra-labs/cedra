@@ -120,7 +120,7 @@ module aptos_framework::delegation_pool {
 
     use aptos_framework::account;
     use aptos_framework::aptos_account;
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::aptos_governance;
     use aptos_framework::coin;
     use aptos_framework::event::{Self, EventHandle, emit};
@@ -885,7 +885,7 @@ module aptos_framework::delegation_pool {
         let seed = create_resource_account_seed(delegation_pool_creation_seed);
 
         let (stake_pool_signer, stake_pool_signer_cap) = account::create_resource_account(owner, seed);
-        coin::register<AptosCoin>(&stake_pool_signer);
+        coin::register<CedraCoin>(&stake_pool_signer);
 
         // stake_pool_signer will be owner of the stake pool and have its `stake::OwnerCapability`
         let pool_address = signer::address_of(&stake_pool_signer);
@@ -2516,7 +2516,7 @@ module aptos_framework::delegation_pool {
         // zero `add_stake` fee as validator is not producing rewards this epoch
         assert!(get_add_stake_fee(pool_address, 1000000 * ONE_APT) == 0, 0);
 
-        // add 1M APT, join the validator set and activate this stake
+        // add 1M Cedra, join the validator set and activate this stake
         stake::mint(validator, 1000000 * ONE_APT);
         add_stake(validator, pool_address, 1000000 * ONE_APT);
 
@@ -2733,11 +2733,11 @@ module aptos_framework::delegation_pool {
 
         // check `add_stake` increases `active` stakes of delegator and stake pool
         stake::mint(validator, 300 * ONE_APT);
-        let balance = coin::balance<AptosCoin>(validator_address);
+        let balance = coin::balance<CedraCoin>(validator_address);
         add_stake(validator, pool_address, 250 * ONE_APT);
 
         // check added stake have been transferred out of delegator account
-        assert!(coin::balance<AptosCoin>(validator_address) == balance - 250 * ONE_APT, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == balance - 250 * ONE_APT, 0);
         // zero `add_stake` fee charged from added stake
         assert_delegation(validator_address, pool_address, 1250 * ONE_APT, 0, 0);
         // zero `add_stake` fee transferred to null shareholder
@@ -2951,11 +2951,11 @@ module aptos_framework::delegation_pool {
 
         // cannot withdraw stake unlocked by others
         withdraw(delegator, pool_address, 50 * ONE_APT);
-        assert!(coin::balance<AptosCoin>(delegator_address) == 0, 0);
+        assert!(coin::balance<CedraCoin>(delegator_address) == 0, 0);
 
         // withdraw own unlocked stake
         withdraw(validator, pool_address, 15301499997);
-        assert!(coin::balance<AptosCoin>(validator_address) == 15301499997, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == 15301499997, 0);
         assert_delegation(validator_address, pool_address, 15403510001, 0, 0);
         // pending withdrawal has been executed and deleted
         assert_pending_withdrawal(validator_address, pool_address, false, 0, false, 0);
@@ -2976,9 +2976,9 @@ module aptos_framework::delegation_pool {
         assert_pending_withdrawal(validator_address, pool_address, true, 1, true, 5457545100);
 
         // unlock when the pending withdrawal exists and gets automatically executed
-        let balance = coin::balance<AptosCoin>(validator_address);
+        let balance = coin::balance<CedraCoin>(validator_address);
         unlock(validator, pool_address, 10100000000);
-        assert!(coin::balance<AptosCoin>(validator_address) == balance + 5457545100, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == balance + 5457545100, 0);
         assert_delegation(validator_address, pool_address, 0, 0, 10100000000);
         // this is the new pending withdrawal replacing the executed one
         assert_pending_withdrawal(validator_address, pool_address, true, 2, false, 10100000000);
@@ -3006,10 +3006,10 @@ module aptos_framework::delegation_pool {
         assert_pending_withdrawal(validator_address, pool_address, true, 2, false, 10303010000);
 
         // validator is inactive and lockup expired => pending_inactive stake is withdrawable
-        balance = coin::balance<AptosCoin>(validator_address);
+        balance = coin::balance<CedraCoin>(validator_address);
         withdraw(validator, pool_address, 10303010000);
 
-        assert!(coin::balance<AptosCoin>(validator_address) == balance + 10303010000, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == balance + 10303010000, 0);
         assert_delegation(validator_address, pool_address, 0, 0, 0);
         assert_pending_withdrawal(validator_address, pool_address, false, 0, false, 0);
         stake::assert_stake_pool(pool_address, 5100500001, 0, 0, 0);
@@ -3024,13 +3024,13 @@ module aptos_framework::delegation_pool {
         // the pending withdrawal should be reported as still pending
         assert_pending_withdrawal(validator_address, pool_address, true, 2, false, 1000000000);
 
-        balance = coin::balance<AptosCoin>(validator_address);
+        balance = coin::balance<CedraCoin>(validator_address);
         // pending_inactive balance would be under threshold => redeem entire balance
         withdraw(validator, pool_address, 1);
         // pending_inactive balance has been withdrawn and the pending withdrawal executed
         assert_delegation(validator_address, pool_address, 1999999999, 0, 0);
         assert_pending_withdrawal(validator_address, pool_address, false, 0, false, 0);
-        assert!(coin::balance<AptosCoin>(validator_address) == balance + 1000000000, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == balance + 1000000000, 0);
     }
 
     #[test(aptos_framework = @aptos_framework, validator = @0x123, delegator1 = @0x010, delegator2 = @0x020)]
@@ -3197,7 +3197,7 @@ module aptos_framework::delegation_pool {
 
         // unlock stake in the new lockup cycle (the pending withdrawal is executed)
         unlock(validator, pool_address, 100 * ONE_APT);
-        assert!(coin::balance<AptosCoin>(validator_address) == 15149999998, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == 15149999998, 0);
         assert_delegation(validator_address, pool_address, 10402000002, 0, 9999999999);
         assert_pending_withdrawal(validator_address, pool_address, true, 1, false, 9999999999);
 
@@ -3254,9 +3254,9 @@ module aptos_framework::delegation_pool {
         assert_delegation(validator_address, pool_address, 90900000000, 10100000000, 0);
 
         // withdraw entire owned inactive stake
-        let balance = coin::balance<AptosCoin>(validator_address);
+        let balance = coin::balance<CedraCoin>(validator_address);
         withdraw(validator, pool_address, MAX_U64);
-        assert!(coin::balance<AptosCoin>(validator_address) == balance + 10100000000, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == balance + 10100000000, 0);
         assert_pending_withdrawal(validator_address, pool_address, false, 0, false, 0);
         assert_inactive_shares_pool(pool_address, 0, false, 0);
 
@@ -3553,7 +3553,7 @@ module aptos_framework::delegation_pool {
 
         // unlock 200 coins from delegator `validator` which implicitly executes its pending withdrawal
         unlock(validator, pool_address, 200 * ONE_APT);
-        assert!(coin::balance<AptosCoin>(validator_address) == 20606019996, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == 20606019996, 0);
         assert_delegation(validator_address, pool_address, 64288924812, 0, 19999999999);
 
         // lockup cycle is not ended, pending_inactive stake is still earning
@@ -3624,8 +3624,8 @@ module aptos_framework::delegation_pool {
 
         assert_pending_withdrawal(delegator2_address, pool_address, true, 1, true, 10000000001);
         assert_pending_withdrawal(delegator1_address, pool_address, false, 0, false, 0);
-        assert!(coin::balance<AptosCoin>(delegator1_address) == 15149999998, 0);
-        assert!(coin::balance<AptosCoin>(delegator2_address) == 5149999997, 0);
+        assert!(coin::balance<CedraCoin>(delegator1_address) == 15149999998, 0);
+        assert!(coin::balance<CedraCoin>(delegator2_address) == 5149999997, 0);
 
         // recreate the pending withdrawal of delegator 1 in lockup cycle 2
         unlock(delegator1, pool_address, 100 * ONE_APT);
@@ -3640,12 +3640,12 @@ module aptos_framework::delegation_pool {
 
         // withdraw inactive stake of delegator 2 left from lockup cycle 1 in cycle 3
         withdraw(delegator2, pool_address, 10000000001);
-        assert!(coin::balance<AptosCoin>(delegator2_address) == 15149999998, 0);
+        assert!(coin::balance<CedraCoin>(delegator2_address) == 15149999998, 0);
         assert_pending_withdrawal(delegator2_address, pool_address, false, 0, false, 0);
 
         // withdraw inactive stake of delegator 1 left from previous lockup cycle
         withdraw(delegator1, pool_address, 10099999998);
-        assert!(coin::balance<AptosCoin>(delegator1_address) == 15149999998 + 10099999998, 0);
+        assert!(coin::balance<CedraCoin>(delegator1_address) == 15149999998 + 10099999998, 0);
         assert_pending_withdrawal(delegator1_address, pool_address, false, 0, false, 0);
     }
 
@@ -3779,7 +3779,7 @@ module aptos_framework::delegation_pool {
         // 10087349999 pending_inactive stake * 1.008735
         assert_delegation(delegator2_address, pool_address, 10807241561, 10175463001, 0);
         unlock(delegator2, pool_address, 100 * ONE_APT);
-        // 10807241561 - 100 APT < `MIN_COINS_ON_SHARES_POOL` thus active stake is entirely unlocked
+        // 10807241561 - 100 Cedra < `MIN_COINS_ON_SHARES_POOL` thus active stake is entirely unlocked
         assert_delegation(delegator2_address, pool_address, 0, 0, 10807241561);
         end_aptos_epoch();
 
@@ -3788,9 +3788,9 @@ module aptos_framework::delegation_pool {
         assert_pending_withdrawal(validator_address, pool_address, true, 0, true, 25536996);
 
         // distribute in-flight pending_inactive commission, implicitly executing the inactive withdrawal of operator
-        coin::register<AptosCoin>(validator);
+        coin::register<CedraCoin>(validator);
         synchronize_delegation_pool(pool_address);
-        assert!(coin::balance<AptosCoin>(validator_address) == 25536996, 0);
+        assert!(coin::balance<CedraCoin>(validator_address) == 25536996, 0);
 
         // in-flight commission has been synced, implicitly used to buy shares for operator
         // expect operator stake to be slightly less than previously reported by `Self::get_stake`
@@ -3914,7 +3914,7 @@ module aptos_framework::delegation_pool {
         end_aptos_epoch();
 
         withdraw(operator1, pool_address, ONE_APT);
-        assert!(coin::balance<AptosCoin>(operator1_address) == ONE_APT - 1, 0);
+        assert!(coin::balance<CedraCoin>(operator1_address) == ONE_APT - 1, 0);
 
         set_beneficiary_for_operator(operator1, beneficiary_address);
         assert!(beneficiary_for_operator(operator1_address) == beneficiary_address, 0);
@@ -3925,8 +3925,8 @@ module aptos_framework::delegation_pool {
         end_aptos_epoch();
 
         withdraw(beneficiary, pool_address, ONE_APT);
-        assert!(coin::balance<AptosCoin>(beneficiary_address) == ONE_APT - 1, 0);
-        assert!(coin::balance<AptosCoin>(operator1_address) == ONE_APT - 1, 0);
+        assert!(coin::balance<CedraCoin>(beneficiary_address) == ONE_APT - 1, 0);
+        assert!(coin::balance<CedraCoin>(operator1_address) == ONE_APT - 1, 0);
 
         // switch operator to operator2. The rewards should go to operator2 not to the beneficiay of operator1.
         set_operator(operator1, operator2_address);
@@ -3936,8 +3936,8 @@ module aptos_framework::delegation_pool {
         end_aptos_epoch();
 
         withdraw(operator2, pool_address, ONE_APT);
-        assert!(coin::balance<AptosCoin>(beneficiary_address) == ONE_APT - 1, 0);
-        assert!(coin::balance<AptosCoin>(operator2_address) == ONE_APT - 1, 0);
+        assert!(coin::balance<CedraCoin>(beneficiary_address) == ONE_APT - 1, 0);
+        assert!(coin::balance<CedraCoin>(operator2_address) == ONE_APT - 1, 0);
     }
 
     #[test(aptos_framework = @aptos_framework, operator = @0x123, delegator = @0x010)]

@@ -66,7 +66,7 @@ pub struct K8sSwarm {
 }
 
 impl K8sSwarm {
-    pub async fn new(
+    pub async fn new<'b>(
         root_key: &[u8],
         image_tag: &str,
         upgrade_image_tag: &str,
@@ -494,7 +494,9 @@ fn stateful_set_labels_matches(sts: &StatefulSet, labels: &BTreeMap<String, Stri
                 k, truncated_k, v, truncated_v
             );
         }
-        sts_labels.get(&truncated_k) == Some(&truncated_v)
+        sts_labels
+            .get(&truncated_k)
+            .map_or(false, |val| val == &truncated_v)
     })
 }
 
@@ -788,7 +790,7 @@ fn check_all_injected(status: &Option<ChaosStatus>) -> bool {
     status
         .as_ref()
         .and_then(|status| status.conditions.as_ref())
-        .is_some_and(|conditions| {
+        .map_or(false, |conditions| {
             conditions.iter().any(|c| {
                 c.r#type == ChaosConditionType::AllInjected && c.status == ConditionStatus::True
             }) && conditions.iter().any(|c| {

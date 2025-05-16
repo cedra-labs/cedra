@@ -45,7 +45,7 @@ async fn test_multisig_transaction_with_payload_succeeds() {
         .execute_multisig_transaction(owner_account_1, multisig_account, 202)
         .await;
 
-    // The multisig tx that transfers away 1000 APT should have succeeded.
+    // The multisig tx that transfers away 1000 Cedra should have succeeded.
     assert_eq!(0, context.get_apt_balance(multisig_account).await);
 }
 
@@ -91,7 +91,7 @@ async fn test_multisig_transaction_with_existing_account() {
         .execute_multisig_transaction(owner_account_2, multisig_account.address(), 202)
         .await;
 
-    // The multisig tx that transfers away 1000 APT should have succeeded.
+    // The multisig tx that transfers away 1000 Cedra should have succeeded.
     assert_eq!(
         org_multisig_balance - 1000,
         context.get_apt_balance(multisig_account.address()).await
@@ -234,7 +234,7 @@ async fn test_multisig_transaction_update_signature_threshold() {
 async fn test_multisig_transaction_with_insufficient_balance_to_cover_gas() {
     let mut context = new_test_context(current_function_name!());
     let owner_account_1 = &mut context.create_account().await;
-    // Owner 2 has no APT balance.
+    // Owner 2 has no Cedra balance.
     let owner_account_2 = &mut context.gen_account();
     let multisig_account = context
         .create_multisig_account(
@@ -267,7 +267,7 @@ async fn test_multisig_transaction_with_payload_and_failing_execution() {
     context
         .create_multisig_transaction(owner_account, multisig_account, multisig_payload.clone())
         .await;
-    // Target transaction execution should fail because the multisig account only has 1000 APT but
+    // Target transaction execution should fail because the multisig account only has 1000 Cedra but
     // is requested to send 2000.
     // The transaction should still succeed with the failure tracked on chain.
     context
@@ -305,7 +305,7 @@ async fn test_multisig_transaction_with_payload_hash() {
         )
         .await;
 
-    // The multisig tx that transfers away 1000 APT should have succeeded.
+    // The multisig tx that transfers away 1000 Cedra should have succeeded.
     assert_eq!(0, context.get_apt_balance(multisig_account).await);
 }
 
@@ -326,7 +326,7 @@ async fn test_multisig_transaction_with_payload_hash_and_failing_execution() {
         )
         .await;
 
-    // Target transaction execution should fail because the multisig account only has 1000 APT but
+    // Target transaction execution should fail because the multisig account only has 1000 Cedra but
     // is requested to send 2000.
     // The transaction should still succeed with the failure tracked on chain.
     context
@@ -396,7 +396,7 @@ async fn test_multisig_transaction_with_matching_payload() {
         )
         .await;
 
-    // The multisig tx that transfers away 1000 APT should have succeeded.
+    // The multisig tx that transfers away 1000 Cedra should have succeeded.
     assert_eq!(0, context.get_apt_balance(multisig_account).await);
 }
 

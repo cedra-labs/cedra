@@ -192,7 +192,10 @@ pub fn consensus_observer_network_configuration(
 pub fn netbench_network_configuration(
     node_config: &NodeConfig,
 ) -> Option<NetworkApplicationConfig> {
-    let cfg = node_config.netbench?;
+    let cfg = match node_config.netbench {
+        None => return None,
+        Some(x) => x,
+    };
     if !cfg.enabled {
         return None;
     }

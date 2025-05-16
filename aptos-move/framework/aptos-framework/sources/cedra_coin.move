@@ -1,6 +1,6 @@
 /// This module defines a minimal and generic Coin and Balance.
 /// modified from https://github.com/move-language/move/tree/main/language/documentation/tutorial
-module aptos_framework::aptos_coin {
+module aptos_framework::cedra_coin {
     use std::error;
     use std::signer;
     use std::string;
@@ -19,10 +19,10 @@ module aptos_framework::aptos_coin {
     /// Cannot find delegation of mint capability to this account
     const EDELEGATION_NOT_FOUND: u64 = 3;
 
-    struct AptosCoin has key {}
+    struct CedraCoin has key {}
 
     struct MintCapStore has key {
-        mint_cap: MintCapability<AptosCoin>,
+        mint_cap: MintCapability<CedraCoin>,
     }
 
     /// Delegation token created by delegator and can be claimed by the delegatee as MintCapability.
@@ -36,13 +36,13 @@ module aptos_framework::aptos_coin {
     }
 
     /// Can only called during genesis to initialize the Aptos coin.
-    public(friend) fun initialize(aptos_framework: &signer): (BurnCapability<AptosCoin>, MintCapability<AptosCoin>) {
+    public(friend) fun initialize(aptos_framework: &signer): (BurnCapability<CedraCoin>, MintCapability<CedraCoin>) {
         system_addresses::assert_aptos_framework(aptos_framework);
 
-        let (burn_cap, freeze_cap, mint_cap) = coin::initialize_with_parallelizable_supply<AptosCoin>(
+        let (burn_cap, freeze_cap, mint_cap) = coin::initialize_with_parallelizable_supply<CedraCoin>(
             aptos_framework,
-            string::utf8(b"Aptos Coin"),
-            string::utf8(b"APT"),
+            string::utf8(b"Cedra Coin"),
+            string::utf8(b"Cedra"),
             8, // decimals
             true, // monitor_supply
         );
@@ -69,20 +69,20 @@ module aptos_framework::aptos_coin {
 
     /// Can only be called during genesis for tests to grant mint capability to aptos framework and core resources
     /// accounts.
-    /// Expects account and APT store to be registered before calling.
+    /// Expects account and Cedra store to be registered before calling.
     public(friend) fun configure_accounts_for_test(
         aptos_framework: &signer,
         core_resources: &signer,
-        mint_cap: MintCapability<AptosCoin>,
+        mint_cap: MintCapability<CedraCoin>,
     ) {
         system_addresses::assert_aptos_framework(aptos_framework);
 
-        // Mint the core resource account AptosCoin for gas so it can execute system transactions.
-        let coins = coin::mint<AptosCoin>(
+        // Mint the core resource account CedraCoin for gas so it can execute system transactions.
+        let coins = coin::mint<CedraCoin>(
             18446744073709551615,
             &mint_cap,
         );
-        coin::deposit<AptosCoin>(signer::address_of(core_resources), coins);
+        coin::deposit<CedraCoin>(signer::address_of(core_resources), coins);
 
         move_to(core_resources, MintCapStore { mint_cap });
         move_to(core_resources, Delegations { inner: vector::empty() });
@@ -103,8 +103,8 @@ module aptos_framework::aptos_coin {
         );
 
         let mint_cap = &borrow_global<MintCapStore>(account_addr).mint_cap;
-        let coins_minted = coin::mint<AptosCoin>(amount, mint_cap);
-        coin::deposit<AptosCoin>(dst_addr, coins_minted);
+        let coins_minted = coin::mint<CedraCoin>(amount, mint_cap);
+        coin::deposit<CedraCoin>(dst_addr, coins_minted);
     }
 
     /// Only callable in tests and testnets where the core resources account exists.
@@ -179,15 +179,15 @@ module aptos_framework::aptos_coin {
             coin::destroy_mint_cap(mint_cap);
         };
         coin::create_coin_conversion_map(&aptos_framework);
-        coin::create_pairing<AptosCoin>(&aptos_framework);
+        coin::create_pairing<CedraCoin>(&aptos_framework);
     }
 
     #[test_only]
-    public fun initialize_for_test(aptos_framework: &signer): (BurnCapability<AptosCoin>, MintCapability<AptosCoin>) {
+    public fun initialize_for_test(aptos_framework: &signer): (BurnCapability<CedraCoin>, MintCapability<CedraCoin>) {
         aggregator_factory::initialize_aggregator_factory_for_test(aptos_framework);
         let (burn_cap, mint_cap) = initialize(aptos_framework);
         coin::create_coin_conversion_map(aptos_framework);
-        coin::create_pairing<AptosCoin>(aptos_framework);
+        coin::create_pairing<CedraCoin>(aptos_framework);
         (burn_cap, mint_cap)
     }
 
@@ -195,10 +195,10 @@ module aptos_framework::aptos_coin {
     #[test_only]
     public fun initialize_for_test_without_aggregator_factory(
         aptos_framework: &signer
-    ): (BurnCapability<AptosCoin>, MintCapability<AptosCoin>) {
+    ): (BurnCapability<CedraCoin>, MintCapability<CedraCoin>) {
         let (burn_cap, mint_cap) = initialize(aptos_framework);
         coin::create_coin_conversion_map(aptos_framework);
-        coin::create_pairing<AptosCoin>(aptos_framework);
+        coin::create_pairing<CedraCoin>(aptos_framework);
         (burn_cap, mint_cap)
     }
 }

@@ -19,7 +19,7 @@ spec aptos_framework::resource_account {
     /// Requirement: The resource account is registered for the Aptos coin.
     /// Criticality: High
     /// Implementation: The create_resource_account_and_fund ensures the newly created resource account is registered to
-    /// receive the AptosCoin.
+    /// receive the CedraCoin.
     /// Enforcement: Formally verified via [high-level-req-3](create_resource_account_and_fund).
     ///
     /// No.: 4
@@ -86,16 +86,16 @@ spec aptos_framework::resource_account {
         pragma verify = false;
         let source_addr = signer::address_of(origin);
         let resource_addr = account::spec_create_resource_address(source_addr, seed);
-        let coin_store_resource = global<coin::CoinStore<AptosCoin>>(resource_addr);
+        let coin_store_resource = global<coin::CoinStore<CedraCoin>>(resource_addr);
 
-        include aptos_account::WithdrawAbortsIf<AptosCoin>{from: origin, amount: fund_amount};
-        include aptos_account::GuidAbortsIf<AptosCoin>{to: resource_addr};
+        include aptos_account::WithdrawAbortsIf<CedraCoin>{from: origin, amount: fund_amount};
+        include aptos_account::GuidAbortsIf<CedraCoin>{to: resource_addr};
         include RotateAccountAuthenticationKeyAndStoreCapabilityAbortsIfWithoutAccountLimit;
 
         // TODO(fa_migration)
-        //aborts_if !coin::spec_is_account_registered<AptosCoin>(resource_addr) && coin_store_resource.frozen;
+        //aborts_if !coin::spec_is_account_registered<CedraCoin>(resource_addr) && coin_store_resource.frozen;
         /// [high-level-req-3]
-        ensures exists<aptos_framework::coin::CoinStore<AptosCoin>>(resource_addr);
+        ensures exists<aptos_framework::coin::CoinStore<CedraCoin>>(resource_addr);
     }
 
     spec create_resource_account_and_publish_package(

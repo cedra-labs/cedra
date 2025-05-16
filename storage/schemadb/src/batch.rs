@@ -207,7 +207,7 @@ pub struct NativeBatch<'db> {
     raw_batch: RawBatch,
 }
 
-impl Debug for NativeBatch<'_> {
+impl<'db> Debug for NativeBatch<'db> {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "NativeBatch for DB {} ", self.db.name)
     }
@@ -223,7 +223,7 @@ impl<'db> NativeBatch<'db> {
     }
 }
 
-impl WriteBatch for NativeBatch<'_> {
+impl<'db> WriteBatch for NativeBatch<'db> {
     fn stats(&mut self) -> &mut SampledBatchStats {
         &mut self.raw_batch.stats
     }
@@ -245,7 +245,7 @@ impl WriteBatch for NativeBatch<'_> {
     }
 }
 
-impl IntoRawBatch for NativeBatch<'_> {
+impl<'db> IntoRawBatch for NativeBatch<'db> {
     fn into_raw_batch(self, _db: &DB) -> DbResult<RawBatch> {
         let Self { db: _, raw_batch } = self;
 

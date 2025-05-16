@@ -35,7 +35,7 @@ pub struct SymbolDisplay<'a> {
     pool: &'a SymbolPool,
 }
 
-impl fmt::Display for SymbolDisplay<'_> {
+impl<'a> fmt::Display for SymbolDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error> {
         f.write_str(&self.pool.string(*self.sym))
     }

@@ -24,7 +24,6 @@ use aptos_transaction_workloads_lib::{EntryPoints, LoopType};
 use aptos_types::{
     account_address::{default_stake_pool_address, AccountAddress},
     account_config::CORE_CODE_ADDRESS,
-    chain_id::ChainId,
     fee_statement::FeeStatement,
     transaction::{EntryFunction, TransactionPayload},
 };
@@ -203,13 +202,13 @@ fn test_gas() {
     runner.run(
         "Transfer",
         account_1,
-        aptos_stdlib::aptos_coin_transfer(account_2_address, 1000),
+        aptos_stdlib::cedra_coin_transfer(account_2_address, 1000),
     );
 
     runner.run(
         "2ndTransfer",
         account_1,
-        aptos_stdlib::aptos_coin_transfer(account_2_address, 1000),
+        aptos_stdlib::cedra_coin_transfer(account_2_address, 1000),
     );
 
     runner.run(
@@ -681,9 +680,9 @@ fn test_txn_generator_workloads_calibrate_gas() {
                 PackageHandler::new(entry_point.pre_built_packages(), entry_point.package_name());
             let mut rng = StdRng::seed_from_u64(14);
             let package = package_handler.pick_package(&mut rng, *publisher.address());
-            for payload in package.publish_transaction_payload(&ChainId::test()) {
-                runner.harness.run_transaction_payload(&publisher, payload);
-            }
+            runner
+                .harness
+                .run_transaction_payload(&publisher, package.publish_transaction_payload());
             if let Some(init_entry_point) = entry_point.initialize_entry_point() {
                 runner.harness.run_transaction_payload(
                     &publisher,
@@ -719,7 +718,7 @@ fn test_txn_generator_workloads_calibrate_gas() {
     runner.run_with_tps_estimate(
         "Transfer",
         account_1,
-        aptos_stdlib::aptos_coin_transfer(account_2_address, 1000),
+        aptos_stdlib::cedra_coin_transfer(account_2_address, 1000),
         if use_large_db_numbers { 2032. } else { 2791. },
     );
 
@@ -735,12 +734,10 @@ fn test_txn_generator_workloads_calibrate_gas() {
     let mut package_handler = PackageHandler::new(EntryPoints::Nop.pre_built_packages(), "simple");
     let mut rng = StdRng::seed_from_u64(14);
     let package = package_handler.pick_package(&mut rng, *account_1.address());
-    let payloads = package.publish_transaction_payload(&ChainId::test());
-    assert!(payloads.len() == 1);
     runner.run_with_tps_estimate(
         "PublishModule",
         account_1,
-        payloads[0].clone(),
+        package.publish_transaction_payload(),
         if use_large_db_numbers { 138.0 } else { 148. },
     );
 }

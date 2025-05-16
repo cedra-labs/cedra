@@ -655,7 +655,7 @@ fn get_member_index(
     }
 }
 
-impl TransferFunctions for ReferenceSafetyAnalysis<'_> {
+impl<'a> TransferFunctions for ReferenceSafetyAnalysis<'a> {
     type State = AbstractState;
 
     fn execute(
@@ -675,4 +675,4 @@ impl TransferFunctions for ReferenceSafetyAnalysis<'_> {
     }
 }
 
-impl AbstractInterpreter for ReferenceSafetyAnalysis<'_> {}
+impl<'a> AbstractInterpreter for ReferenceSafetyAnalysis<'a> {}

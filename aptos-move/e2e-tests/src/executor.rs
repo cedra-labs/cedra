@@ -55,7 +55,7 @@ use aptos_types::{
     },
     vm_status::VMStatus,
     write_set::{WriteOp, WriteSet, WriteSetMut},
-    AptosCoinType, CoinType,
+    CedraCoinType, CoinType,
 };
 use aptos_validator_interface::{DebuggerStateView, RestDebuggerInterface};
 use aptos_vm::{
@@ -672,7 +672,7 @@ impl FakeExecutor {
             .execute_view_function(
                 str::parse("0x1::coin::supply").unwrap(),
                 vec![move_core_types::language_storage::TypeTag::from_str(
-                    "0x1::aptos_coin::AptosCoin",
+                    "0x1::cedra_coin::CedraCoin",
                 )
                 .unwrap()],
                 vec![],
@@ -685,8 +685,8 @@ impl FakeExecutor {
     }
 
     /// Reads the CoinInfo resource value from this executor's data store.
-    pub fn read_apt_coin_info_resource(&self) -> Option<CoinInfoResource<AptosCoinType>> {
-        self.read_resource(&AptosCoinType::coin_info_address())
+    pub fn read_apt_coin_info_resource(&self) -> Option<CoinInfoResource<CedraCoinType>> {
+        self.read_resource(&CedraCoinType::coin_info_address())
     }
 
     /// Executes the given block of transactions.
