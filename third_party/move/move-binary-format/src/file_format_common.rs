@@ -704,7 +704,7 @@ pub(crate) mod versioned_data {
         }
     }
 
-    impl Read for VersionedCursor<'_> {
+    impl<'a> Read for VersionedCursor<'a> {
         fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
             self.cursor.read(buf)
         }

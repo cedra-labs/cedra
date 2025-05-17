@@ -112,7 +112,9 @@ impl VMValueCast<Closure> for Value {
     }
 }
 
-impl serde::Serialize for SerializationReadyValue<'_, '_, '_, MoveFunctionLayout, Closure> {
+impl<'c, 'l, 'v> serde::Serialize
+    for SerializationReadyValue<'c, 'l, 'v, MoveFunctionLayout, Closure>
+{
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let Closure(fun, captured) = self.value;
         let fun_ext = self

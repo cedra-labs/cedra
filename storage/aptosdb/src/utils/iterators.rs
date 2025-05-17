@@ -179,7 +179,7 @@ impl<'a> PrefixedStateValueIterator<'a> {
     }
 }
 
-impl Iterator for PrefixedStateValueIterator<'_> {
+impl<'a> Iterator for PrefixedStateValueIterator<'a> {
     type Item = Result<(StateKey, StateValue)>;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -233,7 +233,7 @@ impl<'a> EpochEndingLedgerInfoIter<'a> {
     }
 }
 
-impl Iterator for EpochEndingLedgerInfoIter<'_> {
+impl<'a> Iterator for EpochEndingLedgerInfoIter<'a> {
     type Item = Result<LedgerInfoWithSignatures>;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -285,7 +285,7 @@ impl<'a> EventsByVersionIter<'a> {
     }
 }
 
-impl Iterator for EventsByVersionIter<'_> {
+impl<'a> Iterator for EventsByVersionIter<'a> {
     type Item = Result<Vec<ContractEvent>>;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -329,7 +329,7 @@ impl<'a> AccountTransactionSummariesIter<'a> {
     }
 }
 
-impl AccountTransactionSummariesIter<'_> {
+impl<'a> AccountTransactionSummariesIter<'a> {
     fn next_impl(&mut self) -> Result<Option<(Version, IndexedTransactionSummary)>> {
         // If already iterated over `limit` transactions, return None.
         if self.count >= self.limit {
@@ -373,7 +373,7 @@ impl AccountTransactionSummariesIter<'_> {
     }
 }
 
-impl Iterator for AccountTransactionSummariesIter<'_> {
+impl<'a> Iterator for AccountTransactionSummariesIter<'a> {
     type Item = Result<(Version, IndexedTransactionSummary)>;
 
     fn next(&mut self) -> Option<Self::Item> {

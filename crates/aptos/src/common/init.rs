@@ -29,7 +29,7 @@ use std::{
     str::FromStr,
 };
 
-/// 1 APT (might not actually get that much, depending on the faucet)
+/// 1 Cedra (might not actually get that much, depending on the faucet)
 const NUM_DEFAULT_OCTAS: u64 = 100000000;
 
 /// Tool to initialize current directory for the aptos tool
@@ -82,7 +82,6 @@ impl CliCommand<()> for InitTool {
         "AptosInit"
     }
 
-    #[allow(clippy::literal_string_with_formatting_args)]
     async fn execute(self) -> CliTypedResult<()> {
         let mut config = if CliConfig::config_exists(ConfigSearchMode::CurrentDir) {
             CliConfig::load(ConfigSearchMode::CurrentDir)?
@@ -285,7 +284,7 @@ impl CliCommand<()> for InitTool {
         // Create account if it doesn't exist (and there's a faucet)
         // Check if account exists
         let funded = matches!(client
-            .get_account_balance(address, "0x1::AptosCoin::AptosCoin")
+            .get_account_balance(address, "0x1::CedraCoin::CedraCoin")
             .await, Ok(res) if *res.inner() > 0);
 
         // If you want to create a private key, but not fund the account, skipping the faucet is still possible
@@ -350,7 +349,7 @@ impl CliCommand<()> for InitTool {
                 },
                 Network::Testnet => {
                     let mint_site_url = get_mint_site_url(Some(address));
-                    eprintln!("The account has not been funded on chain yet. To fund the account and get APT on testnet you must visit {}", mint_site_url);
+                    eprintln!("The account has not been funded on chain yet. To fund the account and get Cedra on testnet you must visit {}", mint_site_url);
                     // We don't use `prompt_yes_with_override` here because we only want to
                     // automatically open the minting site if they're in an interactive setting.
                     if !self.prompt_options.assume_yes {

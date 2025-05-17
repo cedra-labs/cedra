@@ -365,13 +365,11 @@ impl ConsensusObserver {
 
     /// Returns the highest committed block epoch and round
     fn get_highest_committed_epoch_round(&self) -> (u64, Round) {
-        // we can merge this back to if statement once we move to edition 2024
-        // https://github.com/rust-lang/rust/issues/131154
-        let maybe_epoch_round = self
+        if let Some(epoch_round) = self
             .ordered_block_store
             .lock()
-            .get_highest_committed_epoch_round();
-        if let Some(epoch_round) = maybe_epoch_round {
+            .get_highest_committed_epoch_round()
+        {
             epoch_round
         } else {
             // Return the root epoch and round
@@ -382,10 +380,7 @@ impl ConsensusObserver {
 
     /// Returns the last ordered block
     fn get_last_ordered_block(&self) -> BlockInfo {
-        // we can merge this back to if statement once we move to edition 2024
-        // https://github.com/rust-lang/rust/issues/131154
-        let maybe_last_ordered_block = self.ordered_block_store.lock().get_last_ordered_block();
-        if let Some(last_ordered_block) = maybe_last_ordered_block {
+        if let Some(last_ordered_block) = self.ordered_block_store.lock().get_last_ordered_block() {
             last_ordered_block.block_info()
         } else {
             // Return the root ledger info
@@ -395,13 +390,11 @@ impl ConsensusObserver {
 
     /// Returns the parent block's pipeline futures, should only be called when pipeline is enabled
     fn get_parent_pipeline_futs(&self, block: &PipelinedBlock) -> Option<PipelineFutures> {
-        // we can merge this back to if statement once we move to edition 2024
-        // https://github.com/rust-lang/rust/issues/131154
-        let maybe_last_ordered_block = self
+        if let Some(last_ordered_block) = self
             .ordered_block_store
             .lock()
-            .get_ordered_block(block.epoch(), block.quorum_cert().certified_block().round());
-        if let Some(last_ordered_block) = maybe_last_ordered_block {
+            .get_ordered_block(block.epoch(), block.quorum_cert().certified_block().round())
+        {
             last_ordered_block.last_block().pipeline_futs()
         } else {
             Some(self.pipeline_builder().build_root(

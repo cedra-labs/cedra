@@ -10,10 +10,10 @@ spec aptos_framework::aptos_account {
     /// Enforcement: Formally verified via [high-level-req-1](CreateAccountAbortsIf).
     ///
     /// No.: 2
-    /// Requirement: After creating an Aptos account, the account should become registered to receive AptosCoin.
+    /// Requirement: After creating an Aptos account, the account should become registered to receive CedraCoin.
     /// Criticality: Critical
     /// Implementation: The create_account function creates a new account for the particular address and registers
-    /// AptosCoin.
+    /// CedraCoin.
     /// Enforcement: Formally verified via [high-level-req-2](create_account).
     ///
     /// No.: 3
@@ -34,10 +34,10 @@ spec aptos_framework::aptos_account {
     ///
     /// No.: 5
     /// Requirement: The transfer function should ensure an account is created for the provided destination if one does not
-    /// exist; then, register AptosCoin for that account if a particular is unregistered before transferring the amount.
+    /// exist; then, register CedraCoin for that account if a particular is unregistered before transferring the amount.
     /// Criticality: Critical
     /// Implementation: The transfer function checks if the recipient account exists. If the account does not exist,
-    /// the function creates one and registers the account to AptosCoin if not registered.
+    /// the function creates one and registers the account to CedraCoin if not registered.
     /// Enforcement: Formally verified via [high-level-req-5](transfer).
     ///
     /// No.: 6
@@ -49,7 +49,7 @@ spec aptos_framework::aptos_account {
     /// Enforcement: Formally verified via [high-level-req-6](deposit_coins).
     ///
     /// No.: 7
-    /// Requirement: When performing a batch transfer of Aptos Coin and/or a batch transfer of a custom coin type, it
+    /// Requirement: When performing a batch transfer of Cedra Coin and/or a batch transfer of a custom coin type, it
     /// should ensure that the vector containing destination addresses and the vector containing the corresponding
     /// amounts are equal in length.
     /// Criticality: Low
@@ -91,14 +91,14 @@ spec aptos_framework::aptos_account {
         let account_addr_source = signer::address_of(source);
 
         include CreateAccountTransferAbortsIf;
-        include GuidAbortsIf<AptosCoin>;
-        include WithdrawAbortsIf<AptosCoin>{from: source};
-        include TransferEnsures<AptosCoin>;
+        include GuidAbortsIf<CedraCoin>;
+        include WithdrawAbortsIf<CedraCoin>{from: source};
+        include TransferEnsures<CedraCoin>;
 
-        aborts_if exists<coin::CoinStore<AptosCoin>>(to) && global<coin::CoinStore<AptosCoin>>(to).frozen;
+        aborts_if exists<coin::CoinStore<CedraCoin>>(to) && global<coin::CoinStore<CedraCoin>>(to).frozen;
         /// [high-level-req-5]
         ensures exists<aptos_framework::account::Account>(to);
-        ensures exists<coin::CoinStore<AptosCoin>>(to);
+        ensures exists<coin::CoinStore<CedraCoin>>(to);
     }
 
     spec assert_account_exists(addr: address) {
@@ -106,12 +106,12 @@ spec aptos_framework::aptos_account {
     }
 
     /// Check if the address existed.
-    /// Check if the AptosCoin under the address existed.
+    /// Check if the CedraCoin under the address existed.
     spec assert_account_is_registered_for_apt(addr: address) {
         pragma aborts_if_is_partial;
         // aborts_if !account::spec_exists_at(addr);
         // TODO(fa_migration)
-        //aborts_if !coin::spec_is_account_registered<AptosCoin>(addr);
+        //aborts_if !coin::spec_is_account_registered<CedraCoin>(addr);
     }
 
     spec set_allow_direct_coin_transfers(account: &signer, allow: bool) {
@@ -126,7 +126,7 @@ spec aptos_framework::aptos_account {
         //TODO: Can't verify the loop invariant in enumerate
         pragma verify = false;
         let account_addr_source = signer::address_of(source);
-        let coin_store_source = global<coin::CoinStore<AptosCoin>>(account_addr_source);
+        let coin_store_source = global<coin::CoinStore<CedraCoin>>(account_addr_source);
         let balance_source = coin_store_source.coin.value;
 
         // requires forall i in 0..len(recipients):
@@ -146,21 +146,21 @@ spec aptos_framework::aptos_account {
 
         // coin::withdraw properties
         aborts_if exists i in 0..len(recipients):
-            !exists<coin::CoinStore<AptosCoin>>(account_addr_source);
+            !exists<coin::CoinStore<CedraCoin>>(account_addr_source);
         aborts_if exists i in 0..len(recipients):
             coin_store_source.frozen;
         aborts_if exists i in 0..len(recipients):
-            global<coin::CoinStore<AptosCoin>>(account_addr_source).coin.value < amounts[i];
+            global<coin::CoinStore<CedraCoin>>(account_addr_source).coin.value < amounts[i];
 
         // deposit properties
         aborts_if exists i in 0..len(recipients):
-            exists<coin::CoinStore<AptosCoin>>(recipients[i]) && global<coin::CoinStore<AptosCoin>>(recipients[i]).frozen;
+            exists<coin::CoinStore<CedraCoin>>(recipients[i]) && global<coin::CoinStore<CedraCoin>>(recipients[i]).frozen;
 
         // guid properties
         aborts_if exists i in 0..len(recipients):
-            account::spec_exists_at(recipients[i]) && !exists<coin::CoinStore<AptosCoin>>(recipients[i]) && global<account::Account>(recipients[i]).guid_creation_num + 2 >= account::MAX_GUID_CREATION_NUM;
+            account::spec_exists_at(recipients[i]) && !exists<coin::CoinStore<CedraCoin>>(recipients[i]) && global<account::Account>(recipients[i]).guid_creation_num + 2 >= account::MAX_GUID_CREATION_NUM;
         aborts_if exists i in 0..len(recipients):
-            account::spec_exists_at(recipients[i]) && !exists<coin::CoinStore<AptosCoin>>(recipients[i]) && global<account::Account>(recipients[i]).guid_creation_num + 2 > MAX_U64;
+            account::spec_exists_at(recipients[i]) && !exists<coin::CoinStore<CedraCoin>>(recipients[i]) && global<account::Account>(recipients[i]).guid_creation_num + 2 > MAX_U64;
     }
 
     spec can_receive_direct_coin_transfers(account: address): bool {
@@ -323,7 +323,7 @@ spec aptos_framework::aptos_account {
         // TODO(fa_migration)
         // aborts_if !coin::spec_is_account_registered<CoinType>(to) && !type_info::spec_is_struct<CoinType>();
         aborts_if exists<aptos_framework::account::Account>(to);
-        aborts_if type_info::type_of<CoinType>() != type_info::type_of<AptosCoin>();
+        aborts_if type_info::type_of<CoinType>() != type_info::type_of<CedraCoin>();
     }
 
     spec schema TransferEnsures<CoinType> {

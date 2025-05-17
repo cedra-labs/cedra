@@ -254,6 +254,8 @@ impl NetworkConfig {
                 Some(peer_id)
             },
             Identity::FromFile(config) => {
+                println!("config path");
+                println!("{:?}", &config.path);
                 let identity_blob: IdentityBlob = IdentityBlob::from_file(&config.path).unwrap();
 
                 // If account is not specified, generate peer id from public key

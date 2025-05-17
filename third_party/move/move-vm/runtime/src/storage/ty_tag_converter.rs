@@ -91,7 +91,7 @@ impl<'a> hashbrown::Equivalent<StructKeyRef<'a>> for StructKey {
     }
 }
 
-impl hashbrown::Equivalent<StructKey> for StructKeyRef<'_> {
+impl<'a> hashbrown::Equivalent<StructKey> for StructKeyRef<'a> {
     fn equivalent(&self, other: &StructKey) -> bool {
         self.idx == &other.idx && self.ty_args == other.ty_args.as_slice()
     }
@@ -106,7 +106,7 @@ impl Hash for StructKey {
 }
 
 // Ensure hash is the same as for StructKey.
-impl Hash for StructKeyRef<'_> {
+impl<'a> Hash for StructKeyRef<'a> {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.idx.hash(state);
         self.ty_args.hash(state);

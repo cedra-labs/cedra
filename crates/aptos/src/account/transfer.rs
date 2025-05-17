@@ -13,17 +13,17 @@ use clap::Parser;
 use serde::Serialize;
 use std::collections::BTreeMap;
 
-// TODO: Add ability to transfer non-APT coins
+// TODO: Add ability to transfer non-Cedra coins
 // TODO: Add ability to not create account by default
-/// Transfer APT between accounts
+/// Transfer Cedra between accounts
 ///
 #[derive(Debug, Parser)]
 pub struct TransferCoins {
-    /// Address of account to send APT to
+    /// Address of account to send Cedra to
     #[clap(long, value_parser = crate::common::types::load_account_arg)]
     pub(crate) account: AccountAddress,
 
-    /// Amount of Octas (10^-8 APT) to transfer
+    /// Amount of Octas (10^-8 Cedra) to transfer
     #[clap(long)]
     pub(crate) amount: u64,
 
@@ -48,7 +48,7 @@ impl CliCommand<TransferSummary> for TransferCoins {
     }
 }
 
-const SUPPORTED_COINS: [&str; 1] = ["0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>"];
+const SUPPORTED_COINS: [&str; 1] = ["0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>"];
 
 /// A shortened transaction output
 #[derive(Clone, Debug, Serialize)]

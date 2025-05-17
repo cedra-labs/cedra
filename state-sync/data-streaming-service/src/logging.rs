@@ -15,7 +15,7 @@ pub struct LogSchema<'a> {
     stream_id: Option<u64>,
 }
 
-impl LogSchema<'_> {
+impl<'a> LogSchema<'a> {
     pub fn new(name: LogEntry) -> Self {
         Self {
             name,

@@ -319,9 +319,10 @@ where
                 ReplayProtector::SequenceNumber(_) => {
                     get_account_sequence_number(&state_view, t.sender())
                         .map(Some)
-                        .inspect_err(|e| {
-                            error!(LogSchema::new(LogEntry::DBError).error(e));
+                        .map_err(|e| {
+                            error!(LogSchema::new(LogEntry::DBError).error(&e));
                             counters::DB_ERROR.inc();
+                            e
                         })
                 },
             })

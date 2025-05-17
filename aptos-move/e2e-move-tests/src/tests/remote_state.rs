@@ -14,7 +14,7 @@
 //!
 //! # Dummy Account Setup
 //! The tests rely on a dummy account on testnet, pre-configured as follows:
-//! - Some APT balance
+//! - Some Cedra balance
 //! - A module `test` published under its address
 //!   - This contains a function `foo` that returns the `u64` value `100`
 //! - The same module also published as a code object, owned by the same account
@@ -33,7 +33,7 @@ use aptos_types::account_address::AccountAddress;
 use move_core_types::{language_storage::TypeTag, value::MoveValue};
 use std::str::FromStr;
 
-const APTOS_COIN_STRUCT_STRING: &str = "0x1::aptos_coin::AptosCoin";
+const CEDRA_COIN_STRUCT_STRING: &str = "0x1::cedra_coin::CedraCoin";
 
 const TESTNET_TXN_VERSION: u64 = 6691904943;
 const TESTNET_ACCOUNT_ADDR: &str =
@@ -42,12 +42,12 @@ const TESTNET_CODE_OBJECT_ADDR: &str =
     "0x49dc2690339e3a7ad944d2eb6dde038f98b9ddece711530f4db2fbab67b741ed";
 const TESTNET_ACCOUNT_APT_BALANCE: u64 = 91_8290_3550;
 
-/// Helper function to fetch the APT balance of the specified account.
+/// Helper function to fetch the Cedra balance of the specified account.
 fn get_account_apt_balance(h: &mut MoveHarness, addr: AccountAddress) -> u64 {
     let bytes = h
         .execute_view_function(
             str::parse("0x1::coin::balance").unwrap(),
-            vec![TypeTag::from_str(APTOS_COIN_STRUCT_STRING).unwrap()],
+            vec![TypeTag::from_str(CEDRA_COIN_STRUCT_STRING).unwrap()],
             vec![addr.to_vec()],
         )
         .values
@@ -57,7 +57,7 @@ fn get_account_apt_balance(h: &mut MoveHarness, addr: AccountAddress) -> u64 {
     bcs::from_bytes::<u64>(bytes.as_slice()).unwrap()
 }
 
-/// Reads the APT balance of the test account and checks that it matches the expected value.
+/// Reads the Cedra balance of the test account and checks that it matches the expected value.
 #[ignore]
 #[tokio::test(flavor = "multi_thread")]
 async fn view_existing_account_balance() {
@@ -82,7 +82,7 @@ async fn view_existing_account_balance() {
     )
 }
 
-/// Transfers 1 APT from a newly created account to the existing test account
+/// Transfers 1 Cedra from a newly created account to the existing test account
 /// and verifies that the recipient's balance increases accordingly.
 #[ignore]
 #[tokio::test(flavor = "multi_thread")]
@@ -91,15 +91,15 @@ async fn transfer_to_existing_account() {
 
     let existing_account_addr = AccountAddress::from_hex_literal(TESTNET_ACCOUNT_ADDR).unwrap();
 
-    // Create a new account and fund it with 10 APT.
+    // Create a new account and fund it with 10 Cedra.
     let new_account =
-        h.new_account_with_balance_and_sequence_number(10_0000_0000 /* 10 APT */, 0);
+        h.new_account_with_balance_and_sequence_number(10_0000_0000 /* 10 Cedra */, 0);
 
-    // Transfer 1 APT to the existing account.
+    // Transfer 1 Cedra to the existing account.
     let status = h.run_entry_function(
         &new_account,
         str::parse("0x1::coin::transfer").unwrap(),
-        vec![TypeTag::from_str("0x1::aptos_coin::AptosCoin").unwrap()],
+        vec![TypeTag::from_str("0x1::cedra_coin::CedraCoin").unwrap()],
         vec![
             MoveValue::Address(existing_account_addr)
                 .simple_serialize()
@@ -109,14 +109,14 @@ async fn transfer_to_existing_account() {
     );
     assert_success!(status);
 
-    // Verify that the recipient's balance has increased by 1 APT.
+    // Verify that the recipient's balance has increased by 1 Cedra.
     assert_eq!(
         get_account_apt_balance(&mut h, existing_account_addr),
         TESTNET_ACCOUNT_APT_BALANCE + 1_0000_0000
     )
 }
 
-/// Attempts to transfer 1 APT from the existing test account to a newly created account,
+/// Attempts to transfer 1 Cedra from the existing test account to a newly created account,
 /// verifying that the sender's balance decreases appropriately.
 #[ignore]
 #[tokio::test(flavor = "multi_thread")]
@@ -127,7 +127,7 @@ async fn transfer_from_existing_account() {
 
     // Create a new account.
     let new_account =
-        h.new_account_with_balance_and_sequence_number(10_0000_0000 /* 10 APT */, 0);
+        h.new_account_with_balance_and_sequence_number(10_0000_0000 /* 10 Cedra */, 0);
 
     // Rotate the authentication key of the existing account so that we can authenticate transactions
     // without using or exposing the real private key.
@@ -138,11 +138,11 @@ async fn transfer_from_existing_account() {
         .executor
         .rotate_account_authentication_key(existing_account_addr);
 
-    // Transfer 1 APT from the existing account to the new account.
+    // Transfer 1 Cedra from the existing account to the new account.
     let status = h.run_entry_function(
         &existing_account,
         str::parse("0x1::coin::transfer").unwrap(),
-        vec![TypeTag::from_str("0x1::aptos_coin::AptosCoin").unwrap()],
+        vec![TypeTag::from_str("0x1::cedra_coin::CedraCoin").unwrap()],
         vec![
             MoveValue::Address(*new_account.address())
                 .simple_serialize()

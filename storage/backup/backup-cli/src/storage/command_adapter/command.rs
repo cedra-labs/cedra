@@ -132,7 +132,7 @@ pub(super) struct ChildStdoutAsDataSource<'a> {
     join_fut: Option<BoxFuture<'a, Result<()>>>,
 }
 
-impl ChildStdoutAsDataSource<'_> {
+impl<'a> ChildStdoutAsDataSource<'a> {
     fn new(child: SpawnedCommand) -> Self {
         Self {
             child: Some(child),
@@ -141,7 +141,7 @@ impl ChildStdoutAsDataSource<'_> {
     }
 }
 
-impl AsyncRead for ChildStdoutAsDataSource<'_> {
+impl<'a> AsyncRead for ChildStdoutAsDataSource<'a> {
     fn poll_read(
         mut self: Pin<&mut Self>,
         cx: &mut Context<'_>,
@@ -170,7 +170,7 @@ pub(super) struct ChildStdinAsDataSink<'a> {
     join_fut: Option<BoxFuture<'a, Result<()>>>,
 }
 
-impl ChildStdinAsDataSink<'_> {
+impl<'a> ChildStdinAsDataSink<'a> {
     fn new(child: SpawnedCommand) -> Self {
         Self {
             child: Some(child),
@@ -179,7 +179,7 @@ impl ChildStdinAsDataSink<'_> {
     }
 }
 
-impl AsyncWrite for ChildStdinAsDataSink<'_> {
+impl<'a> AsyncWrite for ChildStdinAsDataSink<'a> {
     fn poll_write(
         mut self: Pin<&mut Self>,
         cx: &mut Context<'_>,

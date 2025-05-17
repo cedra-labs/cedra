@@ -629,7 +629,7 @@ impl ParkingLotIndex {
                 .account_indices
                 .get(account)
                 .and_then(|idx| self.data.get(*idx))
-                .is_some_and(|(_account, txns)| txns.contains(&(seq_num, hash))),
+                .map_or(false, |(_account, txns)| txns.contains(&(seq_num, hash))),
             ReplayProtector::Nonce(_) => false,
         }
     }

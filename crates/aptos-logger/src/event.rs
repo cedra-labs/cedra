@@ -53,7 +53,7 @@ impl<'a> Event<'a> {
 #[derive(Clone)]
 struct KeysAndValues<'a>(&'a [&'a dyn Schema]);
 
-impl fmt::Debug for KeysAndValues<'_> {
+impl<'a> fmt::Debug for KeysAndValues<'a> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let mut visitor = f.debug_map();
         for key_value in self.0 {

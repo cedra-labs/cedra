@@ -18,10 +18,10 @@ create_account(1){
 
         // Find the "faucet" loaded account
         currency = {
-          "symbol": "APT",
+          "symbol": "Cedra",
           "decimals": 8,
           "metadata": {
-            "move_type": "0x1::aptos_coin::AptosCoin"
+            "move_type": "0x1::cedra_coin::CedraCoin"
           }
         };
         print_message({"Find faucet with at least balance to create accounts": "10000000"});
@@ -52,10 +52,10 @@ create_account(1){
 request_funds(1){
   find_account{
     currency = {
-      "symbol": "APT",
+      "symbol": "Cedra",
       "decimals": 8,
       "metadata": {
-        "move_type": "0x1::aptos_coin::AptosCoin"
+        "move_type": "0x1::cedra_coin::CedraCoin"
       }
     };
     print_message({"Find faucet with at least balance": "0"});
@@ -84,10 +84,10 @@ transfer(50){
     transfer{
         transfer.network = {"network":"TESTING", "blockchain":"aptos"};
         currency = {
-          "symbol": "APT",
+          "symbol": "Cedra",
           "decimals": 8,
           "metadata": {
-            "move_type": "0x1::aptos_coin::AptosCoin"
+            "move_type": "0x1::cedra_coin::CedraCoin"
           }
         };
 

@@ -79,8 +79,9 @@ impl<Strategy: PartitionStrategy> Executor for GuidedExecutor<Strategy> {
                 self.executor
                     .execute_block(block)?
                     .into_iter()
-                    .inspect(|output| {
+                    .map(|output| {
                         self.executor.apply_write_set(output.write_set());
+                        output
                     }),
             )
         }

@@ -7,11 +7,11 @@ use crate::tests::new_test_context_with_db_sharding_and_internal_indexer;
 use aptos_api_test_context::{current_function_name, find_value, TestContext};
 use aptos_api_types::{MoveModuleBytecode, MoveResource, MoveStructTag, StateKeyWrapper};
 use aptos_cached_packages::aptos_stdlib;
-use aptos_sdk::types::APTOS_COIN_TYPE_STR;
+use aptos_sdk::types::CEDRA_COIN_TYPE_STR;
 use aptos_types::{
     account_config::{primary_apt_store, ObjectCoreResource},
     transaction::{EntryFunction, TransactionPayload},
-    AptosCoinType, CoinType,
+    CedraCoinType, CoinType,
 };
 use move_core_types::{
     account_address::AccountAddress,
@@ -197,7 +197,7 @@ async fn test_account_auto_creation() {
     let root_account = context.root_account().await;
     let account = context.gen_account();
     let txn1 = root_account.sign_with_transaction_builder(context.transaction_factory().payload(
-        aptos_stdlib::coin_migrate_to_fungible_store(AptosCoinType::type_tag()),
+        aptos_stdlib::coin_migrate_to_fungible_store(CedraCoinType::type_tag()),
     ));
     let txn2 = root_account.sign_with_transaction_builder(context.transaction_factory().payload(
         aptos_stdlib::aptos_account_fungible_transfer_only(account.address(), 10_000_000_000),
@@ -226,13 +226,13 @@ async fn test_get_account_balance() {
     let coin_balance_before = context
         .get(&account_balance(
             &root_account.address().to_hex_literal(),
-            APTOS_COIN_TYPE_STR,
+            CEDRA_COIN_TYPE_STR,
         ))
         .await;
 
     // Migrate to fungible store
     let txn = root_account.sign_with_transaction_builder(context.transaction_factory().payload(
-        aptos_stdlib::coin_migrate_to_fungible_store(AptosCoinType::type_tag()),
+        aptos_stdlib::coin_migrate_to_fungible_store(CedraCoinType::type_tag()),
     ));
     context.commit_block(&vec![txn.clone()]).await;
 
@@ -240,7 +240,7 @@ async fn test_get_account_balance() {
     let coin_balance_after = context
         .get(&account_balance(
             &root_account.address().to_hex_literal(),
-            APTOS_COIN_TYPE_STR,
+            CEDRA_COIN_TYPE_STR,
         ))
         .await;
     assert_eq!(coin_balance_before, coin_balance_after);

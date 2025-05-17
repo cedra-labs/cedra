@@ -555,10 +555,15 @@ impl Module {
     }
 
     pub(crate) fn get_function(&self, function_name: &IdentStr) -> VMResult<Arc<Function>> {
+        if function_name.to_string() == "initialize_cedra_coin" {
+            println!("get_function");
+            println!("{:?}", self.function_map);
+        }
+       
         Ok(self
             .function_map
             .get(function_name)
-            .and_then(|idx| self.function_defs.get(*idx))
+            .and_then(|idx: &usize| self.function_defs.get(*idx))
             .ok_or_else(|| {
                 let module_id = self.self_id();
                 PartialVMError::new(StatusCode::FUNCTION_RESOLUTION_FAILURE)

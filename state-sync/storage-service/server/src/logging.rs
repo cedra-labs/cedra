@@ -19,7 +19,7 @@ pub struct LogSchema<'a> {
     request: Option<&'a StorageServiceRequest>,
 }
 
-impl LogSchema<'_> {
+impl<'a> LogSchema<'a> {
     pub fn new(name: LogEntry) -> Self {
         Self {
             name,

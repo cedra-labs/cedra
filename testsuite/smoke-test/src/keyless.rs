@@ -375,7 +375,7 @@ script {{
 
     let txn_builder = info
         .transaction_factory()
-        .payload(aptos_stdlib::aptos_coin_transfer(
+        .payload(aptos_stdlib::cedra_coin_transfer(
             recipient.address(),
             1_000_000,
         ));
@@ -482,7 +482,7 @@ async fn test_keyless_groth16_verifies_using_rust_sdk() {
 
     let builder = info
         .transaction_factory()
-        .payload(aptos_stdlib::aptos_coin_transfer(recipient.address(), 100));
+        .payload(aptos_stdlib::cedra_coin_transfer(recipient.address(), 100));
     let signed_txn = account.sign_with_transaction_builder(builder);
 
     remove_training_wheels(&mut cli, &mut info, root_idx).await;
@@ -547,7 +547,7 @@ async fn test_keyless_groth16_verifies_using_rust_sdk_from_jwt() {
 
     let builder = info
         .transaction_factory()
-        .payload(aptos_stdlib::aptos_coin_transfer(recipient.address(), 100));
+        .payload(aptos_stdlib::cedra_coin_transfer(recipient.address(), 100));
     let signed_txn = account.sign_with_transaction_builder(builder);
 
     remove_training_wheels(&mut cli, &mut info, root_idx).await;
@@ -616,7 +616,7 @@ async fn test_keyless_groth16_with_bad_tw_signature() {
     }
 }
 
-async fn sign_transaction_any_keyless_pk(
+async fn sign_transaction_any_keyless_pk<'a>(
     info: &mut AptosPublicInfo,
     mut sig: KeylessSignature,
     any_keyless_pk: AnyKeylessPublicKey,
@@ -664,7 +664,7 @@ async fn sign_transaction_any_keyless_pk(
 
     let raw_txn = info
         .transaction_factory()
-        .payload(aptos_stdlib::aptos_coin_transfer(
+        .payload(aptos_stdlib::cedra_coin_transfer(
             recipient.address(),
             1_000_000,
         ))
@@ -723,7 +723,7 @@ async fn sign_transaction_any_keyless_pk(
     }
 }
 
-async fn sign_transaction(
+async fn sign_transaction<'a>(
     info: &mut AptosPublicInfo,
     sig: KeylessSignature,
     pk: KeylessPublicKey,
@@ -831,7 +831,7 @@ async fn setup_local_net_inner(
     (tw_sk, config, jwk, swarm, cli, root_idx)
 }
 
-pub(crate) async fn remove_training_wheels(
+pub(crate) async fn remove_training_wheels<'a>(
     cli: &mut CliTestFramework,
     info: &mut AptosPublicInfo,
     root_idx: usize,
@@ -1050,7 +1050,7 @@ script {{
     script
 }
 
-async fn rotate_vk_by_governance(
+async fn rotate_vk_by_governance<'a>(
     cli: &mut CliTestFramework,
     info: &mut AptosPublicInfo,
     vk: &Groth16VerificationKey,

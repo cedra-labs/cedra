@@ -135,7 +135,11 @@ async fn do_thread_dump(
                 body.push_str(&format!("Frame ip: {}\n", frame.ip()));
             }
             for symbol in frame.symbols() {
-                let name = symbol.name().unwrap_or("(unknown)");
+                let name = if let Some(name) = symbol.name() {
+                    name
+                } else {
+                    "(unknown)"
+                };
                 if location {
                     let location = if let Some(file) = symbol.file() {
                         if let Some(line) = symbol.line() {

@@ -225,7 +225,7 @@ pub struct Incoming<'a> {
     inner: &'a mut MemoryListener,
 }
 
-impl Stream for Incoming<'_> {
+impl<'a> Stream for Incoming<'a> {
     type Item = Result<MemorySocket>;
 
     fn poll_next(mut self: Pin<&mut Self>, context: &mut Context) -> Poll<Option<Self::Item>> {

@@ -17,10 +17,10 @@ use crate::{
             account_address_from_public_key, AccountAddressWrapper, ArgWithTypeVec,
             AuthenticationKeyInputOptions, ChunkedPublishOption, CliError, CliTypedResult,
             EncodingOptions, EntryFunctionArguments, FaucetOptions, GasOptions, KeyType,
-            LargePackagesModuleOption, MoveManifestAccountWrapper, MovePackageOptions,
-            OptionalPoolAddressArgs, OverrideSizeCheckOption, PoolAddressArgs,
-            PrivateKeyInputOptions, PromptOptions, PublicKeyInputOptions, RestOptions, RngArgs,
-            SaveFile, ScriptFunctionArguments, TransactionOptions, TransactionSummary, TypeArgVec,
+            MoveManifestAccountWrapper, MovePackageOptions, OptionalPoolAddressArgs,
+            OverrideSizeCheckOption, PoolAddressArgs, PrivateKeyInputOptions, PromptOptions,
+            PublicKeyInputOptions, RestOptions, RngArgs, SaveFile, ScriptFunctionArguments,
+            TransactionOptions, TransactionSummary, TypeArgVec,
         },
         utils::write_to_file,
     },
@@ -53,7 +53,7 @@ use aptos_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519PublicKey},
     x25519, PrivateKey,
 };
-use aptos_framework::chunked_publish::CHUNK_SIZE_IN_BYTES;
+use aptos_framework::chunked_publish::{CHUNK_SIZE_IN_BYTES, LARGE_PACKAGES_MODULE_ADDRESS};
 use aptos_genesis::config::HostAndPort;
 use aptos_keygen::KeyGen;
 use aptos_logger::warn;
@@ -315,8 +315,8 @@ impl CliTestFramework {
                 type_arg_vec: TypeArgVec {
                     type_args: vec![MoveType::Struct(MoveStructTag::new(
                         AccountAddress::ONE.into(),
-                        ident_str!("aptos_coin").into(),
-                        ident_str!("AptosCoin").into(),
+                        ident_str!("cedra_coin").into(),
+                        ident_str!("CedraCoin").into(),
                         vec![],
                     ))],
                 },
@@ -881,9 +881,10 @@ impl CliTestFramework {
             },
             chunked_publish_option: ChunkedPublishOption {
                 chunked_publish: false,
-                large_packages_module: LargePackagesModuleOption {
-                    large_packages_module_address: None,
-                },
+                large_packages_module_address: AccountAddress::from_str(
+                    LARGE_PACKAGES_MODULE_ADDRESS,
+                )
+                .unwrap(),
                 chunk_size: CHUNK_SIZE_IN_BYTES,
             },
         }

@@ -346,7 +346,6 @@ impl BlockTree {
             self.update_commit_root(self.highest_commit_cert.commit_info().id());
         }
     }
-
     #[allow(unexpected_cfgs)]
     pub(super) fn insert_quorum_cert(&mut self, qc: QuorumCert) -> anyhow::Result<()> {
         let block_id = qc.certified_block().id();

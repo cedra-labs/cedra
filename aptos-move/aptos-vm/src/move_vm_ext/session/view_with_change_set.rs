@@ -57,7 +57,7 @@ impl<'r> ExecutorViewWithChangeSet<'r> {
     }
 }
 
-impl TAggregatorV1View for ExecutorViewWithChangeSet<'_> {
+impl<'r> TAggregatorV1View for ExecutorViewWithChangeSet<'r> {
     type Identifier = StateKey;
 
     fn get_aggregator_v1_state_value(
@@ -77,7 +77,7 @@ impl TAggregatorV1View for ExecutorViewWithChangeSet<'_> {
     }
 }
 
-impl TDelayedFieldView for ExecutorViewWithChangeSet<'_> {
+impl<'r> TDelayedFieldView for ExecutorViewWithChangeSet<'r> {
     type Identifier = DelayedFieldID;
     type ResourceGroupTag = StructTag;
     type ResourceKey = StateKey;
@@ -176,7 +176,7 @@ impl TDelayedFieldView for ExecutorViewWithChangeSet<'_> {
     }
 }
 
-impl TResourceView for ExecutorViewWithChangeSet<'_> {
+impl<'r> TResourceView for ExecutorViewWithChangeSet<'r> {
     type Key = StateKey;
     type Layout = MoveTypeLayout;
 
@@ -233,7 +233,7 @@ impl TResourceView for ExecutorViewWithChangeSet<'_> {
     }
 }
 
-impl TResourceGroupView for ExecutorViewWithChangeSet<'_> {
+impl<'r> TResourceGroupView for ExecutorViewWithChangeSet<'r> {
     type GroupKey = StateKey;
     type Layout = MoveTypeLayout;
     type ResourceTag = StructTag;
@@ -309,7 +309,7 @@ impl TResourceGroupView for ExecutorViewWithChangeSet<'_> {
     }
 }
 
-impl StateStorageView for ExecutorViewWithChangeSet<'_> {
+impl<'r> StateStorageView for ExecutorViewWithChangeSet<'r> {
     type Key = StateKey;
 
     fn id(&self) -> StateViewId {

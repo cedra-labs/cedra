@@ -143,7 +143,7 @@ impl<'a> ExtendedChecker<'a> {
 // ----------------------------------------------------------------------------------
 // Module Initialization
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn check_init_module(&self, module: &ModuleEnv) {
         // TODO: also enable init_module by attribute, perhaps deprecate by name
         let init_module_sym = self.env.symbol_pool().make(INIT_MODULE_FUN);
@@ -181,7 +181,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Entry Functions
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn check_entry_functions(&self, module: &ModuleEnv) {
         for ref fun in module.get_functions() {
             if !fun.is_entry() {
@@ -278,7 +278,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Resource Group Functions
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     // A entry in a resource group should contain the resource group attribute and a parameter that
     // points to a resource group container.
     fn check_and_record_resource_group_members(&mut self, module: &ModuleEnv) {
@@ -498,7 +498,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Unbiasable entry functions
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn check_and_record_unbiasabale_entry_functions(&mut self, module: &ModuleEnv) {
         for ref fun in module.get_functions() {
             let maybe_randomness_annotation = match self.get_randomness_max_gas_declaration(fun) {
@@ -593,7 +593,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Checks for unsafe usage of randomness
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     /// Checks unsafe usage of the randomness feature for the given module.
     ///
     /// 1. Checks that no public function in the module calls randomness features. An
@@ -676,7 +676,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // View Functions
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn check_and_record_view_functions(&mut self, module: &ModuleEnv) {
         for ref fun in module.get_functions() {
             if !self.has_attribute(fun, VIEW_FUN_ATTRIBUTE) {
@@ -735,7 +735,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Events
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn check_and_record_events(&mut self, module: &ModuleEnv) {
         for ref struct_ in module.get_structs() {
             if self.has_attribute_iter(struct_.get_attributes().iter(), EVENT_STRUCT_ATTRIBUTE) {
@@ -816,7 +816,7 @@ impl ExtendedChecker<'_> {
 // ----------------------------------------------------------------------------------
 // Error Map
 
-impl ExtendedChecker<'_> {
+impl<'a> ExtendedChecker<'a> {
     fn build_error_map(&mut self, module: &ModuleEnv<'_>) {
         // Compute the error map, we are using the `ErrorMapping` type from Move which
         // is more general as we need as it works for multiple modules.

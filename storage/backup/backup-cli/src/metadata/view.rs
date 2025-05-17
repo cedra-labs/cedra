@@ -165,7 +165,7 @@ impl MetadataView {
             .transaction_backups
             .iter()
             .sorted()
-            .next_back()
+            .last()
             .map(|backup| backup.last_version))
     }
 

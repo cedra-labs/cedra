@@ -167,7 +167,7 @@ pub struct Currency {
 
 #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub struct CurrencyMetadata {
-    /// Move coin type e.g. 0x1::aptos_coin::AptosCoin
+    /// Move coin type e.g. 0x1::cedra_coin::CedraCoin
     #[serde(skip_serializing_if = "Option::is_none")]
     pub move_type: Option<String>,
     /// Fungible Asset Address e.g. 0xA
@@ -1425,7 +1425,10 @@ fn parse_write_set<'a>(
         },
     };
 
-    let bytes = write_op.bytes()?;
+    let bytes = match write_op.bytes() {
+        Some(bytes) => bytes,
+        None => return None,
+    };
 
     Some((struct_tag, address, bytes))
 }
@@ -2579,7 +2582,7 @@ impl InternalOperation {
                 // Check if the currency is known
                 let currency = &transfer.currency;
 
-                // We special case APT, because we don't want the behavior to change
+                // We special case Cedra, because we don't want the behavior to change
                 if currency == &native_coin() {
                     return Ok((
                         aptos_stdlib::aptos_account_transfer(transfer.receiver, transfer.amount.0),

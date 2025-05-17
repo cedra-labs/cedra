@@ -144,8 +144,8 @@ and implement the governance voting logic on top.
 
 
 <pre><code><b>use</b> <a href="account.md#0x1_account">0x1::account</a>;
-<b>use</b> <a href="aptos_coin.md#0x1_aptos_coin">0x1::aptos_coin</a>;
 <b>use</b> <a href="../../aptos-stdlib/../move-stdlib/doc/bcs.md#0x1_bcs">0x1::bcs</a>;
+<b>use</b> <a href="cedra_coin.md#0x1_cedra_coin">0x1::cedra_coin</a>;
 <b>use</b> <a href="chain_id.md#0x1_chain_id">0x1::chain_id</a>;
 <b>use</b> <a href="coin.md#0x1_coin">0x1::coin</a>;
 <b>use</b> <a href="create_signer.md#0x1_create_signer">0x1::create_signer</a>;
@@ -3453,10 +3453,10 @@ This function is private so no other code can call this beside the VM itself as 
     <b>let</b> owner_nonce = <a href="account.md#0x1_account_get_sequence_number">account::get_sequence_number</a>(address_of(owner));
     <b>let</b> (multisig_signer, multisig_signer_cap) =
         <a href="account.md#0x1_account_create_resource_account">account::create_resource_account</a>(owner, <a href="multisig_account.md#0x1_multisig_account_create_multisig_account_seed">create_multisig_account_seed</a>(to_bytes(&owner_nonce)));
-    // Register the <a href="account.md#0x1_account">account</a> <b>to</b> receive APT <b>as</b> this is not done by default <b>as</b> part of the resource <a href="account.md#0x1_account">account</a> creation
+    // Register the <a href="account.md#0x1_account">account</a> <b>to</b> receive Cedra <b>as</b> this is not done by default <b>as</b> part of the resource <a href="account.md#0x1_account">account</a> creation
     // flow.
-    <b>if</b> (!<a href="coin.md#0x1_coin_is_account_registered">coin::is_account_registered</a>&lt;AptosCoin&gt;(address_of(&multisig_signer))) {
-        <a href="coin.md#0x1_coin_register">coin::register</a>&lt;AptosCoin&gt;(&multisig_signer);
+    <b>if</b> (!<a href="coin.md#0x1_coin_is_account_registered">coin::is_account_registered</a>&lt;CedraCoin&gt;(address_of(&multisig_signer))) {
+        <a href="coin.md#0x1_coin_register">coin::register</a>&lt;CedraCoin&gt;(&multisig_signer);
     };
 
     (multisig_signer, multisig_signer_cap)

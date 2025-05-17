@@ -9,7 +9,7 @@ All notable changes to the Aptos CLI will be captured in this file. This project
 ## [7.3.0]
 
 - Update boogie from 3.2.4 to 3.5.1.
-- Change behavior of `aptos init` to first look and see if the account has an APT balance rather than checking if the account exists
+- Change behavior of `aptos init` to first look and see if the account has an Cedra balance rather than checking if the account exists
 
 ## [7.2.0]
 
@@ -139,7 +139,7 @@ stdin, which triggers a graceful shutdown when received.
 - Fixes a bug in the Move compiler (both v1 and v2) which disallowed `match` as a name for a function or for a variable.
 
 ## [3.5.0] - 2024/07/06
-- Add balance command to easily get account balances for APT currently
+- Add balance command to easily get account balances for Cedra currently
 - Add network to config file
 - Add explorer links to initialized accounts, and transaction submissions
 - Alias some move commands as common misnomers (e.g. build -> compile, deploy -> publish)

@@ -885,7 +885,7 @@ impl TestContext {
                 account,
                 "0x1",
                 "coin",
-                "CoinStore<0x1::aptos_coin::AptosCoin>",
+                "CoinStore<0x1::cedra_coin::CedraCoin>",
             )
             .await;
         let coin = coin_balance_option.map(|x| {

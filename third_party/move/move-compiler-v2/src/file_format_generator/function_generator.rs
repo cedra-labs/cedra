@@ -1260,7 +1260,7 @@ impl<'a> FunctionGenerator<'a> {
     }
 }
 
-impl FunctionContext<'_> {
+impl<'env> FunctionContext<'env> {
     /// Emits an internal error for this function.
     pub fn internal_error(&self, msg: impl AsRef<str>) {
         self.module.internal_error(
@@ -1293,7 +1293,7 @@ impl FunctionContext<'_> {
     }
 }
 
-impl BytecodeContext<'_> {
+impl<'env> BytecodeContext<'env> {
     /// Determine whether `temp` is alive (used) in the reachable code after this point,
     /// or is part of the remaining argument list. When `dest_check` is true, we additionally
     /// check if `temp` is also written to by the current instruction; if it is, then the

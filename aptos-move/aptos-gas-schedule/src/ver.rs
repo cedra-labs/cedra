@@ -50,7 +50,7 @@
 ///   - Added BLS12-381 operations.
 /// - V7
 ///   - Native support for `exists<T>`
-///   - New formulae for storage fees based on fixed APT costs
+///   - New formulae for storage fees based on fixed Cedra costs
 ///   - Lower gas price (other than the newly introduced storage fees) by upping the scaling factor
 /// - V6
 ///   - Added a new native function - blake2b_256.
@@ -72,7 +72,7 @@
 ///       global operations.
 /// - V1
 ///   - TBA
-pub const LATEST_GAS_FEATURE_VERSION: u64 = gas_feature_versions::RELEASE_V1_31;
+pub const LATEST_GAS_FEATURE_VERSION: u64 = gas_feature_versions::RELEASE_V1_30;
 
 pub mod gas_feature_versions {
     pub const RELEASE_V1_8: u64 = 11;

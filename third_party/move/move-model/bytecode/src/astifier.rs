@@ -1360,7 +1360,7 @@ struct IfElseTransformer<'a> {
     builder: ExpBuilder<'a>,
 }
 
-impl ExpRewriterFunctions for IfElseTransformer<'_> {
+impl<'a> ExpRewriterFunctions for IfElseTransformer<'a> {
     fn rewrite_exp(&mut self, exp: Exp) -> Exp {
         if let Some(result) = self.try_make_if_else(exp.clone()) {
             self.rewrite_exp_descent(result)
@@ -1372,7 +1372,7 @@ impl ExpRewriterFunctions for IfElseTransformer<'_> {
     }
 }
 
-impl IfElseTransformer<'_> {
+impl<'a> IfElseTransformer<'a> {
     /// Attempts to create an if-then-else from the given expression.
     /// This recognizes the pattern below, as produced by the AST
     /// generator. Here, with 'does not branch out of a loop' we mean
@@ -1536,7 +1536,7 @@ struct FreeVariableBinder<'a> {
     bound_vars: Vec<BTreeSet<Symbol>>,
 }
 
-impl ExpRewriterFunctions for AssignTransformer<'_> {
+impl<'a> ExpRewriterFunctions for AssignTransformer<'a> {
     fn rewrite_exp(&mut self, exp: Exp) -> Exp {
         if let ExpData::Sequence(id, stms) = exp.as_ref() {
             // If this is a sequence, simplify.
@@ -1547,7 +1547,7 @@ impl ExpRewriterFunctions for AssignTransformer<'_> {
     }
 }
 
-impl AssignTransformer<'_> {
+impl<'a> AssignTransformer<'a> {
     fn simplify_seq(&mut self, seq_id: NodeId, stms: &[Exp]) -> Vec<Exp> {
         let Some(last) = stms.last() else {
             return vec![];
@@ -1621,7 +1621,7 @@ impl AssignTransformer<'_> {
     }
 }
 
-impl ExpRewriterFunctions for FreeVariableBinder<'_> {
+impl<'a> ExpRewriterFunctions for FreeVariableBinder<'a> {
     fn rewrite_exp(&mut self, mut exp: Exp) -> Exp {
         // TODO: this currently just adds lets on outermost level.
         //   Refine this to push lets down to leafs.

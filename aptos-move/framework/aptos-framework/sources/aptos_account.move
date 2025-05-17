@@ -1,6 +1,6 @@
 module aptos_framework::aptos_account {
     use aptos_framework::account::{Self, new_event_handle};
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin::{Self, Coin};
     use aptos_framework::create_signer::create_signer;
     use aptos_framework::event::{EventHandle, emit_event, emit};
@@ -21,7 +21,7 @@ module aptos_framework::aptos_account {
 
     /// Account does not exist.
     const EACCOUNT_NOT_FOUND: u64 = 1;
-    /// Account is not registered to receive APT.
+    /// Account is not registered to receive Cedra.
     const EACCOUNT_NOT_REGISTERED_FOR_APT: u64 = 2;
     /// Account opted out of receiving coins that they did not register to receive.
     const EACCOUNT_DOES_NOT_ACCEPT_DIRECT_COIN_TRANSFERS: u64 = 3;
@@ -58,7 +58,7 @@ module aptos_framework::aptos_account {
         register_apt(&account_signer);
     }
 
-    /// Batch version of APT transfer.
+    /// Batch version of Cedra transfer.
     public entry fun batch_transfer(source: &signer, recipients: vector<address>, amounts: vector<u64>) {
         let recipients_len = vector::length(&recipients);
         assert!(
@@ -72,8 +72,8 @@ module aptos_framework::aptos_account {
         });
     }
 
-    /// Convenient function to transfer APT to a recipient account that might not exist.
-    /// This would create the recipient account first, which also registers it to receive APT, before transferring.
+    /// Convenient function to transfer Cedra to a recipient account that might not exist.
+    /// This would create the recipient account first, which also registers it to receive Cedra, before transferring.
     public entry fun transfer(source: &signer, to: address, amount: u64) {
         if (!account::exists_at(to)) {
             create_account(to)
@@ -82,12 +82,12 @@ module aptos_framework::aptos_account {
         if (features::operations_default_to_fa_apt_store_enabled()) {
             fungible_transfer_only(source, to, amount)
         } else {
-            // Resource accounts can be created without registering them to receive APT.
+            // Resource accounts can be created without registering them to receive Cedra.
             // This conveniently does the registration if necessary.
-            if (!coin::is_account_registered<AptosCoin>(to)) {
-                coin::register<AptosCoin>(&create_signer(to));
+            if (!coin::is_account_registered<CedraCoin>(to)) {
+                coin::register<CedraCoin>(&create_signer(to));
             };
-            coin::transfer<AptosCoin>(source, to, amount)
+            coin::transfer<CedraCoin>(source, to, amount)
         }
     }
 
@@ -119,8 +119,8 @@ module aptos_framework::aptos_account {
             create_account(to);
             spec {
                 // TODO(fa_migration)
-                // assert coin::spec_is_account_registered<AptosCoin>(to);
-                // assume aptos_std::type_info::type_of<CoinType>() == aptos_std::type_info::type_of<AptosCoin>() ==>
+                // assert coin::spec_is_account_registered<CedraCoin>(to);
+                // assume aptos_std::type_info::type_of<CoinType>() == aptos_std::type_info::type_of<CedraCoin>() ==>
                 //     coin::spec_is_account_registered<CoinType>(to);
             };
         };
@@ -174,7 +174,7 @@ module aptos_framework::aptos_account {
 
     public fun assert_account_is_registered_for_apt(addr: address) {
         assert_account_exists(addr);
-        assert!(coin::is_account_registered<AptosCoin>(addr), error::not_found(EACCOUNT_NOT_REGISTERED_FOR_APT));
+        assert!(coin::is_account_registered<CedraCoin>(addr), error::not_found(EACCOUNT_NOT_REGISTERED_FOR_APT));
     }
 
     /// Set whether `account` can receive direct transfers of coins that they have not explicitly registered to receive.
@@ -226,17 +226,17 @@ module aptos_framework::aptos_account {
         if (features::new_accounts_default_to_fa_apt_store_enabled()) {
             ensure_primary_fungible_store_exists(signer::address_of(account_signer));
         } else {
-            coin::register<AptosCoin>(account_signer);
+            coin::register<CedraCoin>(account_signer);
         }
     }
 
-    /// APT Primary Fungible Store specific specialized functions,
-    /// Utilized internally once migration of APT to FungibleAsset is complete.
+    /// Cedra Primary Fungible Store specific specialized functions,
+    /// Utilized internally once migration of Cedra to FungibleAsset is complete.
 
-    /// Convenient function to transfer APT to a recipient account that might not exist.
-    /// This would create the recipient APT PFS first, which also registers it to receive APT, before transferring.
+    /// Convenient function to transfer Cedra to a recipient account that might not exist.
+    /// This would create the recipient Cedra PFS first, which also registers it to receive Cedra, before transferring.
     /// TODO: once migration is complete, rename to just "transfer_only" and make it an entry function (for cheapest way
-    /// to transfer APT) - if we want to allow APT PFS without account itself
+    /// to transfer Cedra) - if we want to allow Cedra PFS without account itself
     public(friend) entry fun fungible_transfer_only(
         source: &signer, to: address, amount: u64
     ) {
@@ -245,20 +245,20 @@ module aptos_framework::aptos_account {
 
         // use internal APIs, as they skip:
         // - owner, frozen and dispatchable checks
-        // as APT cannot be frozen or have dispatch, and PFS cannot be transfered
+        // as Cedra cannot be frozen or have dispatch, and PFS cannot be transfered
         // (PFS could potentially be burned. regular transfer would permanently unburn the store.
         // Ignoring the check here has the equivalent of unburning, transfers, and then burning again)
         fungible_asset::withdraw_permission_check_by_address(source, sender_store, amount);
         fungible_asset::unchecked_deposit(recipient_store, fungible_asset::unchecked_withdraw(sender_store, amount));
     }
 
-    /// Is balance from APT Primary FungibleStore at least the given amount
+    /// Is balance from Cedra Primary FungibleStore at least the given amount
     public(friend) fun is_fungible_balance_at_least(account: address, amount: u64): bool {
         let store_addr = primary_fungible_store_address(account);
         fungible_asset::is_address_balance_at_least(store_addr, amount)
     }
 
-    /// Burn from APT Primary FungibleStore for gas charge
+    /// Burn from Cedra Primary FungibleStore for gas charge
     public(friend) fun burn_from_fungible_store_for_gas(
         ref: &BurnRef,
         account: address,
@@ -271,7 +271,7 @@ module aptos_framework::aptos_account {
         };
     }
 
-    /// Ensure that APT Primary FungibleStore exists (and create if it doesn't)
+    /// Ensure that Cedra Primary FungibleStore exists (and create if it doesn't)
     inline fun ensure_primary_fungible_store_exists(owner: address): address {
         let store_addr = primary_fungible_store_address(owner);
         if (fungible_asset::store_exists(store_addr)) {
@@ -281,7 +281,7 @@ module aptos_framework::aptos_account {
         }
     }
 
-    /// Address of APT Primary Fungible Store
+    /// Address of Cedra Primary Fungible Store
     inline fun primary_fungible_store_address(account: address): address {
         object::create_user_derived_object_address(account, @aptos_fungible_asset)
     }
@@ -303,15 +303,15 @@ module aptos_framework::aptos_account {
         let bob = from_bcs::to_address(x"0000000000000000000000000000000000000000000000000000000000000b0b");
         let carol = from_bcs::to_address(x"00000000000000000000000000000000000000000000000000000000000ca501");
 
-        let (burn_cap, mint_cap) = aptos_framework::aptos_coin::initialize_for_test(core);
+        let (burn_cap, mint_cap) = aptos_framework::cedra_coin::initialize_for_test(core);
         create_account(signer::address_of(alice));
         coin::deposit(signer::address_of(alice), coin::mint(10000, &mint_cap));
         transfer(alice, bob, 500);
-        assert!(coin::balance<AptosCoin>(bob) == 500, 0);
+        assert!(coin::balance<CedraCoin>(bob) == 500, 0);
         transfer(alice, carol, 500);
-        assert!(coin::balance<AptosCoin>(carol) == 500, 1);
+        assert!(coin::balance<CedraCoin>(carol) == 500, 1);
         transfer(alice, carol, 1500);
-        assert!(coin::balance<AptosCoin>(carol) == 2000, 2);
+        assert!(coin::balance<CedraCoin>(carol) == 2000, 2);
 
         coin::destroy_burn_cap(burn_cap);
         coin::destroy_mint_cap(mint_cap);
@@ -323,7 +323,7 @@ module aptos_framework::aptos_account {
 
         let bob = from_bcs::to_address(x"0000000000000000000000000000000000000000000000000000000000000b0b");
 
-        let (burn_cap, mint_cap) = aptos_framework::aptos_coin::initialize_for_test(core);
+        let (burn_cap, mint_cap) = aptos_framework::cedra_coin::initialize_for_test(core);
         create_account(signer::address_of(alice));
         coin::deposit(signer::address_of(alice), coin::mint(10000, &mint_cap));
 
@@ -342,13 +342,13 @@ module aptos_framework::aptos_account {
     public fun test_transfer_to_resource_account(alice: &signer, core: &signer) {
         let (resource_account, _) = account::create_resource_account(alice, vector[]);
         let resource_acc_addr = signer::address_of(&resource_account);
-        let (burn_cap, mint_cap) = aptos_framework::aptos_coin::initialize_for_test(core);
-        assert!(coin::is_account_registered<AptosCoin>(resource_acc_addr), 0);
+        let (burn_cap, mint_cap) = aptos_framework::cedra_coin::initialize_for_test(core);
+        assert!(coin::is_account_registered<CedraCoin>(resource_acc_addr), 0);
 
         create_account(signer::address_of(alice));
         coin::deposit(signer::address_of(alice), coin::mint(10000, &mint_cap));
         transfer(alice, resource_acc_addr, 500);
-        assert!(coin::balance<AptosCoin>(resource_acc_addr) == 500, 1);
+        assert!(coin::balance<CedraCoin>(resource_acc_addr) == 500, 1);
 
         coin::destroy_burn_cap(burn_cap);
         coin::destroy_mint_cap(mint_cap);
@@ -356,7 +356,7 @@ module aptos_framework::aptos_account {
 
     #[test(from = @0x123, core = @0x1, recipient_1 = @0x124, recipient_2 = @0x125)]
     public fun test_batch_transfer(from: &signer, core: &signer, recipient_1: &signer, recipient_2: &signer) {
-        let (burn_cap, mint_cap) = aptos_framework::aptos_coin::initialize_for_test(core);
+        let (burn_cap, mint_cap) = aptos_framework::cedra_coin::initialize_for_test(core);
         create_account(signer::address_of(from));
         let recipient_1_addr = signer::address_of(recipient_1);
         let recipient_2_addr = signer::address_of(recipient_2);
@@ -368,8 +368,8 @@ module aptos_framework::aptos_account {
             vector[recipient_1_addr, recipient_2_addr],
             vector[100, 500],
         );
-        assert!(coin::balance<AptosCoin>(recipient_1_addr) == 100, 0);
-        assert!(coin::balance<AptosCoin>(recipient_2_addr) == 500, 1);
+        assert!(coin::balance<CedraCoin>(recipient_1_addr) == 100, 0);
+        assert!(coin::balance<CedraCoin>(recipient_2_addr) == 500, 1);
         coin::destroy_burn_cap(burn_cap);
         coin::destroy_mint_cap(mint_cap);
     }
@@ -495,9 +495,9 @@ module aptos_framework::aptos_account {
         user: &signer,
     ) {
         use aptos_framework::fungible_asset::Metadata;
-        use aptos_framework::aptos_coin;
+        use aptos_framework::cedra_coin;
 
-        aptos_coin::ensure_initialized_with_apt_fa_metadata_for_test();
+        cedra_coin::ensure_initialized_with_apt_fa_metadata_for_test();
 
         let apt_metadata = object::address_to_object<Metadata>(@aptos_fungible_asset);
         let user_addr = signer::address_of(user);

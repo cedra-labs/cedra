@@ -248,9 +248,9 @@ pub enum EntryPoints {
     /// there to slow down deserialization & verification, effectively making it more expensive to
     /// load it into code cache.
     SimpleScript,
-    /// Set up an APT transfer permission and transfering APT by using that permissioned signer.
+    /// Set up an Cedra transfer permission and transfering Cedra by using that permissioned signer.
     APTTransferWithPermissionedSigner,
-    /// Transfer APT using vanilla master signer to compare the performance.
+    /// Transfer Cedra using vanilla master signer to compare the performance.
     APTTransferWithMasterSigner,
 
     OrderBook {
@@ -1031,7 +1031,11 @@ fn minimize(module_id: ModuleId, other: &AccountAddress) -> TransactionPayload {
 }
 
 fn rand_string(rng: &mut StdRng, len: usize) -> String {
-    let res = rng.sample_iter(&Alphanumeric).take(len).collect();
+    let res = rng
+        .sample_iter(&Alphanumeric)
+        .take(len)
+        .map(char::from)
+        .collect();
     assert_eq!(
         bcs::serialized_size(&res).unwrap(),
         bcs_size_of_byte_array(len)

@@ -80,6 +80,7 @@ pub fn rand_string(len: usize) -> String {
     let res = rand::thread_rng()
         .sample_iter(&Alphanumeric)
         .take(len)
+        .map(char::from)
         .collect();
     assert_eq!(
         bcs::serialized_size(&res).unwrap(),
@@ -136,7 +137,7 @@ impl SignedTransactionBuilder<AccountAddress> for TransferAptSignedTransactionBu
         txn_factory: &TransactionFactory,
     ) -> SignedTransaction {
         account.sign_with_transaction_builder(txn_factory.payload(
-            aptos_stdlib::aptos_coin_transfer(*data, self.amount_to_send),
+            aptos_stdlib::cedra_coin_transfer(*data, self.amount_to_send),
         ))
     }
 

@@ -44,7 +44,7 @@ use aptos_types::{
         TransactionOutput, TransactionStatus, WriteSetPayload,
     },
     write_set::WriteOp,
-    AptosCoinType,
+    CedraCoinType,
 };
 use aptos_vm::{
     block_executor::{AptosBlockExecutorWrapper, AptosTransactionOutput},
@@ -355,9 +355,7 @@ impl NativeVMExecutorTask {
         };
 
         events.push((
-            FeeStatement::new(gas_units, gas_units, 0, 0, 0)
-                .create_event_v2()
-                .expect("Creating FeeStatement should always succeed"),
+            FeeStatement::new(gas_units, gas_units, 0, 0, 0).create_event_v2(),
             None,
         ));
 
@@ -573,7 +571,7 @@ impl NativeVMExecutorTask {
         view: &(impl ExecutorView + ResourceGroupView),
         aggregator_v1_delta_set: &mut BTreeMap<StateKey, DeltaOp>,
     ) -> Result<(), ()> {
-        let (sender_coin_store, _metadata) = Self::get_value::<CoinInfoResource<AptosCoinType>>(
+        let (sender_coin_store, _metadata) = Self::get_value::<CoinInfoResource<CedraCoinType>>(
             &self.db_util.common.apt_coin_info_resource,
             view,
         )?
@@ -658,8 +656,7 @@ impl NativeVMExecutorTask {
                                 store: sender_store_address,
                                 amount: transfer_amount,
                             }
-                            .create_event_v2()
-                            .expect("Creating WithdrawFAEvent should always succeed"),
+                            .create_event_v2(),
                             None,
                         ));
                     }
@@ -681,10 +678,10 @@ impl NativeVMExecutorTask {
         resource_write_set: &mut BTreeMap<StateKey, AbstractResourceWriteOp>,
         events: &mut Vec<(ContractEvent, Option<MoveTypeLayout>)>,
     ) -> Result<(), ()> {
-        let sender_coin_store_key = self.db_util.new_state_key_aptos_coin(&sender_address);
+        let sender_coin_store_key = self.db_util.new_state_key_cedra_coin(&sender_address);
 
         let sender_coin_store_opt =
-            Self::get_value::<CoinStoreResource<AptosCoinType>>(&sender_coin_store_key, view)?;
+            Self::get_value::<CoinStoreResource<CedraCoinType>>(&sender_coin_store_key, view)?;
 
         let (mut sender_coin_store, metadata) = match sender_coin_store_opt {
             None => {
@@ -812,12 +809,7 @@ impl NativeVMExecutorTask {
                 store: recipient_store_address,
                 amount: transfer_amount,
             };
-            events.push((
-                event
-                    .create_event_v2()
-                    .expect("Creating DepositFAEvent should always succeed"),
-                None,
-            ));
+            events.push((event.create_event_v2(), None));
         }
         Ok(existed)
     }
@@ -830,9 +822,9 @@ impl NativeVMExecutorTask {
         resource_write_set: &mut BTreeMap<StateKey, AbstractResourceWriteOp>,
         events: &mut Vec<(ContractEvent, Option<MoveTypeLayout>)>,
     ) -> Result<bool, ()> {
-        let recipient_coin_store_key = self.db_util.new_state_key_aptos_coin(&recipient_address);
+        let recipient_coin_store_key = self.db_util.new_state_key_cedra_coin(&recipient_address);
         let (mut recipient_coin_store, recipient_coin_store_metadata, existed) =
-            match Self::get_value::<CoinStoreResource<AptosCoinType>>(
+            match Self::get_value::<CoinStoreResource<CedraCoinType>>(
                 &recipient_coin_store_key,
                 view,
             )? {
@@ -843,11 +835,10 @@ impl NativeVMExecutorTask {
                     events.push((
                         CoinRegister {
                             account: AccountAddress::ONE,
-                            type_info: DbAccessUtil::new_type_info_resource::<AptosCoinType>()
+                            type_info: DbAccessUtil::new_type_info_resource::<CedraCoinType>()
                                 .map_err(hide_error)?,
                         }
-                        .create_event_v2()
-                        .expect("Creating CoinRegister should always succeed"),
+                        .create_event_v2(),
                         None,
                     ));
                     (

@@ -399,7 +399,7 @@ impl<'a> LiveVarAnalysis<'a> {
     }
 }
 
-impl TransferFunctions for LiveVarAnalysis<'_> {
+impl<'a> TransferFunctions for LiveVarAnalysis<'a> {
     type State = LiveVarState;
 
     const BACKWARD: bool = true;
@@ -438,7 +438,7 @@ impl TransferFunctions for LiveVarAnalysis<'_> {
     }
 }
 
-impl DataflowAnalysis for LiveVarAnalysis<'_> {}
+impl<'a> DataflowAnalysis for LiveVarAnalysis<'a> {}
 
 impl AbstractDomain for LiveVarState {
     fn join(&mut self, other: &Self) -> JoinResult {
