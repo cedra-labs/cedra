@@ -106,7 +106,7 @@ pub struct ProposalMetadata {
 }
 
 fn default_url() -> String {
-    "https://github.com/aptos-labs/aptos-core".to_string()
+    "https://github.com/cedra-labs/cedra".to_string()
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Eq, PartialEq)]

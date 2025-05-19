@@ -11,7 +11,7 @@ use aptos_indexer_grpc_utils::{
     timestamp_now_proto,
 };
 use aptos_logger::{error, info};
-use aptos_moving_average::MovingAverage;
+use cedra_moving_average::MovingAverage;
 use aptos_protos::{
     indexer::v1::FullnodeInfo,
     internal::fullnode::v1::{

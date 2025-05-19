@@ -1,7 +1,7 @@
 ---
 id: aptos-sdk-builder
 title: Aptos SDK Builder
-custom_edit_url: https://github.com/aptos-labs/aptos-core/edit/main/language/aptos-sdk-builder/README.md
+custom_edit_url: https://github.com/cedra-labs/cedra/edit/main/language/aptos-sdk-builder/README.md
 ---
 
 # Aptos SDK Builder

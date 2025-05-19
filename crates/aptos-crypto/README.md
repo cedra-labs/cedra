@@ -1,7 +1,7 @@
 ---
 id: crypto
 title: Crypto
-custom_edit_url: https://github.com/aptos-labs/aptos-core/edit/main/crypto/crypto/README.md
+custom_edit_url: https://github.com/cedra-labs/cedra/edit/main/crypto/crypto/README.md
 ---
 
 The crypto component hosts all the implementations of cryptographic primitives we use in Aptos: hashing, signatures, multisignatures, aggregate signatures, and key derivation/generation.

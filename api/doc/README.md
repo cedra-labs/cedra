@@ -35,7 +35,7 @@ The API follows semantic versioning. Current v1 version ensures backward compati
 Complete OpenAPI specification is available at `/api/v1/spec`
 
 ## Support
-- [GitHub Issues](https://github.com/aptos-labs/aptos-core/issues)
+- [GitHub Issues](https://github.com/cedra-labs/cedra/issues)
 - [Discord](https://discord.gg/aptosnetwork)
 - [Aptos Documentation](https://aptos.dev)
 

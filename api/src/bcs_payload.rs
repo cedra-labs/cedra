@@ -5,7 +5,7 @@
 //! supported. This type just helps with representing BCS bytes in the spec.
 
 // Previously the Bcs payload type took a T, not Vec<u8>. For more information
-// about that effort, see https://github.com/aptos-labs/aptos-core/issues/2277.
+// about that effort, see https://github.com/cedra-labs/cedra/issues/2277.
 
 use aptos_api_types::mime_types::BCS;
 use poem::{http::header, FromRequest, IntoResponse, Request, RequestBody, Response, Result};
@@ -72,6 +72,7 @@ impl ApiResponse for Bcs {
             responses: vec![MetaResponse {
                 description: "BCS: Binary Canonical Serialization",
                 status: Some(200),
+                status_range: None,
                 content: vec![MetaMediaType {
                     content_type: Self::CONTENT_TYPE,
                     schema: Self::schema_ref(),

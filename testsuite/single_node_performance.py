@@ -1045,7 +1045,7 @@ if errors:
     print(
         """If you expect your PR to change the performance, you need to recalibrate the values.
 To do so, you should run the test on your branch 6 times
-(https://github.com/aptos-labs/aptos-core/actions/workflows/workflow-run-execution-performance.yaml ; remember to select CONTINUOUS).
+(https://github.com/cedra-labs/cedra/actions/workflows/workflow-run-execution-performance.yaml ; remember to select CONTINUOUS).
 Then run the script locally `./testsuite/single_node_performance_calibration.py --branch=YOUR_BRANCH` to update calibration values
 and add Blockchain oncall as the reviewer.
 """
@@ -1059,7 +1059,7 @@ Move e2e benchmark failed, failing the job. See logs at the beginning for more d
 
 If you expect your PR to change the performance, you need to recalibrate the values.
 To do so, you should run the test on your branch 6 times
-(https://github.com/aptos-labs/aptos-core/actions/workflows/workflow-run-execution-performance.yaml ; remember to select CONTINUOUS,
+(https://github.com/cedra-labs/cedra/actions/workflows/workflow-run-execution-performance.yaml ; remember to select CONTINUOUS,
 and don't select to skip move-only e2e tests).
 Then run the script locally `./testsuite/single_node_performance_calibration.py --branch=YOUR_BRANCH --move-e2e` to update calibration values
 and add Blockchain oncall as the reviewer.

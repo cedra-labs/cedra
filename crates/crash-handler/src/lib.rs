@@ -9,7 +9,7 @@ use backtrace::Backtrace;
 use move_core_types::state::{self, VMState};
 use serde::Serialize;
 use std::{
-    panic::{self, PanicInfo},
+    panic::{self, PanicHookInfo},
     process,
 };
 
@@ -25,14 +25,14 @@ pub struct CrashInfo {
 /// ensure that all subsequent thread panics (even Tokio threads) will report the
 /// details/backtrace and then exit.
 pub fn setup_panic_handler() {
-    panic::set_hook(Box::new(move |pi: &PanicInfo<'_>| {
+    panic::set_hook(Box::new(move |pi: &PanicHookInfo<'_>| {
         handle_panic(pi);
     }));
 }
 
 // Formats and logs panic information
-fn handle_panic(panic_info: &PanicInfo<'_>) {
-    // The Display formatter for a PanicInfo contains the message, payload and location.
+fn handle_panic(panic_info: &PanicHookInfo<'_>) {
+    // The Display formatter for a PanicHookInfo contains the message, payload and location.
     let details = format!("{}", panic_info);
     let backtrace = format!("{:#?}", Backtrace::new());
 
@@ -40,7 +40,7 @@ fn handle_panic(panic_info: &PanicInfo<'_>) {
     let crash_info = toml::to_string_pretty(&info).unwrap();
     error!("{}", crash_info);
     // TODO / HACK ALARM: Write crash info synchronously via eprintln! to ensure it is written before the process exits which error! doesn't guarantee.
-    // This is a workaround until https://github.com/aptos-labs/aptos-core/issues/2038 is resolved.
+    // This is a workaround until https://github.com/cedra-labs/cedra/issues/2038 is resolved.
     eprintln!("{}", crash_info);
 
     // Wait till the logs have been flushed

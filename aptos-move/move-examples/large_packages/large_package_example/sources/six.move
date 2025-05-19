@@ -46,9 +46,9 @@
 /// ### Implementations
 ///
 /// - Python
-///     - [Sequence number manager](https://github.com/aptos-labs/aptos-core/pull/7987)
-///     - [Transaction manager](https://github.com/aptos-labs/aptos-core/pull/7987)
-/// - [Worker-leader smart contract](https://github.com/aptos-labs/aptos-core/pull/7986)
+///     - [Sequence number manager](https://github.com/cedra-labs/cedra/pull/7987)
+///     - [Transaction manager](https://github.com/cedra-labs/cedra/pull/7987)
+/// - [Worker-leader smart contract](https://github.com/cedra-labs/cedra/pull/7986)
 ///
 /// ### Managing Sequence Numbers
 ///

@@ -454,7 +454,7 @@ fn set_sender_address(
 
 // This is a hack to recognize APTOS StdLib, Framework, and Token libs to avoid warnings on some old errors.
 // This will be removed after library attributes are cleaned up.
-// (See https://github.com/aptos-labs/aptos-core/issues/9410)
+// (See https://github.com/cedra-labs/cedra/issues/9410)
 fn module_is_in_aptos_libs(module_address: Option<Spanned<Address>>) -> bool {
     const APTOS_STDLIB_NAME: &str = "aptos_std";
     static APTOS_STDLIB_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =

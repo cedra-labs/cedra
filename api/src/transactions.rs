@@ -90,7 +90,7 @@ pub enum SubmitTransactionPost {
 
     // TODO: Since I don't want to impl all the Poem derives on SignedTransaction,
     // find a way to at least indicate in the spec that it expects a SignedTransaction.
-    // TODO: https://github.com/aptos-labs/aptos-core/issues/2275
+    // TODO: https://github.com/cedra-labs/cedra/issues/2275
     #[oai(content_type = "application/x.aptos.signed_transaction+bcs")]
     Bcs(Bcs),
 }
@@ -113,7 +113,7 @@ pub enum SubmitTransactionsBatchPost {
 
     // TODO: Since I don't want to impl all the Poem derives on SignedTransaction,
     // find a way to at least indicate in the spec that it expects a SignedTransaction.
-    // TODO: https://github.com/aptos-labs/aptos-core/issues/2275
+    // TODO: https://github.com/cedra-labs/cedra/issues/2275
     #[oai(content_type = "application/x.aptos.signed_transaction+bcs")]
     Bcs(Bcs),
 }

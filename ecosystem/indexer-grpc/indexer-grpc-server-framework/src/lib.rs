@@ -14,7 +14,7 @@ use prometheus::{Encoder, TextEncoder};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 #[cfg(target_os = "linux")]
 use std::convert::Infallible;
-use std::{panic::PanicInfo, path::PathBuf, process};
+use std::{panic::PanicHookInfo, path::PathBuf, process};
 use tracing::error;
 use tracing_subscriber::EnvFilter;
 use warp::{http::Response, reply::Reply, Filter};
@@ -147,21 +147,21 @@ pub struct CrashInfo {
 /// ensure that all subsequent thread panics (even Tokio threads) will report the
 /// details/backtrace and then exit.
 pub fn setup_panic_handler() {
-    std::panic::set_hook(Box::new(move |pi: &PanicInfo<'_>| {
+    std::panic::set_hook(Box::new(move |pi: &PanicHookInfo<'_>| {
         handle_panic(pi);
     }));
 }
 
 // Formats and logs panic information
-fn handle_panic(panic_info: &PanicInfo<'_>) {
-    // The Display formatter for a PanicInfo contains the message, payload and location.
+fn handle_panic(panic_info: &PanicHookInfo<'_>) {
+    // The Display formatter for a PanicHookInfo contains the message, payload and location.
     let details = format!("{}", panic_info);
     let backtrace = format!("{:#?}", Backtrace::new());
     let info = CrashInfo { details, backtrace };
     let crash_info = toml::to_string_pretty(&info).unwrap();
     error!("{}", crash_info);
     // TODO / HACK ALARM: Write crash info synchronously via eprintln! to ensure it is written before the process exits which error! doesn't guarantee.
-    // This is a workaround until https://github.com/aptos-labs/aptos-core/issues/2038 is resolved.
+    // This is a workaround until https://github.com/cedra-labs/cedra/issues/2038 is resolved.
     eprintln!("{}", crash_info);
     // Kill the process
     process::exit(12);

@@ -30,7 +30,7 @@ aptos-genesis = { workspace = true }
 aptos-github-client = { workspace = true }
 aptos-global-constants = { workspace = true }
 aptos-indexer-grpc-server-framework = { workspace = true }
-aptos-indexer-processor-sdk = { workspace = true }
+cedra-indexer-processor-sdk = { workspace = true }
 aptos-keygen = { workspace = true }
 aptos-ledger = { workspace = true }
 aptos-localnet = { workspace = true }
