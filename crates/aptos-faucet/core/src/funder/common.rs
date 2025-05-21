@@ -353,6 +353,7 @@ pub async fn submit_transaction(
     receiver_address: &AccountAddress,
     wait_for_transactions: bool,
 ) -> Result<SignedTransaction, AptosTapError> {
+    println!("faucet_account: {:?}", faucet_account);
     let (result, event_on_success) = if wait_for_transactions {
         // If this fails, we assume it is the user's fault, e.g. because the
         // account already exists, but it is possible that the transaction
@@ -400,6 +401,7 @@ pub async fn submit_transaction(
                 event = "transaction_failure",
                 error_message = format!("{:#}", e)
             );
+            println!("error printout: {:?}", e);
             Err(e)
         },
     }

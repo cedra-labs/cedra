@@ -222,6 +222,8 @@ impl FundApiComponents {
             },
         };
 
+        println!("Incoming fund request JSON: {:?}", fund_request);
+
         let receiver = match fund_request.receiver() {
             Some(receiver) => receiver,
             None => {
@@ -375,6 +377,7 @@ pub async fn mint(
         pub_key,
         return_txns,
     }): poem::web::Query<MintRequest>,
+        // }): poem::web::Json<MintRequest>,
     // This automagically uses FromRequest to get this data from the request.
     // It takes into things like X-Forwarded-IP and X-Real-IP.
     source_ip: RealIp,

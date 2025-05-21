@@ -194,6 +194,7 @@ impl RunConfig {
 
         if let Some(tx) = port_tx {
             tx.send(port).map_err(|_| anyhow!("failed to send port"))?;
+            println!("[faucet] Sent bound port: {}", port);
         }
 
         // Create a future for the API server.

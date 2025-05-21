@@ -47,6 +47,15 @@ use std::{
 };
 use tokio::runtime::Runtime;
 
+// === testnet
+use aptos_types::{
+    transaction::authenticator::AuthenticationKey,
+};
+use aptos_crypto::{ed25519::Ed25519PrivateKey, PrivateKey};
+use reqwest::Url;
+
+// === end testnet
+
 const EPOCH_LENGTH_SECS: u64 = 60;
 
 /// Runs an Aptos validator or fullnode
@@ -109,6 +118,13 @@ pub struct AptosNodeArgs {
     /// See rstack-self crate for more details.
     #[clap(long)]
     stacktrace: bool,
+
+    #[clap(long)]
+    pub with_faucet: bool,
+
+    #[clap(long)]
+    pub faucet_key_path: Option<PathBuf>, // e.g. ./faucet.key
+
 }
 
 impl AptosNodeArgs {
@@ -183,8 +199,132 @@ impl AptosNodeArgs {
                 )
             });
 
+            // let config_for_faucet = config.clone();
+
             // Start the node
-            start(config, None, true).expect("Node should start correctly");
+            // start(config, None, true).expect("Node should start correctly");
+            std::thread::spawn(move || {
+                start(config, None, true).expect("Node should start correctly");
+            });
+
+            // add faucet for the testnet
+            if self.with_faucet {
+                // let faucet_key_path = self.faucet_key_path.clone().expect("Faucet key path required with --with-faucet");
+
+                // let faucet_url = format!("http://{}", config_for_faucet.api.address);
+
+                // let faucet_run_config = aptos_faucet_core::server::RunConfig::build_for_cli(
+                //     Url::parse(&faucet_url).expect("Invalid faucet URL"),
+                //     "0.0.0.0".to_string(),
+                //     8081, // Faucet port
+                //     aptos_faucet_core::server::FunderKeyEnum::KeyFile(faucet_key_path),
+                //     false,
+                //     None,
+                // );
+
+                // let (port_tx, port_rx) = tokio::sync::oneshot::channel();
+                // use futures::channel::oneshot;
+
+                let (port_tx, port_rx) = futures::channel::oneshot::channel::<u16>();
+
+
+                let hex_key = "4f3edf983ac636a65a842ce7c78d9aa706d3b113bce036f5e2d47f113d3b35cf";
+                let key_bytes = <[u8; 32]>::from_hex(hex_key).expect("Invalid hex key");
+                let priv_key = Ed25519PrivateKey::try_from(&key_bytes[..]).expect("Invalid private key");
+                let config_key = aptos_config::keys::ConfigKey::new(priv_key.clone());
+                let listen_address = "127.0.0.1".to_string();
+                let listen_port = 8084;
+
+                let pub_key = priv_key.public_key();
+
+                // Derive AuthenticationKey and AccountAddress
+                let auth_key = AuthenticationKey::ed25519(&pub_key);
+                let account_address = auth_key.account_address();
+
+                println!("Funder address: 0x{}", account_address);
+
+                // Node REST API endpoint the faucet should talk to
+                // let node_url = Url::parse(&format!("http://{}", config_for_faucet.api.address))
+                //     .expect("Invalid node API URL");
+
+                let node_url = Url::parse("http://127.0.0.1:8080").unwrap();
+
+
+                let faucet_run_config = aptos_faucet_core::server::RunConfig::build_for_cli(
+                    node_url,
+                    listen_address.clone(), // bind faucet on localhost
+                    listen_port, // faucet port
+                    aptos_faucet_core::server::FunderKeyEnum::Key(config_key),
+                    true, // do not delegate
+                    None,  // no metrics
+                );
+
+                // tokio::spawn(async move {
+                //     if let Err(e) = faucet_run_config.run().await {
+                //         eprintln!("Faucet failed: {:?}", e);
+                //     }
+                // });
+
+
+                // std::thread::spawn(move || {
+                //     let rt = tokio::runtime::Runtime::new().unwrap();
+                //     rt.block_on(async {
+                //         if let Err(e) = faucet_run_config.run().await {
+                //             eprintln!("Faucet failed: {:?}", e);
+                //         }
+                //     });
+                // });
+
+                // std::thread::spawn(move || {
+                //     let rt = tokio::runtime::Builder::new_multi_thread()
+                //         .enable_all()
+                //         .build()
+                //         .unwrap();
+
+                //     println!("Starting faucet async runtime...");
+
+                //     rt.block_on(async {
+                //         match faucet_run_config.run().await {
+                //             Ok(_) => println!("Faucet exited normally (unexpected)"),
+                //             Err(e) => eprintln!("Faucet failed to start: {:?}", e),
+                //         }
+                //     });
+                // });
+
+                std::thread::spawn(move || {
+                    let rt = tokio::runtime::Builder::new_multi_thread()
+                        .enable_all()
+                        .build()
+                        .unwrap();
+
+                    println!("Starting faucet async runtime...");
+
+                    rt.block_on(async {
+                        if let Err(e) = faucet_run_config.run_and_report_port(port_tx).await {
+                            eprintln!("Faucet failed to start: {:?}", e);
+                            return;
+                        }
+
+                        match port_rx.await {
+                            Ok(port) => println!("Faucet bound on port: {}", port),
+                            Err(e) => eprintln!("Failed to receive faucet port: {:?}", e),
+                        }
+                    });
+                });
+
+
+
+
+
+                println!("Faucet started at {}:{}", listen_address, listen_port);
+            }
+
+            // Block main thread
+            let term = Arc::new(AtomicBool::new(false));
+            while !term.load(Ordering::Acquire) {
+                thread::park();
+            }
+
         };
     }
 }

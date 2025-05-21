@@ -7,7 +7,7 @@ use crate::endpoints::{AptosTapError, AptosTapErrorCode};
 use anyhow::{Context, Result};
 use aptos_logger::info;
 use aptos_sdk::{
-    crypto::ed25519::Ed25519PublicKey,
+    // crypto::ed25519::Ed25519PublicKey,
     rest_client::Client,
     transaction_builder::{aptos_stdlib, TransactionFactory},
     types::{
@@ -23,6 +23,9 @@ use async_trait::async_trait;
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
 use tokio::sync::RwLock;
+
+use aptos_sdk::crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
+
 
 static MINTER_SCRIPT: &[u8] = include_bytes!(
     "../../../../../aptos-move/move-examples/scripts/minter/build/Minter/bytecode_scripts/main.mv"
@@ -54,19 +57,39 @@ pub struct MintFunderConfig {
 
 impl MintFunderConfig {
     pub async fn build_funder(self) -> Result<MintFunder> {
-        let key = self.api_connection_config.get_key()?;
+        // let key = self.api_connection_config.get_key()?;
 
-        let faucet_account = LocalAccount::new(
-            self.mint_account_address.unwrap_or_else(|| {
-                AuthenticationKey::ed25519(&Ed25519PublicKey::from(&key)).account_address()
-            }),
-            key,
-            0,
+        let private_key_hex = "4f3edf983ac636a65a842ce7c78d9aa706d3b113bce036f5e2d47f113d3b35cf";
+        let key_bytes = hex::decode(private_key_hex).expect("Invalid hex");
+        let private_key = Ed25519PrivateKey::try_from(&key_bytes[..])?;
+
+        // Derive the account address from the public key
+        let pub_key: Ed25519PublicKey = (&private_key).into();
+        let auth_key = AuthenticationKey::ed25519(&pub_key);
+        let account_address = auth_key.account_address();
+
+        println!("Hardcoded mint address: 0x{}", account_address);
+
+        // Build the LocalAccount
+        let faucet_account = LocalAccount::new(account_address, private_key, 0);
+
+        // let faucet_account = LocalAccount::new(
+        //     self.mint_account_address.unwrap_or_else(|| {
+        //         AuthenticationKey::ed25519(&Ed25519PublicKey::from(&key)).account_address()
+        //     }),
+        //     key,
+        //     0,
+        // );
+
+        println!("MintFunder chain_id for MINT: {}", 
+            self.api_connection_config.chain_id.clone()
+            // ChainId::mainnet()
         );
 
         let mut minter = MintFunder::new(
             self.api_connection_config.node_url.clone(),
             self.api_connection_config.chain_id,
+            // ChainId::mainnet(),
             self.transaction_submission_config,
             faucet_account,
         );
@@ -242,12 +265,20 @@ impl MintFunder {
             {
                 let faucet_account = self.faucet_account.write().await;
                 let transaction_factory = self.get_transaction_factory().await?;
-                faucet_account.sign_with_transaction_builder(transaction_factory.script(
-                    Script::new(MINTER_SCRIPT.to_vec(), vec![], vec![
-                        TransactionArgument::Address(receiver_address),
-                        TransactionArgument::U64(amount),
-                    ]),
-                ))
+                faucet_account.sign_with_transaction_builder(
+                    // transaction_factory.script(
+                    //     Script::new(MINTER_SCRIPT.to_vec(), vec![], vec![
+                    //         TransactionArgument::Address(receiver_address),
+                    //         TransactionArgument::U64(amount),
+                    //     ]),
+                    // )
+                    transaction_factory.payload(
+                        aptos_stdlib::cedra_coin_mint(
+                            receiver_address,
+                            amount,
+                        )
+                    )
+                )
             };
 
         Ok(vec![

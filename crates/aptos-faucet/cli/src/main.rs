@@ -79,6 +79,8 @@ impl FaucetCliArgs {
             true, // wait_for_transactions
         );
 
+        println!("MintFunder chain_id for CLI: {}", self.api_connection_config.chain_id);
+
         // Build the MintFunder service.
         let mut mint_funder = MintFunder::new(
             self.api_connection_args.node_url.clone(),
