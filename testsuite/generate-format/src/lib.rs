@@ -18,7 +18,7 @@ use std::fmt::{Display, Formatter};
 /// Rest API types
 mod api;
 /// Aptos transactions.
-mod aptos;
+mod cedra;
 /// Consensus messages.
 mod consensus;
 /// Analyze Serde formats to detect certain patterns.

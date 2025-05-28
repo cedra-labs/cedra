@@ -1,3 +1,3 @@
 /* eslint-disable */
 
-export * from "./aptos/transaction/v1/transaction";
+export * from "./cedra/transaction/v1/transaction";
