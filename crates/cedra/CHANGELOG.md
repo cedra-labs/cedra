@@ -64,7 +64,7 @@ stdin, which triggers a graceful shutdown when received.
 - Downgrade bytecode version to v6 before calling the Revela decompiler, if possible, i.e. no enum types are used. This allows to continue to use Revela until the new decompiler is ready.
 
 ## [5.0.0] - 2024/12/11
-- [**Breaking Change**] `aptos init` and `aptos account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [Aptos dev docs](https://aptos.dev/network/faucet).
+- [**Breaking Change**] `aptos init` and `aptos account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [Aptos dev docs](https://faucet.cedra.dev).
 ## [4.7.0] - 2024/12/10
 - [`Fix`] CLI config should not always require a private key field to be present.
 

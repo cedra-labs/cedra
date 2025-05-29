@@ -280,7 +280,7 @@ default-members = [
 [workspace.package]
 authors = ["Aptos Labs <opensource@aptoslabs.com>"]
 edition = "2021"
-homepage = "https://aptoslabs.com"
+homepage = "https://cedra.network/"
 license = "Apache-2.0"
 publish = false
 repository = "https://github.com/cedra-labs/cedra"

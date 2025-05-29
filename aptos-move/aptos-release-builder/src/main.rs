@@ -56,8 +56,8 @@ impl NetworkSelection {
 
         let s = match &self {
             Mainnet => "https://fullnode.mainnet.aptoslabs.com",
-            Testnet => "https://fullnode.testnet.aptoslabs.com",
-            Devnet => "https://fullnode.devnet.aptoslabs.com",
+            Testnet => "https://testnet.cedra.dev",
+            Devnet => "https://devnet.cedra.dev",
             RestEndpoint(url) => url,
         };
 

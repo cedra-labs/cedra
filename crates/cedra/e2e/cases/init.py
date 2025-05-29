@@ -17,13 +17,13 @@ def test_init(run_helper: RunHelper, test_name=None):
     # account with the default amount of 100000000 OCTA.
     run_helper.run_command(
         test_name,
-        ["aptos", "init", "--assume-yes", "--network", "local"],
+        ["cedra", "init", "--assume-yes", "--network", "local"],
         input="\n",
     )
 
     # Assert that the CLI config is there.
     config_path = os.path.join(
-        run_helper.host_working_directory, ".aptos", "config.yaml"
+        run_helper.host_working_directory, ".cedra", "config.yaml"
     )
     if not os.path.exists(config_path):
         raise TestError(

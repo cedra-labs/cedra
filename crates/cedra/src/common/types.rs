@@ -96,7 +96,7 @@ pub const MOVE_FOLDER_GIT_IGNORE: &str = indoc! {"
 };
 
 // Custom header value to identify the client
-const X_APTOS_CLIENT_VALUE: &str = concat!("aptos-cli/", env!("CARGO_PKG_VERSION"));
+const X_APTOS_CLIENT_VALUE: &str = concat!("cedra-cli/", env!("CARGO_PKG_VERSION"));
 
 /// A common result to be returned to users
 pub type CliResult = Result<String, String>;
@@ -257,7 +257,7 @@ pub struct CliConfig {
 
 const CONFIG_FILE: &str = "config.yaml";
 const LEGACY_CONFIG_FILE: &str = "config.yml";
-pub const CONFIG_FOLDER: &str = ".aptos";
+pub const CONFIG_FOLDER: &str = ".cedra";
 
 /// An individual profile
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -1134,7 +1134,7 @@ impl RestOptions {
             reqwest::Url::parse(&url)
                 .map_err(|err| CliError::UnableToParse("Rest URL", err.to_string()))
         } else {
-            Err(CliError::CommandArgumentError("No rest url given.  Please add --url or add a rest_url to the .aptos/config.yaml for the current profile".to_string()))
+            Err(CliError::CommandArgumentError("No rest url given.  Please add --url or add a rest_url to the .cedra/config.yaml for the current profile".to_string()))
         }
     }
 
@@ -2522,8 +2522,8 @@ pub struct ChunkedPublishOption {
 /// For minting testnet Cedra.
 pub fn get_mint_site_url(address: Option<AccountAddress>) -> String {
     let params = match address {
-        Some(address) => format!("?address={}", address.to_standard_string()),
+        Some(address) => format!("?amount=100000000&auth_key={}", address.to_standard_string()),
         None => "".to_string(),
     };
-    format!("https://aptos.dev/network/faucet{}", params)
+    format!("https://faucet.cedra.dev/mint{}", params)
 }
