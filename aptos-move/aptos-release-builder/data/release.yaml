@@ -1,5 +1,5 @@
 ---
-remote_endpoint: https://fullnode.mainnet.aptoslabs.com
+remote_endpoint: https://mainnet.cedra.dev
 # replace with below for actual release, compat test needs concrete URL above:
 # remote_endpoint: ~
 name: "vX.YY.Z"

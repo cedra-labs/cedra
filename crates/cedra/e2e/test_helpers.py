@@ -183,18 +183,18 @@ class RunHelper:
             # make sure we're using "workspace" configuration and not "global" configuration.
             response = self.run_command(
                 "check_workspace_config",
-                ["aptos", "config", "show-global-config"],
+                ["cedra", "config", "show-global-config"],
             )
             response = json.loads(response.stdout)
             if response["Result"]["config_type"].lower() != "workspace":
                 raise RuntimeError(
                     "When using --test-cli-path you must use workspace configuration, "
-                    "try running `aptos config set-global-config --config-type workspace`"
+                    "try running `cedra config set-global-config --config-type workspace`"
                 )
 
     # Get the account info of the account created by test_init.
     def get_account_info(self):
-        path = os.path.join(self.host_working_directory, ".aptos", "config.yaml")
+        path = os.path.join(self.host_working_directory, ".cedra", "config.yaml")
         with open(path) as f:
             content = f.read().splitlines()
         # To avoid using external deps we parse the file manually.
