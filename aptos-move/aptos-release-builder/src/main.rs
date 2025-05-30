@@ -55,7 +55,7 @@ impl NetworkSelection {
         use NetworkSelection::*;
 
         let s = match &self {
-            Mainnet => "https://fullnode.mainnet.aptoslabs.com",
+            Mainnet => "https://mainnet.cedra.dev",
             Testnet => "https://testnet.cedra.dev",
             Devnet => "https://devnet.cedra.dev",
             RestEndpoint(url) => url,
@@ -140,7 +140,7 @@ pub enum Commands {
     },
     /// Print out current values of on chain configs.
     PrintConfigs {
-        /// Url endpoint for the desired network. e.g: https://fullnode.mainnet.aptoslabs.com/v1.
+        /// Url endpoint for the desired network. e.g: https://mainnet.cedra.dev/v1.
         #[clap(short, long)]
         endpoint: url::Url,
         /// Whether to print out the full gas schedule.
@@ -151,7 +151,7 @@ pub enum Commands {
     /// Usage: --endpoint '<URL>'
     /// --package-address <ADDRESS> --package-name <PACKAGE_NAME> [--print-json]
     PrintPackageMetadata {
-        /// Url endpoint for the desired network. e.g: https://fullnode.mainnet.aptoslabs.com/v1.
+        /// Url endpoint for the desired network. e.g: https://mainnet.cedra.dev/v1.
         #[clap(short, long)]
         endpoint: url::Url,
         /// The address under which the package is published

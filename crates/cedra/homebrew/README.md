@@ -38,7 +38,7 @@ aptos --help
 # This should return something like
 
 # aptos 1.0.5
-# Aptos Labs <opensource@aptoslabs.com>
+# Cedra Labs <opensource@cedra.network>
 # Command Line Interface (CLI) for developing and interacting with the Aptos blockchain
 # ...
 ```
@@ -94,7 +94,7 @@ Once you have audited and tested your brew formula using the commands above, mak
 ```ruby
 class Aptos < Formula
   desc "Layer 1 blockchain built to support fair access to decentralized assets for all"
-  homepage "https://aptoslabs.com/"
+  homepage "https://cedra.network/"
   url "https://github.com/cedra-labs/cedra/archive/refs/tags/aptos-cli-v1.0.3.tar.gz"
   sha256 "670bb6cb841cb8a65294878af9a4f03d4cba2a598ab4550061fed3a4b1fe4e98"
   license "Apache-2.0"

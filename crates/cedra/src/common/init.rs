@@ -141,7 +141,7 @@ impl CliCommand<()> for InitTool {
         match network {
             Network::Mainnet => {
                 profile_config.rest_url =
-                    Some("https://fullnode.mainnet.aptoslabs.com".to_string());
+                    Some("https://mainnet.cedra.dev".to_string());
                 profile_config.faucet_url = None;
             },
             Network::Testnet => {
@@ -155,8 +155,8 @@ impl CliCommand<()> for InitTool {
                 profile_config.faucet_url = None;
             },
             Network::Devnet => {
-                profile_config.rest_url = Some("https://fullnode.devnet.aptoslabs.com".to_string());
-                profile_config.faucet_url = Some("https://faucet.devnet.aptoslabs.com".to_string());
+                profile_config.rest_url = Some("https://devnet.cedra.dev".to_string());
+                profile_config.faucet_url = Some("https://faucet-api.cedra.dev".to_string());
             },
             Network::Local => {
                 profile_config.rest_url = Some("http://localhost:8080".to_string());

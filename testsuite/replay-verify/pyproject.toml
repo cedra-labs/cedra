@@ -2,7 +2,7 @@
 name = "replay-verify"
 version = "0.1.0"
 description = "replay verify on archive"
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
+authors = ["Cedra Labs <opensource@cedra.network>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

@@ -278,7 +278,7 @@ default-members = [
 # All workspace members should inherit these keys
 # for package declarations.
 [workspace.package]
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
+authors = ["Cedra Labs <opensource@cedra.network>"]
 edition = "2021"
 homepage = "https://cedra.network/"
 license = "Apache-2.0"

@@ -18,7 +18,7 @@ core.workflow(
     mode = "ITERATIVE",
     origin_files = glob(["language/**"]),
     destination_files = glob(["third_party/move/**"]),
-    authoring = authoring.pass_thru("Wolfgang <wg@aptoslabs.com>"),
+    authoring = authoring.pass_thru("Wolfgang <wg@cedra.network>"),
     transformations = [
         core.move("language", "third_party/move"),
     ],
@@ -40,7 +40,7 @@ core.workflow(
     mode = "ITERATIVE",
     origin_files = glob(["third_party/move/**"]),
     destination_files = glob(["language/**"]),
-    authoring = authoring.pass_thru("Wolfgang <wg@aptoslabs.com>"),
+    authoring = authoring.pass_thru("Wolfgang <wg@cedra.network>"),
     transformations = [
         core.move("third_party/move", "language"),
     ],
@@ -60,7 +60,7 @@ core.workflow(
     mode = "ITERATIVE",
     origin_files = glob(["third_party/move/**"]),
     destination_files = glob(["language/**"]),
-    authoring = authoring.pass_thru("Wolfgang <wg@aptoslabs.com>"),
+    authoring = authoring.pass_thru("Wolfgang <wg@cedra.network>"),
     transformations = [
         core.move("third_party/move", "language"),
     ],

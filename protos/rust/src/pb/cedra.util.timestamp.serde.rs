@@ -1,6 +1,3 @@
-// Copyright (c) Aptos Foundation
-// SPDX-License-Identifier: Apache-2.0
-
 // @generated
 impl serde::Serialize for Timestamp {
     #[allow(deprecated)]
@@ -18,6 +15,8 @@ impl serde::Serialize for Timestamp {
         }
         let mut struct_ser = serializer.serialize_struct("cedra.util.timestamp.Timestamp", len)?;
         if self.seconds != 0 {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("seconds", ToString::to_string(&self.seconds).as_str())?;
         }
         if self.nanos != 0 {
@@ -79,28 +78,28 @@ impl<'de> serde::Deserialize<'de> for Timestamp {
                 formatter.write_str("struct cedra.util.timestamp.Timestamp")
             }
 
-            fn visit_map<V>(self, mut map: V) -> std::result::Result<Timestamp, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Timestamp, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut seconds__ = None;
                 let mut nanos__ = None;
-                while let Some(k) = map.next_key()? {
+                while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Seconds => {
                             if seconds__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("seconds"));
                             }
-                            seconds__ =
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            seconds__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
                         GeneratedField::Nanos => {
                             if nanos__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("nanos"));
                             }
-                            nanos__ =
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            nanos__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
                     }

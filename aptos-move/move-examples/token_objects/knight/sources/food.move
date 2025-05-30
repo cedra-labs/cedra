@@ -85,7 +85,7 @@ module knight::food {
             string::utf8(b"Corn"),
             string::utf8(b"CORN"),
             string::utf8(b"https://raw.githubusercontent.com/cedra-labs/cedra-core/main/ecosystem/typescript/sdk/examples/typescript/metadata/knight/Corn.png"),
-            string::utf8(b"https://www.aptoslabs.com"),
+            string::utf8(b"https://cedra.network"),
             5,
         );
         create_food_token_as_fungible_token(
@@ -96,7 +96,7 @@ module knight::food {
             string::utf8(b"Meat"),
             string::utf8(b"MEAT"),
             string::utf8(b"https://raw.githubusercontent.com/cedra-labs/cedra-core/main/ecosystem/typescript/sdk/examples/typescript/metadata/knight/Meat.png"),
-            string::utf8(b"https://www.aptoslabs.com"),
+            string::utf8(b"https://cedra.network"),
             20,
         );
     }

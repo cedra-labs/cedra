@@ -52,7 +52,7 @@
             "name": "Collection"
           },
           "typeStr": "0x4::collection::Collection",
-          "data": "{\"creator\":\"0x239589c5cfb0cc96f76fa59165a7cbb6ef99ad50d0acc34cf3a2585d861511be\",\"description\":\"A collection of explorers looking to have fun and make an impact in Web3\",\"mutation_events\":{\"counter\":\"0\",\"guid\":{\"id\":{\"addr\":\"0x139e21974cb4ee185b95708bebd571d77cec25e51df5ebd242712ed09bda8ca4\",\"creation_num\":\"1125899906842627\"}}},\"name\":\"inAptos\",\"uri\":\"https://aptoslabs.com\"}"
+          "data": "{\"creator\":\"0x239589c5cfb0cc96f76fa59165a7cbb6ef99ad50d0acc34cf3a2585d861511be\",\"description\":\"A collection of explorers looking to have fun and make an impact in Web3\",\"mutation_events\":{\"counter\":\"0\",\"guid\":{\"id\":{\"addr\":\"0x139e21974cb4ee185b95708bebd571d77cec25e51df5ebd242712ed09bda8ca4\",\"creation_num\":\"1125899906842627\"}}},\"name\":\"inAptos\",\"uri\":\"https://cedra.network\"}"
         }
       },
       {

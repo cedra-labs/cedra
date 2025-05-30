@@ -1622,7 +1622,7 @@ pub struct ChangeSummary {
 
 #[derive(Debug, Default, Parser)]
 pub struct FaucetOptions {
-    /// URL for the faucet endpoint e.g. `https://faucet.devnet.aptoslabs.com`
+    /// URL for the faucet endpoint e.g. `https://faucet-api.cedra.dev`
     #[clap(long)]
     pub faucet_url: Option<reqwest::Url>,
 
@@ -2525,5 +2525,5 @@ pub fn get_mint_site_url(address: Option<AccountAddress>) -> String {
         Some(address) => format!("?amount=100000000&auth_key={}", address.to_standard_string()),
         None => "".to_string(),
     };
-    format!("https://faucet.cedra.dev/mint{}", params)
+    format!("https://faucet.cedra.dev{}", params)
 }

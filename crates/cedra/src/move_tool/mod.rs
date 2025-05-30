@@ -2255,9 +2255,9 @@ impl CliCommand<TransactionSummary> for Replay {
         }
 
         let rest_endpoint = match &self.network {
-            Mainnet => "https://fullnode.mainnet.aptoslabs.com",
+            Mainnet => "https://mainnet.cedra.dev",
             Testnet => "https://testnet.cedra.dev",
-            Devnet => "https://fullnode.devnet.aptoslabs.com",
+            Devnet => "https://devnet.cedra.dev",
             RestEndpoint(url) => url,
         };
 

@@ -20,13 +20,13 @@ pub static DEVNET_NODE_URL: Lazy<Url> =
     Lazy::new(|| Url::parse("https://devnet.cedra.dev/v1").unwrap());
 
 pub static DEVNET_FAUCET_URL: Lazy<Url> =
-    Lazy::new(|| Url::parse("https://faucet.cedra.dev").unwrap());
+    Lazy::new(|| Url::parse("https://faucet-api.cedra.dev").unwrap());
 
 pub static TESTNET_NODE_URL: Lazy<Url> =
     Lazy::new(|| Url::parse("https://testnet.cedra.dev").unwrap());
 
 pub static TESTNET_FAUCET_URL: Lazy<Url> =
-    Lazy::new(|| Url::parse("https://faucet.cedra.dev").unwrap());
+    Lazy::new(|| Url::parse("https://faucet-api.cedra.dev").unwrap());
 
 pub const FUND_AMOUNT: u64 = 100_000_000;
 

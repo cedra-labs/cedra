@@ -1,7 +1,7 @@
 [package]
 name = "aptos-vm-profiling"
 version = "0.1.0"
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
+authors = ["Cedra Labs <opensource@cedra.network>"]
 repository = "https://github.com/cedra-labs/cedra"
 homepage = "https://cedra.dev"
 license = "Apache-2.0"

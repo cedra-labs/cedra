@@ -3,7 +3,7 @@ name = "aptos-cli-e2e-tests"
 package-mode = false
 version = "0.1.0"
 description = "Aptos CLI E2E tests"
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
+authors = ["Cedra Labs <opensource@cedra.network>"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]

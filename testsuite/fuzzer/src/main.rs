@@ -7,7 +7,7 @@ use clap::{Arg, Command};
 fn main() {
     let matches = Command::new("Fuzz CLI")
         .version("0.1")
-        .author("Security Team @ Aptos Labs")
+        .author("Security Team @ Cedra Labs")
         .about("This CLI is used to help craft and maintain fuzz targets for the Core components of the Aptos Blockchain.")
         .subcommand(
             Command::new("compile_federated_jwk")

@@ -12,12 +12,12 @@
 # build_cli_release.sh macOS 1.0.0 true
 #
 
-# Note: This must be run from the root of the aptos-core repository
+# Note: This must be run from the root of the cedra-core repository
 
 set -e
 
-NAME='aptos-cli'
-CRATE_NAME='aptos'
+NAME='cedra-cli'
+CRATE_NAME='cedra'
 CARGO_PATH="crates/$CRATE_NAME/Cargo.toml"
 PLATFORM_NAME="$1"
 EXPECTED_VERSION="$2"
