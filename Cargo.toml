@@ -493,10 +493,10 @@ ark-groth16 = "0.4.0"
 ark-relations = "0.4.0"
 ark-serialize = "0.4.0"
 ark-std = { version = "0.4.0", features = ["getrandom"] }
-cedra-indexer-processor-sdk = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev ="58a542e8a7440ba497edae0d240a673d6485c8c5", features = [
+cedra-indexer-processor-sdk = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev="0bb792d10b385df7525d4e3eb2447bad2c7fc159", features = [
     "postgres_partial",
-] }
-cedra-moving-average = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev ="58a542e8a7440ba497edae0d240a673d6485c8c5"}
+] } # , rev ="58a542e8a7440ba497edae0d240a673d6485c8c5"
+cedra-moving-average = { git = "https://github.com/cedra-labs/cedra-indexer-processor-sdk.git", rev="0bb792d10b385df7525d4e3eb2447bad2c7fc159" } #, rev ="58a542e8a7440ba497edae0d240a673d6485c8c5"
 assert_approx_eq = "1.1.0"
 async-channel = "1.7.1"
 async-mutex = "1.4.0"
@@ -692,7 +692,7 @@ pretty = "0.10.0"
 pretty_assertions = "1.2.1"
 # We set default-features to false so we don't onboard the libpq dep. See more here:
 # https://github.com/aptos-labs/aptos/pull/12568
-processor = { git = "https://github.com/cedra-labs/cedra-indexer-processors-v2.git", rev = "b0edf2a3710dac6577cec922693f97e8b95f1dc3", default-features = false }
+processor = { git = "https://github.com/cedra-labs/cedra-indexer-processors-v2.git", default-features = false, rev = "54b728a00743fb05e50c6a50c7d4f18319d1fa97" } #, rev = "b0edf2a3710dac6577cec922693f97e8b95f1dc3"
 procfs = "0.14.1"
 proc-macro2 = "1.0.38"
 project-root = "0.2.2"

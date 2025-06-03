@@ -53,7 +53,7 @@ impl BinaryUpdater for AptosUpdateTool {
     }
 
     fn pretty_name(&self) -> String {
-        "Aptos CLI".to_string()
+        "Cedra CLI".to_string()
     }
 
     /// Return information about whether an update is required.

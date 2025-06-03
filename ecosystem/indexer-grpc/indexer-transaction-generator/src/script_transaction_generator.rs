@@ -6,7 +6,7 @@ use crate::{
     config::{ScriptTransaction, ScriptTransactions},
 };
 use anyhow::Context;
-use aptos::{
+use cedra::{
     account::fund::FundWithFaucet,
     common::types::{CliCommand, MovePackageOptions, ScriptFunctionArguments, TransactionOptions},
     governance::CompileScriptFunction,
