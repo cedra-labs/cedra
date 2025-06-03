@@ -35,7 +35,7 @@ pub enum ViewFunctionRequest {
     #[oai(content_type = "application/json")]
     Json(Json<ViewRequest>),
 
-    #[oai(content_type = "application/x.aptos.view_function+bcs")]
+    #[oai(content_type = "application/x.cedra.view_function+bcs")]
     Bcs(Bcs),
 }
 
