@@ -10,7 +10,7 @@ use crate::{
     },
 };
 use anyhow::{anyhow, bail, Context, Result};
-use aptos::governance::GenerateExecutionHash;
+use cedra::governance::GenerateExecutionHash;
 use aptos_crypto::HashValue;
 use aptos_gas_schedule::LATEST_GAS_FEATURE_VERSION;
 use aptos_infallible::duration_since_epoch;

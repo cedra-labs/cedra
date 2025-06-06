@@ -100,7 +100,7 @@ pub fn sample_jwt_payload_json_overrides(
             "aud":"407408718192.apps.googleusercontent.com",
             "sub":"{}",
             "hd":"aptoslabs.com",
-            "email":"michael@aptoslabs.com",
+            "email":"michael@cedra.network",
             "email_verified":true,
             "at_hash":"bxIESuI59IoZb5alCASqBg",
             "name":"Michael Straka",

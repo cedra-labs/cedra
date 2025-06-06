@@ -13,7 +13,7 @@ With our API setup, the spec files (`api/doc/spec.yaml` / `api/doc/spec.json`) a
 ![API + spec + TS SDK generation diagram](doc/api_spec_ts_sdk_diagram.png)
 
 This process updates the docs at:
-- https://fullnode.devnet.aptoslabs.com/v1/spec#/ (and testnet / mainnet, based on the API rollout schedule)
+- https://devnet.cedra.dev/v1/spec#/ (and testnet / mainnet, based on the API rollout schedule)
 
 All commands here are relative to the root of `aptos-core`.
 

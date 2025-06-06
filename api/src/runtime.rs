@@ -152,7 +152,7 @@ pub fn get_api_service(
     let license =
         LicenseObject::new("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.html");
     let contact = ContactObject::new()
-        .name("Aptos Labs")
+        .name("Cedra Labs")
         .url("https://github.com/cedra-labs/cedra");
 
     OpenApiService::new(apis, "Aptos Node API", version.trim())

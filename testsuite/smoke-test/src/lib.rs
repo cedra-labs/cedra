@@ -7,7 +7,7 @@ extern crate core;
 #[cfg(test)]
 mod account_abstraction;
 #[cfg(test)]
-mod aptos;
+mod cedra;
 #[cfg(test)]
 mod aptos_cli;
 #[cfg(test)]

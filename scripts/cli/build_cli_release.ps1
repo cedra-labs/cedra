@@ -8,10 +8,10 @@
 # Note: This must be run from the root of the aptos-core repository.
 
 # Set up basic variables.
-$NAME="aptos-cli"
-$CRATE_NAME="aptos"
+$NAME="cedra-cli"
+$CRATE_NAME="cedra"
 $CARGO_PATH="crates\$CRATE_NAME\Cargo.toml"
-$Env:VCPKG_ROOT = 'C:\vcpkg\'
+$Env:VCPKG_ROOT = 'D:\vcpkg\'
 
 # Get the version of the CLI from its Cargo.toml.
 $VERSION = Get-Content $CARGO_PATH | Select-String -Pattern '^\w*version = "(\d*\.\d*.\d*)"' | % {"$($_.matches.groups[1])"}

@@ -1,10 +1,10 @@
 [package]
 name = "aptos-comparison-testing"
 version = "0.1.0"
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
+authors = ["Cedra Labs <opensource@cedra.network>"]
 description = "A tool to perform comparison testing on the compiler"
 repository = "https://github.com/cedra-labs/cedra"
-homepage = "https://aptoslabs.com"
+homepage = "https://cedra.dev"
 license = "Apache-2.0"
 publish = false
 edition = "2021"

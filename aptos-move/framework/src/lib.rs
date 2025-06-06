@@ -4,9 +4,9 @@
 
 #![forbid(unsafe_code)]
 
-mod aptos;
+mod cedra;
 
-pub use aptos::*;
+pub use cedra::*;
 use std::io::{Read, Write};
 
 mod built_package;

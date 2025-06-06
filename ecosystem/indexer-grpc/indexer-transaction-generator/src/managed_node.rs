@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Context;
-use aptos::node::local_testnet::{
+use cedra::node::local_testnet::{
     faucet::FaucetManager,
     get_derived_test_dir,
     health_checker::HealthChecker,

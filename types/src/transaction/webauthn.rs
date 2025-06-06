@@ -830,7 +830,7 @@ mod tests {
                   "currency": "Cedra"
                 },
                 "instrument": {
-                  "icon": "https://aptoslabs.com/assets/favicon-2c9e23abc3a3f4c45038e8c784b0a4ecb9051baa.ico",
+                  "icon": "https://cedra.network/assets/favicon-2c9e23abc3a3f4c45038e8c784b0a4ecb9051baa.ico",
                   "displayName": "Petra test"
                 }
               },

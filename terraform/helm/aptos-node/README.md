@@ -4,7 +4,7 @@
 
 Aptos blockchain node deployment
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://cedra.network/>
 
 ## Source Code
 

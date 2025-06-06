@@ -17,7 +17,7 @@ This file keeps track of the changes for indexer grpc.
 
 * Split the services into internal one. [PR](https://github.com/cedra-labs/cedra/pull/7632)
 
-  * Two namespaces are: `aptos.internal.fullnode.v1` and `aptos.indexer.v1`. 
+  * Two namespaces are: `cedra.internal.fullnode.v1` and `cedra.indexer.v1`. 
 
   * External service is simplified since all data are sent sequentially.
 

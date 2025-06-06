@@ -66,7 +66,7 @@
 ///
 /// ### Aptos Explorer
 ///
-/// - The **[Aptos Explorer](https://explorer.aptoslabs.com/)** is an interface that helps users examine details of the Aptos blockchain, including account information, validators, and transactions.
+/// - The **[Aptos Explorer](https://explorer.cedra.dev/)** is an interface that helps users examine details of the Aptos blockchain, including account information, validators, and transactions.
 /// - The Aptos Explorer help users validate their work in Aptos wallets and other tools in the blockchain. Find more details at [Use the Aptos Explorer](../guides/explore-aptos.md).
 ///
 /// ### Aptos Framework

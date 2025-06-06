@@ -36,7 +36,7 @@ cd "$SCRIPT_PATH/.." || exit
 
 function usage {
   echo "Usage:"
-  echo "Installs or updates necessary dev tools for aptoslabs/aptos-core."
+  echo "Installs or updates necessary dev tools for cedralabs/cedra-core."
   echo "-b batch mode, no user interactions and minimal output"
   echo "-p update ${HOME}/.profile"
   echo "-r install protoc and related tools"

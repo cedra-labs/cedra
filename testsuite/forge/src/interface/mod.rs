@@ -4,8 +4,8 @@
 
 mod admin;
 pub use admin::*;
-mod aptos;
-pub use self::aptos::*;
+mod cedra;
+pub use self::cedra::*;
 mod network;
 pub use network::*;
 mod test;

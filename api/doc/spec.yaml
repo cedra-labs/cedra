@@ -4,7 +4,7 @@ info:
   description: The Aptos Node API is a RESTful API for client applications to interact with the Aptos blockchain.
   version: 1.2.0
   contact:
-    name: Aptos Labs
+    name: Cedra Labs
     url: https://github.com/cedra-labs/cedra
   license:
     name: Apache 2.0
