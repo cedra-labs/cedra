@@ -21,7 +21,9 @@ runs:
         key: ${{ inputs.ADDITIONAL_KEY }}
     - name: Install build tools
       shell: bash
-      run: scripts/cli/minimal_cli_build.sh
+      run: |
+        chmod +x scripts/cli/minimal_cli_build.sh
+        scripts/cli/minimal_cli_build.sh
     - run: echo "/home/runner/.cargo/bin" | tee -a $GITHUB_PATH
       shell: bash
     - name: Setup git credentials
