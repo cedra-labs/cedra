@@ -4,7 +4,7 @@
 
 Aptos blockchain automated genesis ceremony for testnets
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://cedra.network/>
 
 ## Source Code
 

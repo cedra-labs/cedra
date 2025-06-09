@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::smoke_test_environment::SwarmBuilder;
-use aptos::move_tool::MemberId;
+use cedra::move_tool::MemberId;
 use aptos_cached_packages::aptos_stdlib;
 use aptos_crypto::SigningKey;
 use aptos_forge::Swarm;

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{smoke_test_environment::SwarmBuilder, utils::get_on_chain_resource};
-use aptos::{common::types::GasOptions, test::CliTestFramework};
+use cedra::{common::types::GasOptions, test::CliTestFramework};
 use aptos_cached_packages::aptos_stdlib;
 use aptos_crypto::{
     ed25519::Ed25519PrivateKey, poseidon_bn254::keyless::fr_to_bytes_le, PrivateKey, SigningKey,

@@ -22,7 +22,7 @@ pub struct VKeyData {
 
 /// On-chain representation of a VK.
 ///
-/// https://fullnode.testnet.aptoslabs.com/v1/accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey
+/// https://testnet.cedra.dev/v1/accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct OnChainGroth16VerificationKey {
     /// Some type info returned by node API.

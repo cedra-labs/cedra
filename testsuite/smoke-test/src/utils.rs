@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::aptos_cli::validator::generate_blob;
-use aptos::test::CliTestFramework;
+use cedra::test::CliTestFramework;
 use aptos_cached_packages::aptos_stdlib;
 use aptos_config::{
     config::{NodeConfig, Peer, PeerRole, HANDSHAKE_VERSION},

@@ -4,7 +4,7 @@
 
 Additional components for aptos-nodes testnet
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://cedra.network/>
 
 ## Source Code
 

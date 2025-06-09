@@ -31,9 +31,9 @@
 /// There are four well-supported networks for integrating with the Aptos blockchain:
 ///
 /// 1. [Localnet](http://127.0.0.1:8080) -- our standalone tool for local development against a known version of the codebase with no external network.
-/// 1. [Devnet](https://fullnode.devnet.aptoslabs.com/v1/spec#/) -- a shared resource for the community, data resets weekly, weekly update from aptos-core main branch.
-/// 1. [Testnet](https://fullnode.testnet.aptoslabs.com/v1/spec#/) -- a shared resource for the community, data will be preserved, network configuration will mimic Mainnet.
-/// 1. [Mainnet](https://fullnode.mainnet.aptoslabs.com/v1/spec#/) -- a production network with real assets.
+/// 1. [Devnet](https://devnet.cedra.dev/v1/spec#/) -- a shared resource for the community, data resets weekly, weekly update from aptos-core main branch.
+/// 1. [Testnet](https://testnet.cedra.dev/v1/spec#/) -- a shared resource for the community, data will be preserved, network configuration will mimic Mainnet.
+/// 1. [Mainnet](https://mainnet.cedra.dev/v1/spec#/) -- a production network with real assets.
 ///
 /// See [Aptos Blockchain Networks](../nodes/networks.md) for full details on each environment.
 ///
@@ -50,26 +50,26 @@
 /// <Tabs groupId="networks">
 ///   <TabItem value="devnet" label="Devnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.devnet.aptoslabs.com/v1">https://fullnode.devnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.devnet.aptoslabs.com/v1/spec#/">https://fullnode.devnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://devnet.cedra.dev/v1">https://devnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://devnet.cedra.dev/v1/spec#/">https://devnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.devnet.aptoslabs.com/v1/graphql">https://api.devnet.aptoslabs.com/v1/graphql</a></li>
-///       <li>Faucet API: <a href="https://faucet.devnet.aptoslabs.com">https://faucet.devnet.aptoslabs.com</a></li>
+///       <li>Faucet API: <a href="https://faucet-api.cedra.dev">https://faucet-api.cedra.dev</a></li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.devnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
 ///     </ul>
 ///   </TabItem>
 ///   <TabItem value="testnet" label="Testnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.testnet.aptoslabs.com/v1">https://fullnode.testnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.testnet.aptoslabs.com/v1/spec#/">https://fullnode.testnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://testnet.cedra.dev/v1">https://testnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://testnet.cedra.dev/v1/spec#/">https://testnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.testnet.aptoslabs.com/v1/graphql">https://api.testnet.aptoslabs.com/v1/graphql</a></li>
-///       <li>Faucet API: <a href="https://faucet.testnet.aptoslabs.com">https://faucet.testnet.aptoslabs.com</a></li>
+///       <li>Faucet API: <a href="https://faucet-api.cedra.dev">https://faucet-api.cedra.dev</a></li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.testnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
 ///     </ul>
 ///   </TabItem>
 ///   <TabItem value="mainnet" label="Mainnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.mainnet.aptoslabs.com/v1">https://fullnode.mainnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.mainnet.aptoslabs.com/v1/spec#/">https://fullnode.mainnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://mainnet.cedra.dev/v1">https://mainnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://mainnet.cedra.dev/v1/spec#/">https://mainnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.mainnet.aptoslabs.com/v1/graphql">https://api.mainnet.aptoslabs.com/v1/graphql</a></li>
 ///       <li>Faucet: N/A</li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.mainnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
@@ -163,9 +163,9 @@
 ///
 /// The REST API offers querying transactions and events in these ways:
 ///
-/// * [Transactions for an account](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_account_transactions)
-/// * [Transactions by version](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_transaction_by_version)
-/// * [Events by event handle](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_events_by_event_handle)
+/// * [Transactions for an account](https://devnet.cedra.dev/v1/spec#/operations/get_account_transactions)
+/// * [Transactions by version](https://devnet.cedra.dev/v1/spec#/operations/get_transaction_by_version)
+/// * [Events by event handle](https://devnet.cedra.dev/v1/spec#/operations/get_events_by_event_handle)
 ///
 /// ## Exchanging and tracking coins
 ///
@@ -498,8 +498,8 @@
 /// What are the differences between devnet and testnet? Effectively none. In the past, the testnet faucet had a Captcha in front of it, making it unqueryable by normal means. This is no longer true.
 ///
 /// The endpoints for each faucet are:
-/// - Devnet: https://faucet.devnet.aptoslabs.com
-/// - Testnet: https://faucet.testnet.aptoslabs.com
+/// - Devnet: https://faucet-api.cedra.dev
+/// - Testnet: https://faucet-api.cedra.dev
 ///
 /// ### Calling the faucet: JavaScript / TypeScript
 /// If you are building a client in JavaScript or TypeScript, you should make use of the [@aptos-labs/aptos-faucet-client](https://www.npmjs.com/package/@aptos-labs/aptos-faucet-client) package. This client is generated based on the OpenAPI spec published by the faucet service.
@@ -512,7 +512,7 @@
 /// } from "@aptos-labs/aptos-faucet-client";
 ///
 /// async function callFaucet(amount: number, address: string): Promise<string[]> {
-///   const faucetClient = new AptosFaucetClient({BASE: "https://faucet.devnet.aptoslabs.com"});
+///   const faucetClient = new AptosFaucetClient({BASE: "https://faucet-api.cedra.dev"});
 ///   const request: FundRequest = {
 ///     amount,
 ///     address,
@@ -529,7 +529,7 @@
 ///
 /// For the latter, you will want to build a query similar to this:
 /// ```
-/// curl -X POST 'https://faucet.devnet.aptoslabs.com/mint?amount=10000&address=0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6'
+/// curl -X POST 'https://faucet-api.cedra.dev/mint?amount=10000&address=0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6'
 /// ```
 ///
 /// This means mint 10000 OCTA to address `0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6`.

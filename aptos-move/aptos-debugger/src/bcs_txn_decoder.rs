@@ -47,7 +47,7 @@ impl Command {
         println!("Chain ID: {}", chain_id.id());
         println!("Network: {}", network);
 
-        let endpoint = format!("https://{}.aptoslabs.com/v1", network);
+        let endpoint = format!("https://{}.cedra.dev/v1", network);
         let debugger = AptosDebugger::rest_client(Client::new(Url::parse(&endpoint)?))?;
         let version = debugger
             .get_version_by_account_sequence(txn.sender(), txn.sequence_number())
@@ -55,11 +55,11 @@ impl Command {
             .unwrap();
         println!("Version: {:?}", version);
         println!(
-            "Overview: https://explorer.aptoslabs.com/txn/{:?}/userTxnOverview?network={}",
+            "Overview: https://explorer.cedra.dev/txn/{:?}/userTxnOverview?network={}",
             version, network
         );
         println!(
-            "Payload: https://explorer.aptoslabs.com/txn/{:?}/payload?network={}",
+            "Payload: https://explorer.cedra.dev/txn/{:?}/payload?network={}",
             version, network
         );
 

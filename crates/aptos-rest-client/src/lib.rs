@@ -4,7 +4,7 @@
 
 extern crate core;
 
-pub mod aptos;
+pub mod cedra;
 pub mod error;
 pub mod faucet;
 use error::AptosErrorResponse;
@@ -16,7 +16,7 @@ pub mod state;
 pub mod types;
 
 pub use crate::client_builder::{AptosBaseUrl, ClientBuilder};
-use crate::{aptos::AptosVersion, error::RestError};
+use crate::{cedra::AptosVersion, error::RestError};
 use anyhow::{anyhow, Result};
 pub use aptos_api_types::{
     self, IndexResponseBcs, MoveModuleBytecode, PendingTransaction, Transaction,
