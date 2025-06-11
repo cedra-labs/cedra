@@ -435,7 +435,7 @@
             "address": "0x1",
             "name": "coin",
             "friends": [
-              "0x1::aptos_coin",
+              "0x1::cedra_coin",
               "0x1::genesis"
             ],
             "exposed_functions": [
@@ -1841,7 +1841,7 @@
                 "generic_type_params": [],
                 "params": [
                   "&0x1::stake::OwnerCapability",
-                  "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                 ],
                 "return": []
               },
@@ -2206,13 +2206,13 @@
                 "return": []
               },
               {
-                "name": "store_aptos_coin_mint_cap",
+                "name": "store_cedra_coin_mint_cap",
                 "visibility": "friend",
                 "is_entry": false,
                 "generic_type_params": [],
                 "params": [
                   "&signer",
-                  "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                 ],
                 "return": []
               },
@@ -2283,7 +2283,7 @@
                   "u64"
                 ],
                 "return": [
-                  "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                 ]
               }
             ],
@@ -2308,7 +2308,7 @@
                 ]
               },
               {
-                "name": "AptosCoinCapabilities",
+                "name": "CedraCoinCapabilities",
                 "is_native": false,
                 "abilities": [
                   "key"
@@ -2317,7 +2317,7 @@
                 "fields": [
                   {
                     "name": "mint_cap",
-                    "type": "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                   }
                 ]
               },
@@ -2517,19 +2517,19 @@
                 "fields": [
                   {
                     "name": "active",
-                    "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                   },
                   {
                     "name": "inactive",
-                    "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                   },
                   {
                     "name": "pending_active",
-                    "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                   },
                   {
                     "name": "pending_inactive",
-                    "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                   },
                   {
                     "name": "locked_until_secs",
@@ -6312,7 +6312,7 @@
           "bytecode": "0xa11ceb0b050000000d0100100210320342830104c5011605db01e00107bb03a80408e307200683087710fa088d020a870b1a0ca10bc0030de10e060fe70e020001000200030004000500060007000800090800000a0400000b0800000c0800010e05010001031207010000011405010001011f0401000101270501000105280700000d000100000f02010000100301000011000100001304050000150006000016070100041b000400031c0a0b0100031d0a0c0100071e0e0f010006200001000121000101000116121301000122140101000623000100022409090001111701010003250119010003260f19010005291b1c00012a1d1e0100012b1f010100022c090900080909090a0d0c110d110e111111120913091511161101060c0003060c060c0b04010800020c050105010b050103020b060108000b0401080003060c050304070a0801030b0501030b04010800010301060b0501090001010106090001080102070a090003010900010b070108000108000203060b04010900010b0701090002050b0701090005070a080103070a080106080103010b04010800010b0401090005060a0801060801030b05010303010b05010900030b060108000b080108000b04010800010a0201080905060c080908090201030b060109000b080109000b04010900010b0801090003050b07010800060b040108000767656e657369730a6170746f735f636f696e04636f696e056572726f72066f7074696f6e067369676e657206737472696e671073797374656d5f61646472657373657306766563746f72094170746f73436f696e1744656c6567617465644d696e744361706162696c6974790b44656c65676174696f6e730c4d696e7443617053746f726515636c61696d5f6d696e745f6361706162696c6974790e4d696e744361706162696c6974791b636f6e6669677572655f6163636f756e74735f666f725f746573741864656c65676174655f6d696e745f6361706162696c6974791064657374726f795f6d696e745f636170064f7074696f6e0f66696e645f64656c65676174696f6e0e4275726e4361706162696c6974790a696e697469616c697a65046d696e740b64756d6d795f6669656c6402746f05696e6e6572086d696e745f6361700a616464726573735f6f660769735f736f6d6506626f72726f770b737761705f72656d6f766504436f696e166173736572745f6170746f735f6672616d65776f726b087265676973746572076465706f736974146173736572745f636f72655f7265736f7572636510696e76616c69645f617267756d656e74046e6f6e6504736f6d6510467265657a654361706162696c69747906537472696e67047574663825696e697469616c697a655f776974685f706172616c6c656c697a61626c655f737570706c791264657374726f795f667265657a655f636170096e6f745f666f756e6400000000000000000000000000000000000000000000000000000000000000010308020000000000000003080300000000000000030801000000000000000520000000000000000000000000000000000000000000000000000000000a550c18052000000000000000000000000000000000000000000000000000000000000000010a020b0a4170746f7320436f696e0a020403415054126170746f733a3a6d657461646174615f7630f80103010000000000000010454e4f5f4341504142494c4954494553254163636f756e7420646f6573206e6f742068617665206d696e74206361706162696c69747902000000000000001245414c52454144595f44454c454741544544444d696e74206361706162696c6974792068617320616c7265616479206265656e2064656c65676174656420746f20746869732073706563696669656420616464726573730300000000000000154544454c45474154494f4e5f4e4f545f464f554e443943616e6e6f742066696e642064656c65676174696f6e206f66206d696e74206361706162696c69747920746f2074686973206163636f756e7400020117010102011805020201190a08010302011a0b0401080000010402020308220a00110711040c030e033800030b0b00010701270e033801140c0207032a020f000c010b010b02380213010107032b031001140c040b000b0412032d03020103000010150b00110b0a01380306ffffffffffffffff0e0238040c030a0111070b0338050a010b0212032d030b01400d000000000000000012022d02020201040102152d0e00110f07032a020f000c040600000000000000000c060a060a042e410d23030f05280a040a060c030c020b022e0b03420d0c050b051002140a012203230b040107001110270b06060100000000000000160c0605080b040b011201440d02030300010316090b00110b07042c0313030c010b013806020400000102182807032b0210000c010600000000000000000c030a01410d0c0538070c040a030a0523031005260a010a03420d0c020b021002140a0021031b05210b01010b0338080c0405260b03060100000000000000160c03050b0b0402050300001a160a00110b0a00070511140706111431080838090c030c020c010b000a0312032d030b02380a0b010b0302060104010320150b0011070c030a032903030907021117270b032b0310010c050b020b0538040c040b010b04380502020003000100000000",
           "abi": {
             "address": "0x1",
-            "name": "aptos_coin",
+            "name": "cedra_coin",
             "friends": [
               "0x1::genesis"
             ],
@@ -6335,7 +6335,7 @@
                 "params": [
                   "&signer",
                   "&signer",
-                  "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                 ],
                 "return": []
               },
@@ -6369,8 +6369,8 @@
                   "&signer"
                 ],
                 "return": [
-                  "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>",
-                  "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>",
+                  "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                 ]
               },
               {
@@ -6388,7 +6388,7 @@
             ],
             "structs": [
               {
-                "name": "AptosCoin",
+                "name": "CedraCoin",
                 "is_native": false,
                 "abilities": [
                   "key"
@@ -6425,7 +6425,7 @@
                 "fields": [
                   {
                     "name": "inner",
-                    "type": "vector<0x1::aptos_coin::DelegatedMintCapability>"
+                    "type": "vector<0x1::cedra_coin::DelegatedMintCapability>"
                   }
                 ]
               },
@@ -6439,7 +6439,7 @@
                 "fields": [
                   {
                     "name": "mint_cap",
-                    "type": "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                   }
                 ]
               }
@@ -8965,20 +8965,20 @@
                 "return": []
               },
               {
-                "name": "store_aptos_coin_burn_cap",
+                "name": "store_cedra_coin_burn_cap",
                 "visibility": "friend",
                 "is_entry": false,
                 "generic_type_params": [],
                 "params": [
                   "&signer",
-                  "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>"
+                  "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>"
                 ],
                 "return": []
               }
             ],
             "structs": [
               {
-                "name": "AptosCoinCapabilities",
+                "name": "CedraCoinCapabilities",
                 "is_native": false,
                 "abilities": [
                   "key"
@@ -8987,7 +8987,7 @@
                 "fields": [
                   {
                     "name": "burn_cap",
-                    "type": "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>"
+                    "type": "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>"
                   }
                 ]
               }
@@ -10211,10 +10211,10 @@
         "address": "0x1",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::coin::CoinInfo<0x1::aptos_coin::AptosCoin>",
+          "type": "0x1::coin::CoinInfo<0x1::cedra_coin::CedraCoin>",
           "data": {
             "decimals": 8,
-            "name": "Aptos Coin",
+            "name": "Cedra Coin",
             "supply": {
               "vec": [
                 {
@@ -10233,7 +10233,7 @@
                 }
               ]
             },
-            "symbol": "APT"
+            "symbol": "Cedra"
           }
         },
         "type": "write_resource"
@@ -10326,7 +10326,7 @@
         "address": "0x1",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::stake::AptosCoinCapabilities",
+          "type": "0x1::stake::CedraCoinCapabilities",
           "data": {
             "mint_cap": {
               "dummy_field": false
@@ -11420,7 +11420,7 @@
         "address": "0x1",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::transaction_fee::AptosCoinCapabilities",
+          "type": "0x1::transaction_fee::CedraCoinCapabilities",
           "data": {
             "burn_cap": {
               "dummy_field": false
@@ -13673,7 +13673,7 @@
         "address": "0xa550c18",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+          "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
           "data": {
             "coin": {
               "value": "18446744073709551615"
@@ -13757,7 +13757,7 @@
         "address": "0xa550c18",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::aptos_coin::Delegations",
+          "type": "0x1::cedra_coin::Delegations",
           "data": {
             "inner": []
           }
@@ -13768,7 +13768,7 @@
         "address": "0xa550c18",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::aptos_coin::MintCapStore",
+          "type": "0x1::cedra_coin::MintCapStore",
           "data": {
             "mint_cap": {
               "dummy_field": false
@@ -13781,7 +13781,7 @@
         "address": "0x66b22b7465af92a9dc8d07d2878716d9dffbbb280830a7d8cf80334b5da812ef",
         "state_key_hash": "",
         "data": {
-          "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+          "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
           "data": {
             "coin": {
               "value": "0"
@@ -14443,7 +14443,7 @@
                 "address": "0x1",
                 "name": "coin",
                 "friends": [
-                  "0x1::aptos_coin",
+                  "0x1::cedra_coin",
                   "0x1::genesis"
                 ],
                 "exposed_functions": [
@@ -15841,7 +15841,7 @@
                     "generic_type_params": [],
                     "params": [
                       "&0x1::stake::OwnerCapability",
-                      "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                     ],
                     "return": []
                   },
@@ -16206,13 +16206,13 @@
                     "return": []
                   },
                   {
-                    "name": "store_aptos_coin_mint_cap",
+                    "name": "store_cedra_coin_mint_cap",
                     "visibility": "friend",
                     "is_entry": false,
                     "generic_type_params": [],
                     "params": [
                       "&signer",
-                      "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                     ],
                     "return": []
                   },
@@ -16283,7 +16283,7 @@
                       "u64"
                     ],
                     "return": [
-                      "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                     ]
                   }
                 ],
@@ -16308,7 +16308,7 @@
                     ]
                   },
                   {
-                    "name": "AptosCoinCapabilities",
+                    "name": "CedraCoinCapabilities",
                     "is_native": false,
                     "abilities": [
                       "key"
@@ -16317,7 +16317,7 @@
                     "fields": [
                       {
                         "name": "mint_cap",
-                        "type": "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                       }
                     ]
                   },
@@ -16517,19 +16517,19 @@
                     "fields": [
                       {
                         "name": "active",
-                        "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                       },
                       {
                         "name": "inactive",
-                        "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                       },
                       {
                         "name": "pending_active",
-                        "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                       },
                       {
                         "name": "pending_inactive",
-                        "type": "0x1::coin::Coin<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::Coin<0x1::cedra_coin::CedraCoin>"
                       },
                       {
                         "name": "locked_until_secs",
@@ -20293,7 +20293,7 @@
               "bytecode": "0xa11ceb0b050000000d0100100210320342830104c5011605db01e00107bb03a80408e307200683087710fa088d020a870b1a0ca10bc0030de10e060fe70e020001000200030004000500060007000800090800000a0400000b0800000c0800010e05010001031207010000011405010001011f0401000101270501000105280700000d000100000f02010000100301000011000100001304050000150006000016070100041b000400031c0a0b0100031d0a0c0100071e0e0f010006200001000121000101000116121301000122140101000623000100022409090001111701010003250119010003260f19010005291b1c00012a1d1e0100012b1f010100022c090900080909090a0d0c110d110e111111120913091511161101060c0003060c060c0b04010800020c050105010b050103020b060108000b0401080003060c050304070a0801030b0501030b04010800010301060b0501090001010106090001080102070a090003010900010b070108000108000203060b04010900010b0701090002050b0701090005070a080103070a080106080103010b04010800010b0401090005060a0801060801030b05010303010b05010900030b060108000b080108000b04010800010a0201080905060c080908090201030b060109000b080109000b04010900010b0801090003050b07010800060b040108000767656e657369730a6170746f735f636f696e04636f696e056572726f72066f7074696f6e067369676e657206737472696e671073797374656d5f61646472657373657306766563746f72094170746f73436f696e1744656c6567617465644d696e744361706162696c6974790b44656c65676174696f6e730c4d696e7443617053746f726515636c61696d5f6d696e745f6361706162696c6974790e4d696e744361706162696c6974791b636f6e6669677572655f6163636f756e74735f666f725f746573741864656c65676174655f6d696e745f6361706162696c6974791064657374726f795f6d696e745f636170064f7074696f6e0f66696e645f64656c65676174696f6e0e4275726e4361706162696c6974790a696e697469616c697a65046d696e740b64756d6d795f6669656c6402746f05696e6e6572086d696e745f6361700a616464726573735f6f660769735f736f6d6506626f72726f770b737761705f72656d6f766504436f696e166173736572745f6170746f735f6672616d65776f726b087265676973746572076465706f736974146173736572745f636f72655f7265736f7572636510696e76616c69645f617267756d656e74046e6f6e6504736f6d6510467265657a654361706162696c69747906537472696e67047574663825696e697469616c697a655f776974685f706172616c6c656c697a61626c655f737570706c791264657374726f795f667265657a655f636170096e6f745f666f756e6400000000000000000000000000000000000000000000000000000000000000010308020000000000000003080300000000000000030801000000000000000520000000000000000000000000000000000000000000000000000000000a550c18052000000000000000000000000000000000000000000000000000000000000000010a020b0a4170746f7320436f696e0a020403415054126170746f733a3a6d657461646174615f7630f80103010000000000000010454e4f5f4341504142494c4954494553254163636f756e7420646f6573206e6f742068617665206d696e74206361706162696c69747902000000000000001245414c52454144595f44454c454741544544444d696e74206361706162696c6974792068617320616c7265616479206265656e2064656c65676174656420746f20746869732073706563696669656420616464726573730300000000000000154544454c45474154494f4e5f4e4f545f464f554e443943616e6e6f742066696e642064656c65676174696f6e206f66206d696e74206361706162696c69747920746f2074686973206163636f756e7400020117010102011805020201190a08010302011a0b0401080000010402020308220a00110711040c030e033800030b0b00010701270e033801140c0207032a020f000c010b010b02380213010107032b031001140c040b000b0412032d03020103000010150b00110b0a01380306ffffffffffffffff0e0238040c030a0111070b0338050a010b0212032d030b01400d000000000000000012022d02020201040102152d0e00110f07032a020f000c040600000000000000000c060a060a042e410d23030f05280a040a060c030c020b022e0b03420d0c050b051002140a012203230b040107001110270b06060100000000000000160c0605080b040b011201440d02030300010316090b00110b07042c0313030c010b013806020400000102182807032b0210000c010600000000000000000c030a01410d0c0538070c040a030a0523031005260a010a03420d0c020b021002140a0021031b05210b01010b0338080c0405260b03060100000000000000160c03050b0b0402050300001a160a00110b0a00070511140706111431080838090c030c020c010b000a0312032d030b02380a0b010b0302060104010320150b0011070c030a032903030907021117270b032b0310010c050b020b0538040c040b010b04380502020003000100000000",
               "abi": {
                 "address": "0x1",
-                "name": "aptos_coin",
+                "name": "cedra_coin",
                 "friends": [
                   "0x1::genesis"
                 ],
@@ -20316,7 +20316,7 @@
                     "params": [
                       "&signer",
                       "&signer",
-                      "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                     ],
                     "return": []
                   },
@@ -20350,8 +20350,8 @@
                       "&signer"
                     ],
                     "return": [
-                      "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>",
-                      "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>",
+                      "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                     ]
                   },
                   {
@@ -20369,7 +20369,7 @@
                 ],
                 "structs": [
                   {
-                    "name": "AptosCoin",
+                    "name": "CedraCoin",
                     "is_native": false,
                     "abilities": [
                       "key"
@@ -20406,7 +20406,7 @@
                     "fields": [
                       {
                         "name": "inner",
-                        "type": "vector<0x1::aptos_coin::DelegatedMintCapability>"
+                        "type": "vector<0x1::cedra_coin::DelegatedMintCapability>"
                       }
                     ]
                   },
@@ -20420,7 +20420,7 @@
                     "fields": [
                       {
                         "name": "mint_cap",
-                        "type": "0x1::coin::MintCapability<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::MintCapability<0x1::cedra_coin::CedraCoin>"
                       }
                     ]
                   }
@@ -22929,20 +22929,20 @@
                     "return": []
                   },
                   {
-                    "name": "store_aptos_coin_burn_cap",
+                    "name": "store_cedra_coin_burn_cap",
                     "visibility": "friend",
                     "is_entry": false,
                     "generic_type_params": [],
                     "params": [
                       "&signer",
-                      "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>"
+                      "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>"
                     ],
                     "return": []
                   }
                 ],
                 "structs": [
                   {
-                    "name": "AptosCoinCapabilities",
+                    "name": "CedraCoinCapabilities",
                     "is_native": false,
                     "abilities": [
                       "key"
@@ -22951,7 +22951,7 @@
                     "fields": [
                       {
                         "name": "burn_cap",
-                        "type": "0x1::coin::BurnCapability<0x1::aptos_coin::AptosCoin>"
+                        "type": "0x1::coin::BurnCapability<0x1::cedra_coin::CedraCoin>"
                       }
                     ]
                   }
@@ -24493,7 +24493,7 @@
                         "extension": {
                           "vec": []
                         },
-                        "name": "aptos_coin",
+                        "name": "cedra_coin",
                         "source": "0x1f8b08000000000002ffbd586d6fdb3610fe9e5fc176402a779eddace9cb94a4589a6443803629d6ecc3300c022dd1321149f4482aae1bf8bfef8ed40b454b4e8775f587c4968e77c7bbe79e3b723a9d929b0557241749993192b0392f982294e4bce039cd082d1292b282491e9333c10bf3e02dcd6811b3c9de14d6c3523ee72c21732972b2d07aa9c2e934e57a51ce26b1c8a7b9b8633fc082b4a42933bfa65a32f84679316d9e27222e735668aab928a6bad442729aed558ed1a5162a9a4b9ab39590b761681fc4e8d1fd1e814fa918513a0943a5252fd2a3ee4326a590de33c553d897f7f08ec57a4b522cd1a930bcffc8b2f9985c9b9f9ba3bd466acb3d74ac917f5bcae28c2ee98c675cafc7e43d2f74fb7b7334ac46ad95667944934432a598aa4cce256790862d714c94e2b51426e7348e4559689208c86a213459d03b86c9d5246e3c30d2b12894261757d7d1d9e987d3b797ef2e6f2e2f3e86a47c79484ec8c151a3f27d77316804bc6492d1644d668c1500a28ca5540322b4201ad1a5962cb618a976e25a3c7df7dbc5e9f91fd1f9c5bb8b5f4f6f2ece6b9b3fb636cf6881ce0338935a3d648088b9bf95c624b51b770d55062eafafa2abeb9be897ebdfaf1a5bcfab980178ca5893538cac813beeee96adc93dd97424aa1c7e04b0b056c848e007dd8ac0add04bf671a3f9cdd8086fda5c9db71bd3e21602194350318cb375bd69214dfdc5b480509338a33cb7eff5823571071c29cfecc475fdbcce4f57c6ec4299fdb4fbd022ece4cc71f7064c42643554319376a1327ec4a59450c8640918854a7412a6fafcc0e73d11e405a80d89adc7e3019fb783084821a2c8d610a32c83d82425b201a92a03e101c4a68159f86766bc35092158afd6b96539cb781cd8121b917959382b02bfe4c8be65915148826e99bb991e06c1c8d9b15fec4072f04feac833ea3b31aab08b9f8c6912ccc01104df188882b1cfcc7eaf213902b85b7a6af715ad80aea325951834784067198b54b95c66aeb34163063f9e17e3ce4b4bc26158eaf9eb60f6d80619953c1eed16fc70e34bbc1e93e95300518cfd4891a7d3ce5b80123302b980dd085979ed8ab9f1414a34be347e9382b144353c8208b1dfc159172fe40e22956009aa89ed992b9e65588692dd41b92600bbd842aa9574ed1ae63504d9c63d99b48c017d31d2c24feeb8cb34f74d1ac9c6dd974d68c2209c621db5690fdaafa3a346da4148830abf90ae77165165c96c977a01ada8f789da2267132150d913d3c62ef25ba541f5c7cc7367b06ceb68d45b1c2e5e30f877c991bfbac1fe1aa5e956e6602aa1244dfe71843a76a5de043f0fabec26bdd96693d2a34172c4e6d19bda3974180d0a4d925349217f3d1d762be3d893704f101d51ca9839e9ac523998256821739e969245b568044e44e844cb3743991b3bb1000d8df91e812feec85f9b92eb91c9b4463748756c9c6903c39f621b06dad1a6cdb34f2c2e35ab3c01baa385a2b1d34c5b2048967210922e6377c3e2c1d1525cdd0d304083647ff0faf0f0e5abc3c367af9ebf7af6d38b17072f0f5e74697abf0ef0d8255e1faa4ba178c78a4d13c4d586381273dfe7b1f5d30d69cd955dc9dd54f9d05a771ab9ef4e1f707cc8977a1d8c1a457d3c893d13d655e5832581df0a063f560b26d936009a2915b20c99ab126a0ad54c7ed09a565592a8197c4df4504f0e8690859536d87cd26872cb8cc01026d7a6c830124e3559d99e22a91536435ffb8ae6760dcccb759d3cc49a88b1ca96d10a50eb497725e1e6d716d9a32e046d8c3c7674d57b738339f285219c1b8050ca2209fcb3cd68dc3b22a0d70d724ec8fe4c80a25594666246b35de627f5aa9e2a33ec0c743b546c36ba4e3bfe82d2a99335ee98f8b60875cf7a786431fd0367029b5f2432f3b3d2027fb3c49e5b3c1a2619689103f0adad343dae5a143448ae80ec9e571c7c766afb6172ef5043b0df02d44dab73aa4194e4a5261da444f0e4d8310c9ddc23b6892199ae560eba9eb58f560b0e290b38396ea8286345aa1781637ee476ac5a11bcc6db1450572fb4deb90bc7843b9b720baf5a3d018e797402411dd7d5c40b33b24554a6e6b626d83ebe8f3c9db8254ebeafaf100c38dbafb577cb522da2198d6fbb0e0e9d55ef710cf9666c6cf0ea1eb193ada9c812743b147b8531006c5309c3a8de9e4fcfdde0eca0dd9cae672c82eb12f609c28ff726511bd760070b3bc9abc150df7e71152991434138caa13bf7deab78c5c21374e369ada9826247d1b7a8ae5d680a4964e6f01a906a4597a00ec705af66924ffe78476f81e2004dcbb57b2565ef4e399c60b0695b22746ec2dc86ddd37776b59dadbd6e779ee63869cd3c3c1b554584a8f4e1d29908e0a6c3de7f1ec324f0e6218eedc9657763ff9521f11150a293b81e82f434545551a3b110050b46bda40bbabe1eb9f2397189f5e4c484d4d76fefbeba1e9ab2f3d5e167065df8b6f374f36fc8d7d871b3ffdd9fc892119e11ff1abe95a6692aed6d6434a7b8fff5d1c0f28af0ba9768edf9eeffbc4ddb76b273e1b5fd7ad0ad911bb0a19bc0fafe64b3f70f32c99a0054190000",
                         "source_map": "0x"
                       },
@@ -24698,10 +24698,10 @@
             "address": "0x1",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::coin::CoinInfo<0x1::aptos_coin::AptosCoin>",
+              "type": "0x1::coin::CoinInfo<0x1::cedra_coin::CedraCoin>",
               "data": {
                 "decimals": 8,
-                "name": "Aptos Coin",
+                "name": "Cedra Coin",
                 "supply": {
                   "vec": [
                     {
@@ -24720,7 +24720,7 @@
                     }
                   ]
                 },
-                "symbol": "APT"
+                "symbol": "Cedra"
               }
             },
             "type": "write_resource"
@@ -24813,7 +24813,7 @@
             "address": "0x1",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::stake::AptosCoinCapabilities",
+              "type": "0x1::stake::CedraCoinCapabilities",
               "data": {
                 "mint_cap": {
                   "dummy_field": false
@@ -25918,7 +25918,7 @@
             "address": "0x1",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::transaction_fee::AptosCoinCapabilities",
+              "type": "0x1::transaction_fee::CedraCoinCapabilities",
               "data": {
                 "burn_cap": {
                   "dummy_field": false
@@ -28230,7 +28230,7 @@
             "address": "0xa550c18",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+              "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
               "data": {
                 "coin": {
                   "value": "18446744073709551615"
@@ -28314,7 +28314,7 @@
             "address": "0xa550c18",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::aptos_coin::Delegations",
+              "type": "0x1::cedra_coin::Delegations",
               "data": {
                 "inner": []
               }
@@ -28325,7 +28325,7 @@
             "address": "0xa550c18",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::aptos_coin::MintCapStore",
+              "type": "0x1::cedra_coin::MintCapStore",
               "data": {
                 "mint_cap": {
                   "dummy_field": false
@@ -28338,7 +28338,7 @@
             "address": "0x66b22b7465af92a9dc8d07d2878716d9dffbbb280830a7d8cf80334b5da812ef",
             "state_key_hash": "",
             "data": {
-              "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+              "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
               "data": {
                 "coin": {
                   "value": "0"

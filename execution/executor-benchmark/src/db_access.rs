@@ -12,7 +12,7 @@ use aptos_types::{
     event::{EventHandle, EventKey},
     state_store::{state_key::StateKey, StateView},
     write_set::TOTAL_SUPPLY_STATE_KEY,
-    AptosCoinType, CoinType,
+    CedraCoinType, CoinType,
 };
 use itertools::Itertools;
 use move_core_types::{
@@ -40,15 +40,15 @@ impl CommonStructTags {
     pub fn new() -> Self {
         Self {
             account: AccountResource::struct_tag(),
-            apt_coin_store: CoinStoreResource::<AptosCoinType>::struct_tag(),
+            apt_coin_store: CoinStoreResource::<CedraCoinType>::struct_tag(),
             object_group: ObjectGroupResource::struct_tag(),
             object_core: ObjectCoreResource::struct_tag(),
             fungible_store: FungibleStoreResource::struct_tag(),
             concurrent_supply: ConcurrentSupplyResource::struct_tag(),
 
-            apt_coin_type_name: "0x1::aptos_coin::AptosCoin".to_string(),
-            apt_coin_info_resource: StateKey::resource_typed::<CoinInfoResource<AptosCoinType>>(
-                &AptosCoinType::coin_info_address(),
+            apt_coin_type_name: "0x1::cedra_coin::CedraCoin".to_string(),
+            apt_coin_info_resource: StateKey::resource_typed::<CoinInfoResource<CedraCoinType>>(
+                &CedraCoinType::coin_info_address(),
             )
             .unwrap(),
         }
@@ -96,7 +96,7 @@ impl DbAccessUtil {
         StateKey::resource(address, &self.common.account).unwrap()
     }
 
-    pub fn new_state_key_aptos_coin(&self, address: &AccountAddress) -> StateKey {
+    pub fn new_state_key_cedra_coin(&self, address: &AccountAddress) -> StateKey {
         StateKey::resource(address, &self.common.apt_coin_store).unwrap()
     }
 
@@ -135,7 +135,7 @@ impl DbAccessUtil {
     pub fn get_apt_coin_store(
         coin_store_key: &StateKey,
         state_view: &impl StateView,
-    ) -> Result<Option<CoinStoreResource<AptosCoinType>>> {
+    ) -> Result<Option<CoinStoreResource<CedraCoinType>>> {
         Self::get_value(coin_store_key, state_view)
     }
 
@@ -172,8 +172,8 @@ impl DbAccessUtil {
     pub fn new_apt_coin_store(
         balance: u64,
         address: AccountAddress,
-    ) -> CoinStoreResource<AptosCoinType> {
-        CoinStoreResource::<AptosCoinType>::new(
+    ) -> CoinStoreResource<CedraCoinType> {
+        CoinStoreResource::<CedraCoinType>::new(
             balance,
             false,
             EventHandle::new(EventKey::new(1, address), 0),

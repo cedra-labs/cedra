@@ -69,7 +69,7 @@ impl<'a> AccountOrderedTransactionsIter<'a> {
     }
 }
 
-impl AccountOrderedTransactionsIter<'_> {
+impl<'a> AccountOrderedTransactionsIter<'a> {
     fn next_impl(&mut self) -> Result<Option<(u64, Version)>> {
         Ok(match self.inner.next().transpose()? {
             Some(((address, seq_num), version)) => {
@@ -117,7 +117,7 @@ impl AccountOrderedTransactionsIter<'_> {
     }
 }
 
-impl Iterator for AccountOrderedTransactionsIter<'_> {
+impl<'a> Iterator for AccountOrderedTransactionsIter<'a> {
     type Item = Result<(u64, Version)>;
 
     fn next(&mut self) -> Option<Self::Item> {

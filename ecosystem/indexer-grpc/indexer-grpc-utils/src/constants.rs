@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 // Maximum number of threads for the file store
 pub const MAXIMUM_NUMBER_FILESTORE_THREADS: usize = 10;
 // GRPC request metadata key for the token ID.
-pub const GRPC_AUTH_TOKEN_HEADER: &str = "x-aptos-data-authorization";
+pub const GRPC_AUTH_TOKEN_HEADER: &str = "x-cedra-data-authorization";
 // GRPC request metadata key for the request name. This is used to identify the
 // data destination.
 pub const GRPC_REQUEST_NAME_HEADER: &str = "x-aptos-request-name";

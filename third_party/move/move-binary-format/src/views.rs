@@ -251,7 +251,7 @@ pub struct FunctionHandleView<'a, T> {
     function_handle: &'a FunctionHandle,
 }
 
-impl<T> Clone for FunctionHandleView<'_, T> {
+impl<'a, T> Clone for FunctionHandleView<'a, T> {
     fn clone(&self) -> Self {
         Self {
             module: self.module,
@@ -478,7 +478,7 @@ pub struct FunctionDefinitionView<'a, T> {
     function_handle_view: FunctionHandleView<'a, T>,
 }
 
-impl<T> Clone for FunctionDefinitionView<'_, T> {
+impl<'a, T> Clone for FunctionDefinitionView<'a, T> {
     fn clone(&self) -> Self {
         Self {
             module: self.module,

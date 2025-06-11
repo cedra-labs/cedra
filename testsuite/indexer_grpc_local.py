@@ -43,12 +43,12 @@ GRPC_IS_READY_MESSAGE = f"""
 
     - For non-TLS:
         grpcurl -plaintext -d '{{ "starting_version": 0 }}' \\
-            -H "x-aptos-data-authorization:dummy_token" \\
-            {GRPC_DATA_SERVICE_NON_TLS_URL} aptos.indexer.v1.RawData/GetTransactions
+            -H "x-cedra-data-authorization:dummy_token" \\
+            {GRPC_DATA_SERVICE_NON_TLS_URL} cedra.indexer.v1.RawData/GetTransactions
     - For TLS:
         grpcurl -insecure -d '{{ "starting_version": 0 }}' \\
-            -H "x-aptos-data-authorization:dummy_token" \\
-            {GRPC_DATA_SERVICE_TLS_URL} aptos.indexer.v1.RawData/GetTransactions
+            -H "x-cedra-data-authorization:dummy_token" \\
+            {GRPC_DATA_SERVICE_TLS_URL} cedra.indexer.v1.RawData/GetTransactions
     ======================================
 """
 
@@ -242,14 +242,14 @@ def wait_for_indexer_grpc_progress(context: SystemContext) -> None:
                     "-d",
                     '{ "starting_version": 0 }',
                     "-H",
-                    "x-aptos-data-authorization:dummy_token",
+                    "x-cedra-data-authorization:dummy_token",
                     "-import-path",
                     "protos/proto",
                     "-proto",
                     "aptos/indexer/v1/raw_data.proto",
                     "-plaintext",
                     GRPC_DATA_SERVICE_NON_TLS_URL,
-                    "aptos.indexer.v1.RawData/GetTransactions",
+                    "cedra.indexer.v1.RawData/GetTransactions",
                 ],
                 timeout_secs=GRPC_PROGRESS_THRESHOLD_SECS,
             )
@@ -393,7 +393,7 @@ def main() -> None:
     if platform.system() == "Darwin" and platform.processor().startswith("arm"):
         # If we're on an ARM Mac, use the amd64 Redis image. On some ARM Macs the ARM
         # Redis image doesn't work so we use the amd64 image for now. See more here:
-        # https://github.com/aptos-labs/aptos-core/issues/9878
+        # https://github.com/cedra-labs/cedra/issues/9878
         if not os.environ.get("REDIS_IMAGE_REPO"):
             os.environ["REDIS_IMAGE_REPO"] = "amd64/redis"
             log.info(

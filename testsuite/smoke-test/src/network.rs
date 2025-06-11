@@ -7,7 +7,7 @@ use crate::{
     state_sync::test_all_validator_failures,
     utils::{MAX_CONNECTIVITY_WAIT_SECS, MAX_HEALTHY_WAIT_SECS},
 };
-use aptos::test::CliTestFramework;
+use cedra::test::CliTestFramework;
 use aptos_config::{
     config::{
         DiscoveryMethod, FileDiscovery, Identity, NetworkConfig, NodeConfig, OverrideNodeConfig,
@@ -170,7 +170,7 @@ async fn test_rest_discovery() {
         .unwrap();
 }
 
-// Currently this test seems flaky: https://github.com/aptos-labs/aptos-core/issues/670
+// Currently this test seems flaky: https://github.com/cedra-labs/cedra/issues/670
 #[ignore]
 #[tokio::test]
 async fn test_file_discovery() {

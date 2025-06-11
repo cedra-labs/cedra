@@ -31,9 +31,9 @@
 ///
 /// - An **Application Programming Interface (API)(** is a set of protocols and tools that allow users to interact with Aptos blockchain nodes and client networks via external applications. Aptos offers a REST API for this purpose. See the [Aptos API reference](https://aptos.dev/nodes/aptos-api-spec#/) documentation and [Use the Aptos API](../integration/fullnode-rest-api.md) for more details.
 ///
-/// ### APT
+/// ### Cedra
 ///
-/// **Aptos token (APT)** is the Aptos blockchain native token used for paying network and transaction fees.
+/// **Aptos token (Cedra)** is the Aptos blockchain native token used for paying network and transaction fees.
 ///
 /// ### Aptos
 ///
@@ -66,7 +66,7 @@
 ///
 /// ### Aptos Explorer
 ///
-/// - The **[Aptos Explorer](https://explorer.aptoslabs.com/)** is an interface that helps users examine details of the Aptos blockchain, including account information, validators, and transactions.
+/// - The **[Aptos Explorer](https://explorer.cedra.dev/)** is an interface that helps users examine details of the Aptos blockchain, including account information, validators, and transactions.
 /// - The Aptos Explorer help users validate their work in Aptos wallets and other tools in the blockchain. Find more details at [Use the Aptos Explorer](../guides/explore-aptos.md).
 ///
 /// ### Aptos Framework
@@ -158,7 +158,7 @@
 /// ### Event
 ///
 /// - An **event** is the user-facing representation of the effects of executing a transaction.
-/// - A transaction may be designed to emit any number of events as a list. For example, a `Coin<AptosCoin>` transfer emits a `WithdrawEvent` for the sender account and a `DepositEvent` for the recipient account.
+/// - A transaction may be designed to emit any number of events as a list. For example, a `Coin<CedraCoin>` transfer emits a `WithdrawEvent` for the sender account and a `DepositEvent` for the recipient account.
 /// - In the Aptos protocol, events provide evidence that the successful execution of a transaction resulted in a specific effect. The `DepositEvent` (in the above example) allows the recipient to confirm that a payment was received into their account.
 /// - Events are persisted on the blockchain and are used to answer queries by [clients](#client).
 ///
@@ -180,7 +180,7 @@
 ///
 /// ### Faucet
 ///
-/// - **Faucet** is a service that mints APT on devnet and testnet. APT on these networks has no real world value, it is only for development purposes.
+/// - **Faucet** is a service that mints Cedra on devnet and testnet. Cedra on these networks has no real world value, it is only for development purposes.
 /// - You can use the faucet in a few different ways:
 ///   - With the [Aptos CLI](../tools/aptos-cli-tool/use-aptos-cli.md#fund-an-account-with-the-faucet).
 ///   - Through a wallet, such as Petra, Martian, or Pontem. You can find a full list [here](https://github.com/aptos-foundation/ecosystem-projects#wallets).
@@ -193,7 +193,7 @@
 ///
 /// ### Fungible Asset
 ///
-/// - A **fungible asset** is an asset, such as a currency, share, in-game resource, etc., that is interchangeable with another identical asset without any loss in its value. For example, APT is a fungible asset because you can exchange one APT for another.
+/// - A **fungible asset** is an asset, such as a currency, share, in-game resource, etc., that is interchangeable with another identical asset without any loss in its value. For example, Cedra is a fungible asset because you can exchange one Cedra for another.
 /// - Follow the [Digital Asset Standards](../standards/index.md#digital-asset-standards) to create fungible assets on the Aptos blockchain.
 /// - Next generation of the Coin standard that addresses shortcomings of `aptos_framework::coin` such as lack of guaranteed enforcement of freeze and burn and advanced functionalities such as programmable transfers, e.g., approve in ERC-20.
 ///
@@ -204,7 +204,7 @@
 ///
 /// ### Fungible Unit
 ///
-/// - A **fungible unit** is an individual unit of a fungible asset. These units are identical and interchangeable without any loss in value. For example, each Octa (the smallest unit of APT) is a fungible unit.
+/// - A **fungible unit** is an individual unit of a fungible asset. These units are identical and interchangeable without any loss in value. For example, each Octa (the smallest unit of Cedra) is a fungible unit.
 ///
 /// ## G
 ///
@@ -399,9 +399,9 @@
 ///
 /// ### Table
 ///
-/// - A [**table**](https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-stdlib/doc/table.md) implements the Table type and in Aptos is used to store information as key-value data within an account at large scale.
+/// - A [**table**](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-stdlib/doc/table.md) implements the Table type and in Aptos is used to store information as key-value data within an account at large scale.
 ///
-/// See [`table.move`](https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-stdlib/sources/table.move) for the associated Aptos source file.
+/// See [`table.move`](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-stdlib/sources/table.move) for the associated Aptos source file.
 ///
 /// ### Testnet
 ///

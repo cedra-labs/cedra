@@ -34,7 +34,7 @@ use aptos_types::{
         TransactionArgument, TransactionOutput, TransactionPayload, TransactionStatus,
         ViewFunctionOutput,
     },
-    AptosCoinType,
+    CedraCoinType,
 };
 use claims::assert_ok;
 use move_core_types::{
@@ -849,9 +849,9 @@ impl MoveHarness {
     }
 
     pub fn read_aptos_balance(&self, addr: &AccountAddress) -> u64 {
-        self.read_resource::<CoinStoreResource<AptosCoinType>>(
+        self.read_resource::<CoinStoreResource<CedraCoinType>>(
             addr,
-            CoinStoreResource::<AptosCoinType>::struct_tag(),
+            CoinStoreResource::<CedraCoinType>::struct_tag(),
         )
         .map(|c| c.coin())
         .unwrap_or(0)

@@ -4,7 +4,7 @@
 
 extern crate core;
 
-pub mod aptos;
+pub mod cedra;
 pub mod error;
 pub mod faucet;
 use error::AptosErrorResponse;
@@ -16,7 +16,7 @@ pub mod state;
 pub mod types;
 
 pub use crate::client_builder::{AptosBaseUrl, ClientBuilder};
-use crate::{aptos::AptosVersion, error::RestError};
+use crate::{cedra::AptosVersion, error::RestError};
 use anyhow::{anyhow, Result};
 pub use aptos_api_types::{
     self, IndexResponseBcs, MoveModuleBytecode, PendingTransaction, Transaction,
@@ -318,7 +318,7 @@ impl Client {
 
     /// Gets the balance of a specific asset type for an account.
     /// The `asset_type` parameter can be either:
-    /// * A coin type (e.g. "0x1::aptos_coin::AptosCoin")
+    /// * A coin type (e.g. "0x1::cedra_coin::CedraCoin")
     /// * A fungible asset metadata address (e.g. "0xa")
     /// For more details, see: https://aptos.dev/en/build/apis/fullnode-rest-api-reference#tag/accounts/GET/accounts/{address}/balance/{asset_type}
     pub async fn get_account_balance(
@@ -372,7 +372,7 @@ impl Client {
         address: AccountAddress,
         version: u64,
     ) -> AptosResult<Response<u64>> {
-        self.view_account_balance_bcs_impl(address, "0x1::aptos_coin::AptosCoin", Some(version))
+        self.view_account_balance_bcs_impl(address, "0x1::cedra_coin::CedraCoin", Some(version))
             .await
     }
 
@@ -380,7 +380,7 @@ impl Client {
         &self,
         address: AccountAddress,
     ) -> AptosResult<Response<u64>> {
-        self.view_account_balance_bcs_impl(address, "0x1::aptos_coin::AptosCoin", None)
+        self.view_account_balance_bcs_impl(address, "0x1::cedra_coin::CedraCoin", None)
             .await
     }
 
@@ -394,7 +394,7 @@ impl Client {
         Ok(response.and_then(|inner| bcs::from_bytes(&inner))?)
     }
 
-    // TODO: Remove this, just use `get_index`: https://github.com/aptos-labs/aptos-core/issues/5597.
+    // TODO: Remove this, just use `get_index`: https://github.com/cedra-labs/cedra/issues/5597.
     pub async fn get_ledger_information(&self) -> AptosResult<Response<State>> {
         let response = self.get_index_bcs().await?.map(|r| State {
             chain_id: r.chain_id,

@@ -173,15 +173,15 @@ struct MemoryUsageAnalysis<'a> {
     cache: SummaryCache<'a>,
 }
 
-impl DataflowAnalysis for MemoryUsageAnalysis<'_> {}
+impl<'a> DataflowAnalysis for MemoryUsageAnalysis<'a> {}
 
-impl CompositionalAnalysis<UsageState> for MemoryUsageAnalysis<'_> {
+impl<'a> CompositionalAnalysis<UsageState> for MemoryUsageAnalysis<'a> {
     fn to_summary(&self, state: UsageState, _fun_target: &FunctionTarget) -> UsageState {
         state
     }
 }
 
-impl TransferFunctions for MemoryUsageAnalysis<'_> {
+impl<'a> TransferFunctions for MemoryUsageAnalysis<'a> {
     type State = UsageState;
 
     const BACKWARD: bool = false;
@@ -241,7 +241,7 @@ impl TransferFunctions for MemoryUsageAnalysis<'_> {
     }
 }
 
-impl MemoryUsageAnalysis<'_> {
+impl<'a> MemoryUsageAnalysis<'a> {
     /// Compute usage information for the given spec. This spec maybe injected in later
     /// phases into the code, but we need to account for it's memory usage already here
     /// as spec injection itself depends on this information.

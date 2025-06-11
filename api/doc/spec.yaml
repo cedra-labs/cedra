@@ -4,8 +4,8 @@ info:
   description: The Aptos Node API is a RESTful API for client applications to interact with the Aptos blockchain.
   version: 1.2.0
   contact:
-    name: Aptos Labs
-    url: https://github.com/aptos-labs/aptos-core
+    name: Cedra Labs
+    url: https://github.com/cedra-labs/cedra
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -11548,7 +11548,7 @@ components:
         This is represented in a string as a 64 character hex string, sometimes
         shortened by stripping leading 0s, and adding a 0x or
         Format: `{address}::{module name}::{struct name}`
-      example: 0x1::aptos_coin::AptosCoin
+      example: 0x1::cedra_coin::CedraCoin
     Block:
       type: object
       description: |-
@@ -11766,7 +11766,7 @@ components:
               If some, it means the internal txn type is `aptos_types::transaction::Transaction::BlockMetadataExt`.
               Otherwise, it is `aptos_types::transaction::Transaction::BlockMetadata`.
 
-              NOTE: we could have introduced a new APT txn type to represent the corresponding internal type,
+              NOTE: we could have introduced a new Cedra txn type to represent the corresponding internal type,
               but that is a breaking change to the ecosystem.
 
               NOTE: `oai` does not support `flatten` together with `skip_serializing_if`.
@@ -11969,7 +11969,7 @@ components:
         Format: `{address}::{module name}::{function name}`
 
         Both `module name` and `function name` are case-sensitive.
-      example: 0x1::aptos_coin::transfer
+      example: 0x1::cedra_coin::transfer
     EntryFunctionPayload:
       type: object
       description: Payload which runs a single entry function
@@ -12438,7 +12438,7 @@ components:
         `address` should be hex-encoded 32 byte account address that is prefixed with `0x`.
 
         Module name is case-sensitive.
-      example: 0x1::aptos_coin
+      example: 0x1::cedra_coin
     MoveResource:
       type: object
       description: A parsed Move resource
@@ -12527,7 +12527,7 @@ components:
           2. `struct generic type parameters` joined by `, `
 
         Examples:
-          * `0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>`
+          * `0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>`
           * `0x1::account::Account`
 
         Note:
@@ -12535,7 +12535,7 @@ components:
           2. When used in an URL path, should be encoded by url-encoding (AKA percent-encoding).
 
         See [doc](https://aptos.dev/concepts/accounts) for more details.
-      example: 0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>
+      example: 0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>
       pattern: ^0x[0-9a-zA-Z:_<>]+$
     MoveStructValue:
       type: object
@@ -12576,7 +12576,7 @@ components:
           `{ "created": "0xa550c18", "role_id": "0" }`
 
         **Special serialization for Move stdlib types**:
-          - [0x1::string::String](https://github.com/aptos-labs/aptos-core/blob/main/third_party/move/move-stdlib/docs/ascii.md)
+          - [0x1::string::String](https://github.com/cedra-labs/cedra/blob/main/third_party/move/move-stdlib/docs/ascii.md)
             is serialized into `string`. For example, struct value `0x1::string::String{bytes: b"Hello World!"}`
             is serialized as `"Hello World!"` in JSON.
       example:
@@ -12609,10 +12609,10 @@ components:
             Vector type value examples:
               - `vector<u8>`
               - `vector<vector<u64>>`
-              - `vector<0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>>`
+              - `vector<0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>>`
 
             Struct type value examples:
-              - `0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>
+              - `0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>
               - `0x1::account::Account`
 
             Note:
@@ -13798,4 +13798,4 @@ components:
         data:
           $ref: '#/components/schemas/DecodedTableData'
 externalDocs:
-  url: https://github.com/aptos-labs/aptos-core
+  url: https://github.com/cedra-labs/cedra

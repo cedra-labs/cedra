@@ -36,5 +36,5 @@ url = { workspace = true }
 uuid = { workspace = true }
 
 # indexer deps
-aptos-indexer-processor-sdk = { workspace = true }
+cedra-indexer-processor-sdk = { workspace = true }
 processor = { workspace = true }

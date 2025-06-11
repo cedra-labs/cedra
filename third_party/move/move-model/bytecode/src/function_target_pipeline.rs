@@ -142,7 +142,7 @@ pub struct ProcessorResultDisplay<'a> {
     pub processor: &'a dyn FunctionTargetProcessor,
 }
 
-impl fmt::Display for ProcessorResultDisplay<'_> {
+impl<'a> fmt::Display for ProcessorResultDisplay<'a> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         self.processor.dump_result(f, self.env, self.targets)
     }

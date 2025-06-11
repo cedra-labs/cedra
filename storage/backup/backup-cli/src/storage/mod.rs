@@ -195,7 +195,7 @@ pub enum StorageOpt {
         about = "Select the CommandAdapter backup storage type, which reads shell commands with which \
     it communicates with either a local file system or a remote cloud storage. Compression or other \
     filters can be added as part of the commands. See a sample config here: \
-    https://github.com/aptos-labs/aptos-core/tree/main/storage/backup/backup-cli/src/storage/command_adapter/sample_configs/"
+    https://github.com/cedra-labs/cedra/tree/main/storage/backup/backup-cli/src/storage/command_adapter/sample_configs/"
     )]
     CommandAdapter(CommandAdapterOpt),
 }

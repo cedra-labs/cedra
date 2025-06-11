@@ -174,9 +174,9 @@ struct ReachingDefAnalysis<'a> {
     borrowed_locals: BTreeSet<TempIndex>,
 }
 
-impl ReachingDefAnalysis<'_> {}
+impl<'a> ReachingDefAnalysis<'a> {}
 
-impl TransferFunctions for ReachingDefAnalysis<'_> {
+impl<'a> TransferFunctions for ReachingDefAnalysis<'a> {
     type State = ReachingDefState;
 
     const BACKWARD: bool = false;
@@ -219,7 +219,7 @@ impl TransferFunctions for ReachingDefAnalysis<'_> {
     }
 }
 
-impl DataflowAnalysis for ReachingDefAnalysis<'_> {}
+impl<'a> DataflowAnalysis for ReachingDefAnalysis<'a> {}
 
 impl AbstractDomain for ReachingDefState {
     fn join(&mut self, other: &Self) -> JoinResult {

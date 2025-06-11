@@ -2,20 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::entry_point_trait::PreBuiltPackages;
-use aptos_framework::{
-    chunked_publish::{
-        chunk_package_and_create_payloads, default_large_packages_module_address, PublishType,
-        CHUNK_SIZE_IN_BYTES,
-    },
-    natives::code::PackageMetadata,
-};
+use aptos_framework::natives::code::PackageMetadata;
 use aptos_sdk::{
     bcs,
     move_types::{identifier::Identifier, language_storage::ModuleId},
     transaction_builder::aptos_stdlib,
     types::{
         account_address::AccountAddress,
-        chain_id::ChainId,
         transaction::{Script, TransactionPayload},
         vm::module_metadata::{
             get_metadata_from_compiled_code, KnownAttribute, APTOS_METADATA_KEY,
@@ -243,27 +236,9 @@ impl Package {
     }
 
     // Return a transaction payload to publish the current package
-    pub fn publish_transaction_payload(&self, chain_id: &ChainId) -> Vec<TransactionPayload> {
+    pub fn publish_transaction_payload(&self) -> TransactionPayload {
         let (metadata_serialized, code) = self.get_publish_args();
-
-        if metadata_serialized.len() + code.iter().map(|v| v.len()).sum::<usize>()
-            > CHUNK_SIZE_IN_BYTES
-        {
-            chunk_package_and_create_payloads(
-                metadata_serialized,
-                code,
-                PublishType::AccountDeploy,
-                None,
-                AccountAddress::from_str_strict(default_large_packages_module_address(chain_id))
-                    .unwrap(),
-                CHUNK_SIZE_IN_BYTES,
-            )
-        } else {
-            vec![aptos_stdlib::code_publish_package_txn(
-                metadata_serialized,
-                code,
-            )]
-        }
+        aptos_stdlib::code_publish_package_txn(metadata_serialized, code)
     }
 
     pub fn get_module_id(&self, module_name: &str) -> ModuleId {

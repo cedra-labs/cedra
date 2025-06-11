@@ -13,7 +13,7 @@ fn build_coin_balance_request(address: &AccountAddress) -> Value {
     json!({
         "function":"0x1::coin::balance",
         "arguments": vec![address.to_string()],
-        "type_arguments": vec!["0x1::aptos_coin::AptosCoin"],
+        "type_arguments": vec!["0x1::cedra_coin::CedraCoin"],
     })
 }
 
@@ -22,7 +22,7 @@ fn build_coin_decimals_request() -> Value {
     json!({
         "function":"0x1::coin::decimals",
         "arguments": arguments,
-        "type_arguments": vec!["0x1::aptos_coin::AptosCoin"],
+        "type_arguments": vec!["0x1::cedra_coin::CedraCoin"],
     })
 }
 
@@ -186,7 +186,7 @@ async fn test_versioned_simple_view() {
             json!({
                 "function":"0x1::coin::balance",
                 "arguments": vec![owner.address().to_string()],
-                "type_arguments": vec!["0x1::aptos_coin::AptosCoin"],
+                "type_arguments": vec!["0x1::cedra_coin::CedraCoin"],
             }),
         )
         .await;

@@ -69,7 +69,7 @@ impl<'env, 'rewriter> ExpRewriter<'env, 'rewriter> {
     }
 }
 
-impl ExpRewriterFunctions for ExpRewriter<'_, '_> {
+impl<'env, 'rewriter> ExpRewriterFunctions for ExpRewriter<'env, 'rewriter> {
     fn rewrite_enter_scope<'a>(
         &mut self,
         _id: NodeId,

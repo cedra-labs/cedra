@@ -126,7 +126,7 @@ where
     }
 }
 
-impl<S> Iterator for SchemaIterator<'_, S>
+impl<'a, S> Iterator for SchemaIterator<'a, S>
 where
     S: Schema,
 {

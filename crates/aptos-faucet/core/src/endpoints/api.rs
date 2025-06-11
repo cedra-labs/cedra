@@ -15,7 +15,7 @@ pub fn build_openapi_service(
     let license =
         LicenseObject::new("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.html");
     let contact = ContactObject::new()
-        .name("Aptos Labs")
+        .name("Cedra Labs")
         .url("https://github.com/aptos-labs");
 
     let apis = (basic_api, captcha_api, fund_api);

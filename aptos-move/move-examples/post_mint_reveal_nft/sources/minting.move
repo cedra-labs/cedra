@@ -49,7 +49,7 @@
 // exchange()
 module post_mint_reveal_nft::minting {
     use aptos_framework::account::{Self, SignerCapability, create_signer_with_capability};
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_framework::event;
     use aptos_framework::timestamp;
@@ -585,7 +585,7 @@ module post_mint_reveal_nft::minting {
             error::permission_denied(ENO_ENOUGH_TOKENS_LEFT));
 
         // pay for the source NFT
-        coin::transfer<AptosCoin>(nft_claimer, nft_mint_config.treasury, price * amount);
+        coin::transfer<CedraCoin>(nft_claimer, nft_mint_config.treasury, price * amount);
 
         // mint token to the receiver
         let resource_signer = create_signer_with_capability(&nft_mint_config.signer_cap);
@@ -662,10 +662,10 @@ module post_mint_reveal_nft::minting {
         create_account_for_test(signer::address_of(public_nft_claimer));
         create_account_for_test(signer::address_of(treasury_account));
 
-        let (burn_cap, mint_cap) = aptos_framework::aptos_coin::initialize_for_test(aptos_framework);
-        coin::register<AptosCoin>(wl_nft_claimer);
-        coin::register<AptosCoin>(public_nft_claimer);
-        coin::register<AptosCoin>(treasury_account);
+        let (burn_cap, mint_cap) = aptos_framework::cedra_coin::initialize_for_test(aptos_framework);
+        coin::register<CedraCoin>(wl_nft_claimer);
+        coin::register<CedraCoin>(public_nft_claimer);
+        coin::register<CedraCoin>(treasury_account);
         coin::deposit(signer::address_of(wl_nft_claimer), coin::mint(100, &mint_cap));
         coin::deposit(signer::address_of(public_nft_claimer), coin::mint(100, &mint_cap));
 
@@ -777,9 +777,9 @@ module post_mint_reveal_nft::minting {
         assert!(token::balance_of(signer::address_of(&wl_nft_claimer), token_id1) == 1, 0);
         assert!(token::balance_of(signer::address_of(&wl_nft_claimer), token_id2) == 1, 1);
         assert!(token::balance_of(signer::address_of(&public_nft_claimer), token_id3) == 1, 2);
-        assert!(coin::balance<AptosCoin>(signer::address_of(&treasury_account)) == 20, 1);
-        assert!(coin::balance<AptosCoin>(signer::address_of(&wl_nft_claimer)) == 90, 2);
-        assert!(coin::balance<AptosCoin>(signer::address_of(&public_nft_claimer)) == 90, 3);
+        assert!(coin::balance<CedraCoin>(signer::address_of(&treasury_account)) == 20, 1);
+        assert!(coin::balance<CedraCoin>(signer::address_of(&wl_nft_claimer)) == 90, 2);
+        assert!(coin::balance<CedraCoin>(signer::address_of(&public_nft_claimer)) == 90, 3);
 
         // Exchange to the destination NFT.
         timestamp::fast_forward_seconds(401);
@@ -1273,7 +1273,7 @@ module post_mint_reveal_nft::minting {
         );
         assert!(token::balance_of(signer::address_of(&wl_nft_claimer), token_id1) == 1, 0);
         assert!(token::balance_of(signer::address_of(&wl_nft_claimer), token_id2) == 1, 1);
-        assert!(coin::balance<AptosCoin>(signer::address_of(&wl_nft_claimer)) == 90, 2);
+        assert!(coin::balance<CedraCoin>(signer::address_of(&wl_nft_claimer)) == 90, 2);
 
         timestamp::fast_forward_seconds(50);
         mint_source_certificate(&wl_nft_claimer2, 1);
@@ -1284,7 +1284,7 @@ module post_mint_reveal_nft::minting {
             0
         );
         assert!(token::balance_of(signer::address_of(&wl_nft_claimer2), token_id3) == 1, 3);
-        assert!(coin::balance<AptosCoin>(signer::address_of(&wl_nft_claimer2)) == 94, 4);
+        assert!(coin::balance<CedraCoin>(signer::address_of(&wl_nft_claimer2)) == 94, 4);
     }
 
     #[test (

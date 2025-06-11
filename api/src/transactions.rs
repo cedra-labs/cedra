@@ -39,7 +39,7 @@ use aptos_types::{
         TransactionPayload, TransactionPayloadInner,
     },
     vm_status::StatusCode,
-    AptosCoinType, CoinType,
+    CedraCoinType, CoinType,
 };
 use aptos_vm::{AptosSimulationVM, AptosVM};
 use move_core_types::{ident_str, language_storage::ModuleId, vm_status::VMStatus};
@@ -90,8 +90,8 @@ pub enum SubmitTransactionPost {
 
     // TODO: Since I don't want to impl all the Poem derives on SignedTransaction,
     // find a way to at least indicate in the spec that it expects a SignedTransaction.
-    // TODO: https://github.com/aptos-labs/aptos-core/issues/2275
-    #[oai(content_type = "application/x.aptos.signed_transaction+bcs")]
+    // TODO: https://github.com/cedra-labs/cedra/issues/2275
+    #[oai(content_type = "application/x.cedra.signed_transaction+bcs")]
     Bcs(Bcs),
 }
 
@@ -113,8 +113,8 @@ pub enum SubmitTransactionsBatchPost {
 
     // TODO: Since I don't want to impl all the Poem derives on SignedTransaction,
     // find a way to at least indicate in the spec that it expects a SignedTransaction.
-    // TODO: https://github.com/aptos-labs/aptos-core/issues/2275
-    #[oai(content_type = "application/x.aptos.signed_transaction+bcs")]
+    // TODO: https://github.com/cedra-labs/cedra/issues/2275
+    #[oai(content_type = "application/x.cedra.signed_transaction+bcs")]
     Bcs(Bcs),
 }
 
@@ -429,7 +429,7 @@ impl TransactionsApi {
     ///
     /// To submit a transaction as BCS, you must submit a SignedTransaction
     /// encoded as BCS. See SignedTransaction in types/src/transaction/mod.rs.
-    /// Make sure to use the `application/x.aptos.signed_transaction+bcs` Content-Type.
+    /// Make sure to use the `application/x.cedra.signed_transaction+bcs` Content-Type.
     // TODO: Point to examples of both of these flows, in multiple languages.
     #[oai(
         path = "/transactions",
@@ -483,7 +483,7 @@ impl TransactionsApi {
     ///
     /// To submit a transaction as BCS, you must submit a SignedTransaction
     /// encoded as BCS. See SignedTransaction in types/src/transaction/mod.rs.
-    /// Make sure to use the `application/x.aptos.signed_transaction+bcs` Content-Type.
+    /// Make sure to use the `application/x.cedra.signed_transaction+bcs` Content-Type.
     #[oai(
         path = "/transactions/batch",
         method = "post",
@@ -636,7 +636,7 @@ impl TransactionsApi {
                     &state_view,
                     ModuleId::new(AccountAddress::ONE, ident_str!("coin").into()),
                     ident_str!("balance").into(),
-                    vec![AptosCoinType::type_tag()],
+                    vec![CedraCoinType::type_tag()],
                     vec![signed_transaction.sender().to_vec()],
                     context.node_config.api.max_gas_view_function,
                 );

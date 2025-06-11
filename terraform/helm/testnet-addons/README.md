@@ -4,11 +4,11 @@
 
 Additional components for aptos-nodes testnet
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://cedra.network/>
 
 ## Source Code
 
-* <https://github.com/aptos-labs/aptos-core>
+* <https://github.com/cedra-labs/cedra>
 
 ## Values
 

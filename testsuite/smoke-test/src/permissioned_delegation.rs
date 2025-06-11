@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::smoke_test_environment::SwarmBuilder;
-use aptos::move_tool::MemberId;
+use cedra::move_tool::MemberId;
 use aptos_cached_packages::aptos_stdlib;
 use aptos_crypto::SigningKey;
 use aptos_forge::Swarm;
@@ -49,7 +49,7 @@ async fn test_permissioned_delegation() {
     );
     account1.increment_sequence_number();
 
-    // Setup permissions: 10 APT allowance, and 0.1 APT gas.
+    // Setup permissions: 10 Cedra allowance, and 0.1 Cedra gas.
     let script = format!(
         r#"
     script {{
@@ -59,7 +59,7 @@ async fn test_permissioned_delegation() {
     use aptos_framework::primary_fungible_store;
     use aptos_framework::transaction_validation;
     fun main(sender: &signer) {{
-        coin::migrate_to_fungible_store<aptos_framework::aptos_coin::AptosCoin>(sender);
+        coin::migrate_to_fungible_store<aptos_framework::cedra_coin::CedraCoin>(sender);
         let key = permissioned_delegation::gen_ed25519_key(ed25519::new_unvalidated_public_key_from_bytes(x"{}"));
         let permissioned_signer = permissioned_delegation::add_permissioned_handle(sender, key, std::option::none(), {});
         primary_fungible_store::grant_apt_permission(sender, &permissioned_signer, 1000000000); // 10 apt
@@ -99,7 +99,7 @@ async fn test_permissioned_delegation() {
         }),
     );
 
-    // Transfer 1 APT and 2 APT.
+    // Transfer 1 Cedra and 2 Cedra.
     let transfer_txn = account1.sign_aa_transaction_with_transaction_builder(
         vec![],
         None,

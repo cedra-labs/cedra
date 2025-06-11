@@ -3,7 +3,7 @@
 
 use crate::smoke_test_environment::SwarmBuilder;
 use anyhow::anyhow;
-use aptos::{
+use cedra::{
     account::create::DEFAULT_FUNDED_COINS,
     common::types::GasOptions,
     test::{CliTestFramework, INVALID_ACCOUNT},
@@ -433,7 +433,7 @@ async fn test_account_balance() {
     )
     .await;
 
-    // Since unlock_stake was initiated, 1000 APT should be in pending inactive state until lockup ends
+    // Since unlock_stake was initiated, 1000 Cedra should be in pending inactive state until lockup ends
     account_has_balance(
         &rosetta_client,
         chain_id,
@@ -2498,7 +2498,7 @@ async fn test_delegation_pool_operations() {
     )
     .await;
 
-    // 20 APT
+    // 20 Cedra
     let delegate_initial_balance = 20 * u64::pow(10, 8);
     cli.fund_account(0, Some(delegate_initial_balance))
         .await
@@ -2556,7 +2556,7 @@ async fn test_delegation_pool_operations() {
     }
     let pool_address = AccountAddress::from_hex_literal(pool_address_str).unwrap();
 
-    // Must stake at least 11 APT
+    // Must stake at least 11 Cedra
     let staked_amount = 11 * u64::pow(10, 8);
 
     add_delegated_stake_and_wait(

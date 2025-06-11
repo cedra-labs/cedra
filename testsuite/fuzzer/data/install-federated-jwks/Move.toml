@@ -9,7 +9,7 @@ named_addr = "0xFED"
 [dev-addresses]
 
 [dependencies.AptosFramework]
-git = "https://github.com/aptos-labs/aptos-core.git"
+git = "https://github.com/cedra-labs/cedra.git"
 rev = "mainnet"
 subdir = "aptos-move/framework/aptos-framework"
 

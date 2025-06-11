@@ -238,7 +238,7 @@ function App() {
                         title={task.content}
                         description={
                           <a
-                            href={`https://explorer.aptoslabs.com/account/${task.address}/`}
+                            href={`https://explorer.cedra.dev/account/${task.address}/`}
                             target="_blank"
                           >{`${task.address.slice(0, 6)}...${task.address.slice(-5)}`}</a>
                         }

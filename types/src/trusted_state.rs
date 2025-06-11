@@ -263,7 +263,7 @@ impl Verifier for TrustedState {
     }
 }
 
-impl TrustedStateChange<'_> {
+impl<'a> TrustedStateChange<'a> {
     pub fn new_state(self) -> Option<TrustedState> {
         match self {
             Self::Version { new_state } | Self::Epoch { new_state, .. } => Some(new_state),

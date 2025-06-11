@@ -10,7 +10,7 @@ use crate::{
     },
     smoke_test_environment::SwarmBuilder,
 };
-use aptos::{
+use cedra::{
     common::types::{CliError, CliTypedResult, GasOptions, TransactionSummary},
     move_tool::MemberId,
 };

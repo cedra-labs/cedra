@@ -22,7 +22,7 @@ pub mod tests;
 
 /// CompiledScript generated from script composer will have this key in its metadata to
 /// distinguish from other scripts.
-pub static APTOS_SCRIPT_COMPOSER_KEY: &[u8] = "aptos::script_composer".as_bytes();
+pub static APTOS_SCRIPT_COMPOSER_KEY: &[u8] = "cedra::script_composer".as_bytes();
 
 /// Representing a returned value from a previous list of `MoveFunctionCall`s.
 #[wasm_bindgen]

@@ -201,7 +201,7 @@ struct TestOutput<'a, 'b, W> {
     writer: &'b Mutex<W>,
 }
 
-impl<W: Write> TestOutput<'_, '_, W> {
+impl<'a, 'b, W: Write> TestOutput<'a, 'b, W> {
     fn pass(&self, fn_name: &str) {
         writeln!(
             self.writer.lock().unwrap(),

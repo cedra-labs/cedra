@@ -145,9 +145,9 @@ struct CopyDropAnalysis<'a> {
     exit_state: &'a ExitStateAnnotation,
 }
 
-impl DataflowAnalysis for CopyDropAnalysis<'_> {}
+impl<'a> DataflowAnalysis for CopyDropAnalysis<'a> {}
 
-impl TransferFunctions for CopyDropAnalysis<'_> {
+impl<'a> TransferFunctions for CopyDropAnalysis<'a> {
     type State = CopyDropState;
 
     const BACKWARD: bool = false;
@@ -238,7 +238,7 @@ struct Transformer<'a> {
     copy_drop: BTreeMap<CodeOffset, CopyDropState>,
 }
 
-impl Transformer<'_> {
+impl<'a> Transformer<'a> {
     fn run(&mut self, code: Vec<Bytecode>) {
         // Check and insert drop for parameters before the first instruction if it is a return
         if !code.is_empty() && code.first().unwrap().is_return() {
@@ -336,7 +336,7 @@ impl Transformer<'_> {
 // ---------------------------------------------------------------------------------------------------------
 // Copy and Move
 
-impl Transformer<'_> {
+impl<'a> Transformer<'a> {
     fn check_implicit_copy(&self, code_offset: CodeOffset, id: AttrId, src: TempIndex) {
         self.check_copy(id, src, || {
             (
@@ -423,7 +423,7 @@ impl Transformer<'_> {
 // ---------------------------------------------------------------------------------------------------------
 // Drop
 
-impl Transformer<'_> {
+impl<'a> Transformer<'a> {
     /// Add implicit drops at the given code offset.
     fn check_and_add_implicit_drops(
         &mut self,
@@ -501,7 +501,7 @@ impl Transformer<'_> {
 /// at the arrow to the location), the 2nd vector is a list of location-based additional hints.
 type Description = (String, Vec<(Loc, String)>);
 
-impl Transformer<'_> {
+impl<'a> Transformer<'a> {
     /// Checks whether the type as the ability and if not reports an error. An optional temp is
     /// provided in the case the type is associated with a value. A function to describe
     /// the reason and possible a list of hints is provided as well.

@@ -9,7 +9,7 @@ use crate::{
     Swarm, SwarmExt, TestReport,
 };
 use anyhow::{bail, Context};
-use aptos::node::analyze::{analyze_validators::AnalyzeValidators, fetch_metadata::FetchMetadata};
+use cedra::node::analyze::{analyze_validators::AnalyzeValidators, fetch_metadata::FetchMetadata};
 use aptos_logger::info as aptos_logger_info;
 use aptos_transaction_emitter_lib::{TxnStats, TxnStatsRate};
 use log::info;

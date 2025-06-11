@@ -3,7 +3,7 @@
 
 use crate::{smoke_test_environment::SwarmBuilder, utils::get_on_chain_resource};
 use anyhow::bail;
-use aptos::common::types::GasOptions;
+use cedra::common::types::GasOptions;
 use aptos_config::config::{OverrideNodeConfig, PersistableConfig};
 use aptos_crypto::{bls12381, Uniform};
 use aptos_forge::{NodeExt, Swarm, SwarmExt};

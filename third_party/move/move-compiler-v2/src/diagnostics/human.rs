@@ -23,7 +23,7 @@ where
     }
 }
 
-impl<W> Emitter for HumanEmitter<'_, W>
+impl<'w, W> Emitter for HumanEmitter<'w, W>
 where
     W: WriteColor,
 {

@@ -41,7 +41,7 @@ pub enum Value<'v> {
     Serde(&'v (dyn erased_serde::Serialize)),
 }
 
-impl fmt::Debug for Value<'_> {
+impl<'v> fmt::Debug for Value<'v> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match &self {
             Value::Debug(d) => fmt::Debug::fmt(d, f),
@@ -86,7 +86,7 @@ impl<'v> KeyValue<'v> {
     }
 }
 
-impl Schema for KeyValue<'_> {
+impl<'v> Schema for KeyValue<'v> {
     fn visit(&self, visitor: &mut dyn Visitor) {
         visitor.visit_pair(self.key.clone(), self.value)
     }

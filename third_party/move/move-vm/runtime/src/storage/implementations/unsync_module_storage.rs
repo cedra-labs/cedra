@@ -42,7 +42,7 @@ pub enum BorrowedOrOwned<'a, T> {
     Owned(T),
 }
 
-impl<T> Deref for BorrowedOrOwned<'_, T> {
+impl<'a, T> Deref for BorrowedOrOwned<'a, T> {
     type Target = T;
 
     fn deref(&self) -> &Self::Target {
@@ -121,7 +121,7 @@ where
     }
 }
 
-impl<Ctx> WithRuntimeEnvironment for UnsyncModuleStorageImpl<'_, Ctx>
+impl<'ctx, Ctx> WithRuntimeEnvironment for UnsyncModuleStorageImpl<'ctx, Ctx>
 where
     Ctx: ModuleBytesStorage + WithRuntimeEnvironment,
 {
@@ -130,7 +130,7 @@ where
     }
 }
 
-impl<Ctx> ModuleCodeBuilder for UnsyncModuleStorageImpl<'_, Ctx>
+impl<'ctx, Ctx> ModuleCodeBuilder for UnsyncModuleStorageImpl<'ctx, Ctx>
 where
     Ctx: ModuleBytesStorage + WithRuntimeEnvironment,
 {

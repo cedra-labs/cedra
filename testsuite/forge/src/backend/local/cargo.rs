@@ -128,7 +128,7 @@ pub fn git_get_upstream_remote() -> Result<String> {
     let output = Command::new("sh")
         .arg("-c")
         .arg(
-            "git remote -v | grep \"https://github.com/aptos-labs/aptos-core.* (fetch)\" | cut -f1",
+            "git remote -v | grep \"https://github.com/cedra-labs/cedra.* (fetch)\" | cut -f1",
         )
         .output()
         .context("Failed to get upstream remote")?;

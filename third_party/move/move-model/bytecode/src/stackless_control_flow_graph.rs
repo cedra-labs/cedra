@@ -365,7 +365,7 @@ impl<'a> DFSLeft<'a> {
     }
 }
 
-impl Iterator for DFSLeft<'_> {
+impl<'a> Iterator for DFSLeft<'a> {
     type Item = BlockId;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -395,7 +395,7 @@ struct DotCFGBlock<'env> {
     label_offsets: BTreeMap<Label, CodeOffset>,
 }
 
-impl std::fmt::Display for DotCFGBlock<'_> {
+impl<'env> std::fmt::Display for DotCFGBlock<'env> {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let code_range = match self.content {
             BlockContent::Basic { lower, upper } => format!("offset {}..={}", lower, upper),

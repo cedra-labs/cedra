@@ -5,7 +5,7 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{create_and_fund_account, MAX_CATCH_UP_WAIT_SECS},
 };
-use aptos::{
+use cedra::{
     account::create::DEFAULT_FUNDED_COINS,
     common::types::TransactionSummary,
     node::analyze::{
@@ -458,7 +458,7 @@ async fn assert_reordering(swarm: &mut dyn Swarm, expected_reordering: bool) {
 
         for _ in 0..5 {
             let txn = account.sign_with_transaction_builder(
-                transaction_factory.payload(aptos_stdlib::aptos_coin_transfer(dst.address(), 10)),
+                transaction_factory.payload(aptos_stdlib::cedra_coin_transfer(dst.address(), 10)),
             );
             txns.push(txn);
         }

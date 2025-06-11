@@ -1,7 +1,7 @@
 script {
     use std::signer;
     use aptos_framework::aptos_account;
-    use aptos_framework::aptos_coin;
+    use aptos_framework::cedra_coin;
     use aptos_framework::coin;
 
     // Tune this parameter based upon the actual gas costs
@@ -12,9 +12,9 @@ script {
         let minter_addr = signer::address_of(minter);
 
         // Do not mint if it would exceed U64_MAX
-        let balance = coin::balance<aptos_coin::AptosCoin>(minter_addr);
+        let balance = coin::balance<cedra_coin::CedraCoin>(minter_addr);
         if (balance < U64_MAX - amount - GAS_BUFFER) {
-            aptos_coin::mint(minter, minter_addr, amount + GAS_BUFFER);
+            cedra_coin::mint(minter, minter_addr, amount + GAS_BUFFER);
         };
 
         aptos_account::transfer(minter, dst_addr, amount);

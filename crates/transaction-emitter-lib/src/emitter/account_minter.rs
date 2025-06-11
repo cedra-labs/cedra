@@ -36,7 +36,7 @@ pub struct SourceAccountManager<'t> {
 }
 
 #[async_trait::async_trait]
-impl RootAccountHandle for SourceAccountManager<'_> {
+impl<'t> RootAccountHandle for SourceAccountManager<'t> {
     async fn approve_funds(&self, amount: u64, reason: &str) {
         self.check_approve_funds(amount, reason).await.unwrap();
     }
@@ -46,7 +46,7 @@ impl RootAccountHandle for SourceAccountManager<'_> {
     }
 }
 
-impl SourceAccountManager<'_> {
+impl<'t> SourceAccountManager<'t> {
     fn source_account_address(&self) -> AccountAddress {
         self.source_account.address()
     }
@@ -130,7 +130,7 @@ impl SourceAccountManager<'_> {
         let txn = self
             .source_account
             .sign_with_transaction_builder(self.txn_factory.payload(
-                aptos_stdlib::aptos_coin_mint(self.source_account_address(), amount),
+                aptos_stdlib::cedra_coin_mint(self.source_account_address(), amount),
             ));
 
         if let Err(e) = txn_executor.execute_transactions(&[txn]).await {
@@ -235,7 +235,8 @@ impl<'t> AccountMinter<'t> {
             num_accounts, coins_per_account,
         );
 
-        let expected_children_per_seed_account = num_accounts.div_ceil(seed_accounts.len());
+        let expected_children_per_seed_account =
+            (num_accounts + seed_accounts.len() - 1) / seed_accounts.len();
 
         let coins_per_seed_account = Self::funds_needed_for_multi_transfer(
             "seed",
@@ -309,7 +310,8 @@ impl<'t> AccountMinter<'t> {
         let start = Instant::now();
         let request_counters = txn_executor.create_counter_state();
 
-        let approx_accounts_per_seed = num_accounts.div_ceil(seed_accounts.len());
+        let approx_accounts_per_seed =
+            (num_accounts + seed_accounts.len() - 1) / seed_accounts.len();
 
         let local_accounts_by_seed: Vec<Vec<Arc<LocalAccount>>> = local_accounts
             .chunks(approx_accounts_per_seed)

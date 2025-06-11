@@ -65,7 +65,7 @@ module aptos_framework::resource_account {
     use std::signer;
     use std::vector;
     use aptos_framework::account;
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_std::simple_map::{Self, SimpleMap};
 
@@ -101,7 +101,7 @@ module aptos_framework::resource_account {
     /// account, and rotates the authentication key to either the optional auth key if it is
     /// non-empty (though auth keys are 32-bytes) or the source accounts current auth key. Note,
     /// this function adds additional resource ownership to the resource account and should only be
-    /// used for resource accounts that need access to `Coin<AptosCoin>`.
+    /// used for resource accounts that need access to `Coin<CedraCoin>`.
     public entry fun create_resource_account_and_fund(
         origin: &signer,
         seed: vector<u8>,
@@ -109,8 +109,8 @@ module aptos_framework::resource_account {
         fund_amount: u64,
     ) acquires Container {
         let (resource, resource_signer_cap) = account::create_resource_account(origin, seed);
-        coin::register<AptosCoin>(&resource);
-        coin::transfer<AptosCoin>(origin, signer::address_of(&resource), fund_amount);
+        coin::register<CedraCoin>(&resource);
+        coin::transfer<CedraCoin>(origin, signer::address_of(&resource), fund_amount);
         rotate_account_authentication_key_and_store_capability(
             origin,
             resource,
@@ -231,17 +231,17 @@ module aptos_framework::resource_account {
     #[test(framework = @0x1, user = @0x1234)]
     public entry fun with_coin(framework: signer, user: signer) acquires Container {
         let user_addr = signer::address_of(&user);
-        let (burn, mint) = aptos_framework::aptos_coin::initialize_for_test(&framework);
+        let (burn, mint) = aptos_framework::cedra_coin::initialize_for_test(&framework);
         aptos_framework::aptos_account::create_account(copy user_addr);
 
-        let coin = coin::mint<AptosCoin>(100, &mint);
+        let coin = coin::mint<CedraCoin>(100, &mint);
         coin::deposit(copy user_addr, coin);
 
         let seed = x"01";
         create_resource_account_and_fund(&user, copy seed, vector::empty(), 10);
 
         let resource_addr = aptos_framework::account::create_resource_address(&user_addr, seed);
-        coin::transfer<AptosCoin>(&user, resource_addr, 10);
+        coin::transfer<CedraCoin>(&user, resource_addr, 10);
 
         coin::destroy_burn_cap(burn);
         coin::destroy_mint_cap(mint);
@@ -253,14 +253,14 @@ module aptos_framework::resource_account {
         let fa_features = vector[std::features::get_new_accounts_default_to_fa_store_feature(), std::features::get_new_accounts_default_to_fa_apt_store_feature(), std::features::get_operations_default_to_fa_apt_store_feature()];
         std::features::change_feature_flags_for_testing(&framework, vector[], fa_features);
         let user_addr = signer::address_of(&user);
-        let (burn, mint) = aptos_framework::aptos_coin::initialize_for_test(&framework);
+        let (burn, mint) = aptos_framework::cedra_coin::initialize_for_test(&framework);
         aptos_framework::aptos_account::create_account(user_addr);
 
         let seed = x"01";
         create_resource_account(&user, copy seed, vector::empty());
 
         let resource_addr = aptos_framework::account::create_resource_address(&user_addr, seed);
-        let coin = coin::mint<AptosCoin>(100, &mint);
+        let coin = coin::mint<CedraCoin>(100, &mint);
         coin::deposit(resource_addr, coin);
 
         coin::destroy_burn_cap(burn);

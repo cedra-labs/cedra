@@ -233,7 +233,7 @@ pub async fn fetch_latency_breakdown(
         let indexer_data_service_all_chunks_sent_query =
             r#"max(indexer_grpc_duration_in_secs{step="4", service_type="data_service"})"#;
 
-        // These are processor latencies for both original core processors and those written with the processor SDK: https://github.com/aptos-labs/aptos-indexer-processor-sdk
+        // These are processor latencies for both original core processors and those written with the processor SDK: https://github.com/cedra-labs/cedra-indexer-processor-sdk
         // Note the use of empty {}, where additional test-specific labels will be added by Forge
         let indexer_processor_latency_query =
             r#"max(indexer_processor_data_processed_latency_in_secs{})"#;

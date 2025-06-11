@@ -42,7 +42,7 @@ edition = "2021"
 aptos-types = {{ path = "../aptos-types", version = "0.1.0" }}
 serde_bytes = "0.11.6"
 serde = {{ version = "1.0.114", features = ["derive"] }}
-bcs = {{ git = "https://github.com/aptos-labs/bcs", rev = "2cde3e8446c460cb17b0c1d6bac7e27e964ac169" }}
+bcs = {{ git = "https://github.com/cedra-labs/bcs", rev = "2cde3e8446c460cb17b0c1d6bac7e27e964ac169" }}
 once_cell = "1.10.0"
 
 [[bin]]
@@ -81,7 +81,7 @@ test = false
 }
 
 #[test]
-// Ignored because transactions require minting/transferring Coin<AptosCoin>, which the
+// Ignored because transactions require minting/transferring Coin<CedraCoin>, which the
 // transaction builder does not support (it doesn't supported typed functions yet).
 #[ignore]
 fn test_that_rust_entry_fun_code_compiles() {

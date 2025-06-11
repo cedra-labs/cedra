@@ -40,10 +40,6 @@ use std::{
 };
 
 const NUM_KEYS: usize = 10;
-const HOT_STATE_MAX_ITEMS: usize = NUM_KEYS / 2;
-const HOT_STATE_MAX_BYTES: usize = NUM_KEYS / 2 * ARB_STATE_VALUE_MAX_SIZE / 3;
-const HOT_STATE_MAX_SINGLE_VALUE_BYTES: usize = ARB_STATE_VALUE_MAX_SIZE / 2;
-const HOT_ITEM_REFRESH_INTERVAL_VERSIONS: usize = 8;
 
 #[derive(Debug)]
 struct Txn {
@@ -284,7 +280,7 @@ impl StateByVersion {
             .shards
             .iter()
             .flat_map(|shard| shard.iter())
-            .flat_map(|(key, slot)| slot.maybe_update_jmt(key, last_snapshot.next_version()))
+            .flat_map(|(k, db_update)| db_update.to_jmt_update_opt(k, last_snapshot.next_version()))
             .collect::<HashMap<_, _>>();
 
         let expected_jmt_updates =
@@ -298,7 +294,7 @@ impl StateByVersion {
                 },
             );
 
-        assert_eq!(jmt_updates, expected_jmt_updates, "JMT updates mismatch.");
+        assert_eq!(jmt_updates, expected_jmt_updates);
     }
 }
 
@@ -347,7 +343,7 @@ fn update_state(
             hot_state.clone(),
             persisted_state.clone(),
             parent_state.deref().clone(),
-            HOT_ITEM_REFRESH_INTERVAL_VERSIONS,
+            1, // access_time_refresh_interval_secs
         );
         let read_keys = block.all_reads().collect_vec();
         pool.install(|| {
@@ -458,11 +454,8 @@ fn test_impl(blocks: Vec<Block>) {
     let empty = LedgerStateWithSummary::new_empty();
     let current_state = Arc::new(Mutex::new(empty.clone()));
 
-    let persisted_state = PersistedState::new_empty_with_config(
-        HOT_STATE_MAX_ITEMS,
-        HOT_STATE_MAX_BYTES,
-        HOT_STATE_MAX_SINGLE_VALUE_BYTES,
-    );
+    let persisted_state =
+        PersistedState::new_empty_with_config(NUM_KEYS / 2, ARB_STATE_VALUE_MAX_SIZE / 2);
     persisted_state.hack_reset(empty.deref().clone());
 
     let (to_summary_update, from_state_update) = channel();
@@ -529,7 +522,7 @@ fn test_impl(blocks: Vec<Block>) {
 }
 
 proptest! {
-    #![proptest_config(ProptestConfig::with_cases(50))]
+    #![proptest_config(ProptestConfig::with_cases(10))]
 
     #[test]
     fn test_speculative_state_workflow(

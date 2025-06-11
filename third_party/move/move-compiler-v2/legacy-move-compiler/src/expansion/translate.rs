@@ -58,7 +58,7 @@ struct Context<'env, 'map> {
     exp_specs: BTreeMap<SpecId, E::SpecBlock>,
     env: &'env mut CompilationEnv,
 }
-impl<'env> Context<'env, '_> {
+impl<'env, 'map> Context<'env, 'map> {
     fn new(
         compilation_env: &'env mut CompilationEnv,
         module_members: UniqueMap<ModuleIdent, ModuleMembers>,
@@ -454,7 +454,7 @@ fn set_sender_address(
 
 // This is a hack to recognize APTOS StdLib, Framework, and Token libs to avoid warnings on some old errors.
 // This will be removed after library attributes are cleaned up.
-// (See https://github.com/aptos-labs/aptos-core/issues/9410)
+// (See https://github.com/cedra-labs/cedra/issues/9410)
 fn module_is_in_aptos_libs(module_address: Option<Spanned<Address>>) -> bool {
     const APTOS_STDLIB_NAME: &str = "aptos_std";
     static APTOS_STDLIB_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
@@ -516,7 +516,7 @@ fn module_(
     assert!(address.is_none());
     set_sender_address(context, &name, module_address);
     let _ = check_restricted_name_all_cases(context, NameCase::Module, &name.0);
-    if name.value().starts_with('_') {
+    if name.value().starts_with(|c| c == '_') {
         let msg = format!(
             "Invalid module name '{}'. Module names cannot start with '_'",
             name,
@@ -3618,7 +3618,7 @@ fn check_valid_module_member_name_impl(
     }
     match member {
         M::Function => {
-            if n.value.starts_with('_') {
+            if n.value.starts_with(|c| c == '_') {
                 let msg = format!(
                     "Invalid {} name '{}'. {} names cannot start with '_'",
                     case.name(),

@@ -208,7 +208,7 @@ impl TransactionFactory {
     }
 
     pub fn transfer(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
-        self.payload(aptos_stdlib::aptos_coin_transfer(to, amount))
+        self.payload(aptos_stdlib::cedra_coin_transfer(to, amount))
     }
 
     pub fn account_transfer(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
@@ -303,7 +303,7 @@ impl TransactionFactory {
     }
 
     pub fn mint(&self, to: AccountAddress, amount: u64) -> TransactionBuilder {
-        self.payload(aptos_stdlib::aptos_coin_mint(to, amount))
+        self.payload(aptos_stdlib::cedra_coin_mint(to, amount))
     }
 
     //

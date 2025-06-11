@@ -2,7 +2,7 @@
 ///
 /// This example requires CLI version 3.1.0 or later.
 module raffle::raffle {
-    use aptos_framework::aptos_coin::AptosCoin;
+    use aptos_framework::cedra_coin::CedraCoin;
     use aptos_framework::coin;
     use aptos_framework::randomness;
     use aptos_framework::coin::Coin;
@@ -18,7 +18,7 @@ module raffle::raffle {
     /// Error code for when the somebody tries to draw an already-closed raffle
     const E_RAFFLE_HAS_CLOSED: u64 = 3;
 
-    /// The minimum price of a raffle ticket, in APT.
+    /// The minimum price of a raffle ticket, in Cedra.
     const TICKET_PRICE: u64 = 10_000;
 
     /// A raffle: a list of users who bought tickets.
@@ -28,7 +28,7 @@ module raffle::raffle {
         // **WARNING:** Using SmartVector here will make the module vulnerable to **undergasing attacks**.
         // See [AIP-41](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-41.md#undergasing-attacks).
         tickets: vector<address>,
-        coins: Coin<AptosCoin>,
+        coins: Coin<CedraCoin>,
         is_closed: bool,
     }
 
@@ -58,7 +58,7 @@ module raffle::raffle {
 
         // Charge the price of a raffle ticket from the user's balance, and
         // accumulate it into the raffle's bounty.
-        let coins = coin::withdraw<AptosCoin>(user, TICKET_PRICE);
+        let coins = coin::withdraw<CedraCoin>(user, TICKET_PRICE);
         coin::merge(&mut raffle.coins, coins);
 
         // Issue a ticket for that user
@@ -94,7 +94,7 @@ module raffle::raffle {
 
         // Pay the winner
         let coins = coin::extract_all(&mut raffle.coins);
-        coin::deposit<AptosCoin>(winner, coins);
+        coin::deposit<CedraCoin>(winner, coins);
         raffle.is_closed = true;
 
         winner

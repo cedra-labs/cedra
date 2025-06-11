@@ -191,7 +191,7 @@ pub struct OfflineArgs {
     #[clap(long, default_value_t = DEFAULT_MAX_PAGE_SIZE)]
     transactions_page_size: u16,
 
-    /// A file of currencies to support other than APT
+    /// A file of currencies to support other than Cedra
     ///
     /// Example file for testnet:
     /// ```json
@@ -277,7 +277,7 @@ impl ServerArgs for OfflineArgs {
 pub struct OnlineRemoteArgs {
     #[clap(flatten)]
     offline_args: OfflineArgs,
-    /// URL for the Aptos REST API. e.g. https://fullnode.devnet.aptoslabs.com
+    /// URL for the Aptos REST API. e.g. https://devnet.cedra.dev
     #[clap(long, default_value = "http://localhost:8080")]
     rest_api_url: url::Url,
     /// DEPRECATED: Owner addresses file as a YAML file with a list

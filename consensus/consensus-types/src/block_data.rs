@@ -243,7 +243,7 @@ impl BlockData {
             QuorumCert::dummy(),
         )
     }
-
+    
     #[allow(unexpected_cfgs)]
     pub fn new_genesis(timestamp_usecs: u64, quorum_cert: QuorumCert) -> Self {
         assume!(quorum_cert.certified_block().epoch() < u64::MAX); // unlikely to be false in this universe

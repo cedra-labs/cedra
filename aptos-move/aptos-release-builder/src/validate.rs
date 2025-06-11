@@ -3,7 +3,7 @@
 
 use crate::{aptos_framework_path, components::ProposalMetadata, ExecutionMode, ReleaseConfig};
 use anyhow::Result;
-use aptos::{
+use cedra::{
     common::types::CliCommand,
     governance::{ExecuteProposal, SubmitProposal, SubmitVote},
     move_tool::{RunFunction, RunScript},
@@ -259,7 +259,7 @@ impl NetworkConfig {
         let args = vec![
             "",
             "--function-id",
-            "0x1::aptos_coin::mint",
+            "0x1::cedra_coin::mint",
             "--sender-account",
             "0xa550c18",
             "--args",

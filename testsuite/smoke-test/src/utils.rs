@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::aptos_cli::validator::generate_blob;
-use aptos::test::CliTestFramework;
+use cedra::test::CliTestFramework;
 use aptos_cached_packages::aptos_stdlib;
 use aptos_config::{
     config::{NodeConfig, Peer, PeerRole, HANDSHAKE_VERSION},
@@ -149,7 +149,7 @@ pub async fn transfer_coins_non_blocking(
     amount: u64,
 ) -> SignedTransaction {
     let txn = sender.sign_with_transaction_builder(transaction_factory.payload(
-        aptos_stdlib::aptos_coin_transfer(receiver.address(), amount),
+        aptos_stdlib::cedra_coin_transfer(receiver.address(), amount),
     ));
 
     client.submit(&txn).await.unwrap();

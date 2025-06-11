@@ -68,7 +68,7 @@ impl PrunerManager for StateKvPrunerManager {
     fn is_pruning_pending(&self) -> bool {
         self.pruner_worker
             .as_ref()
-            .is_some_and(|w| w.is_pruning_pending())
+            .map_or(false, |w| w.is_pruning_pending())
     }
 
     #[cfg(test)]

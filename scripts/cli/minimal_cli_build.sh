@@ -26,7 +26,7 @@ OS="$(uname)"
 case "$OS" in
   Linux)
     if command -v apt-get &>/dev/null; then
-      # Ubuntu / Debian based APT-GET
+      # Ubuntu / Debian based Cedra-GET
       sudo apt-get update
       sh install_pkg.sh build-essential pkgconf libssl-dev git libudev-dev lld libdw-dev clang llvm cmake
     elif command -v dnf &>/dev/null; then
@@ -73,7 +73,7 @@ case "$OS" in
 esac
 
 # TODO: Determine how best to install on it's own
-#git clone https://github.com/aptos-labs/aptos-core.git
+#git clone https://github.com/cedra-labs/cedra.git
 #cd aptos-core || exit 1
 
 # If cargo is installed correctly use it, but otherwise, you may need to initialize rustup, depends on OS

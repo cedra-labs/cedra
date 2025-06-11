@@ -270,18 +270,18 @@ module defi::locked_coins {
     #[test_only]
     use aptos_framework::coin::BurnCapability;
     #[test_only]
-    use aptos_framework::aptos_coin::{Self, AptosCoin};
+    use aptos_framework::cedra_coin::{Self, CedraCoin};
     #[test_only]
     use aptos_framework::aptos_account;
 
     #[test_only]
-    fun setup(aptos_framework: &signer, sponsor: &signer): BurnCapability<AptosCoin> {
+    fun setup(aptos_framework: &signer, sponsor: &signer): BurnCapability<CedraCoin> {
         timestamp::set_time_has_started_for_testing(aptos_framework);
-        let (burn_cap, mint_cap) = aptos_coin::initialize_for_test(aptos_framework);
+        let (burn_cap, mint_cap) = cedra_coin::initialize_for_test(aptos_framework);
 
         account::create_account_for_test(signer::address_of(sponsor));
-        coin::register<AptosCoin>(sponsor);
-        let coins = coin::mint<AptosCoin>(2000, &mint_cap);
+        coin::register<CedraCoin>(sponsor);
+        let coins = coin::mint<CedraCoin>(2000, &mint_cap);
         coin::deposit(signer::address_of(sponsor), coins);
         coin::destroy_mint_cap(mint_cap);
 
@@ -295,13 +295,13 @@ module defi::locked_coins {
         let recipient_addr = signer::address_of(recipient);
         aptos_account::create_account(recipient_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, sponsor_address);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 1, 0);
+        initialize_sponsor<CedraCoin>(sponsor, sponsor_address);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 1, 0);
         timestamp::fast_forward_seconds(1000);
-        claim<AptosCoin>(recipient, sponsor_address);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 0, 1);
-        assert!(coin::balance<AptosCoin>(recipient_addr) == 1000, 0);
+        claim<CedraCoin>(recipient, sponsor_address);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 0, 1);
+        assert!(coin::balance<CedraCoin>(recipient_addr) == 1000, 0);
         coin::destroy_burn_cap(burn_cap);
     }
 
@@ -313,10 +313,10 @@ module defi::locked_coins {
         let recipient_addr = signer::address_of(recipient);
         aptos_account::create_account(recipient_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, sponsor_address);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
+        initialize_sponsor<CedraCoin>(sponsor, sponsor_address);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
         timestamp::fast_forward_seconds(500);
-        claim<AptosCoin>(recipient, sponsor_address);
+        claim<CedraCoin>(recipient, sponsor_address);
         coin::destroy_burn_cap(burn_cap);
     }
 
@@ -328,11 +328,11 @@ module defi::locked_coins {
         let recipient_addr = signer::address_of(recipient);
         aptos_account::create_account(recipient_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, sponsor_address);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
+        initialize_sponsor<CedraCoin>(sponsor, sponsor_address);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
         timestamp::fast_forward_seconds(1000);
-        claim<AptosCoin>(recipient, sponsor_address);
-        claim<AptosCoin>(recipient, sponsor_address);
+        claim<CedraCoin>(recipient, sponsor_address);
+        claim<CedraCoin>(recipient, sponsor_address);
         coin::destroy_burn_cap(burn_cap);
     }
 
@@ -343,17 +343,17 @@ module defi::locked_coins {
         let recipient_addr = signer::address_of(recipient);
         aptos_account::create_account(recipient_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, sponsor_address);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 1, 0);
-        assert!(claim_time_secs<AptosCoin>(sponsor_address, recipient_addr) == 1000, 0);
+        initialize_sponsor<CedraCoin>(sponsor, sponsor_address);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 1, 0);
+        assert!(claim_time_secs<CedraCoin>(sponsor_address, recipient_addr) == 1000, 0);
         // Extend lockup.
-        update_lockup<AptosCoin>(sponsor, recipient_addr, 2000);
-        assert!(claim_time_secs<AptosCoin>(sponsor_address, recipient_addr) == 2000, 1);
+        update_lockup<CedraCoin>(sponsor, recipient_addr, 2000);
+        assert!(claim_time_secs<CedraCoin>(sponsor_address, recipient_addr) == 2000, 1);
         // Reduce lockup.
-        update_lockup<AptosCoin>(sponsor, recipient_addr, 1500);
-        assert!(claim_time_secs<AptosCoin>(sponsor_address, recipient_addr) == 1500, 2);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 1, 1);
+        update_lockup<CedraCoin>(sponsor, recipient_addr, 1500);
+        assert!(claim_time_secs<CedraCoin>(sponsor_address, recipient_addr) == 1500, 2);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 1, 1);
 
         coin::destroy_burn_cap(burn_cap);
     }
@@ -368,23 +368,23 @@ module defi::locked_coins {
         aptos_account::create_account(recipient_1_addr);
         aptos_account::create_account(recipient_2_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, sponsor_address);
-        batch_add_locked_coins<AptosCoin>(
+        initialize_sponsor<CedraCoin>(sponsor, sponsor_address);
+        batch_add_locked_coins<CedraCoin>(
             sponsor,
             vector[recipient_1_addr, recipient_2_addr],
             vector[1000, 1000],
             1000
         );
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_1_addr) == 1000, 0);
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_2_addr) == 1000, 0);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_1_addr) == 1000, 0);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_2_addr) == 1000, 0);
         // Extend lockup.
-        batch_update_lockup<AptosCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr], 2000);
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_1_addr) == 2000, 1);
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_2_addr) == 2000, 1);
+        batch_update_lockup<CedraCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr], 2000);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_1_addr) == 2000, 1);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_2_addr) == 2000, 1);
         // Reduce lockup.
-        batch_update_lockup<AptosCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr], 1500);
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_1_addr) == 1500, 2);
-        assert!(claim_time_secs<AptosCoin>(sponsor_addr, recipient_2_addr) == 1500, 2);
+        batch_update_lockup<CedraCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr], 1500);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_1_addr) == 1500, 2);
+        assert!(claim_time_secs<CedraCoin>(sponsor_addr, recipient_2_addr) == 1500, 2);
 
         coin::destroy_burn_cap(burn_cap);
     }
@@ -398,17 +398,17 @@ module defi::locked_coins {
         aptos_account::create_account(withdrawal_addr);
         aptos_account::create_account(recipient_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, withdrawal_addr);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 1, 0);
-        assert!(coin::balance<AptosCoin>(withdrawal_addr) == 0, 0);
-        cancel_lockup<AptosCoin>(sponsor, recipient_addr);
-        assert!(total_locks<AptosCoin>(sponsor_address) == 0, 0);
-        let locks = borrow_global_mut<Locks<AptosCoin>>(sponsor_address);
+        initialize_sponsor<CedraCoin>(sponsor, withdrawal_addr);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 1, 0);
+        assert!(coin::balance<CedraCoin>(withdrawal_addr) == 0, 0);
+        cancel_lockup<CedraCoin>(sponsor, recipient_addr);
+        assert!(total_locks<CedraCoin>(sponsor_address) == 0, 0);
+        let locks = borrow_global_mut<Locks<CedraCoin>>(sponsor_address);
         assert!(!table::contains(&locks.locks, recipient_addr), 0);
 
         // Funds from canceled locks should be sent to the withdrawal address.
-        assert!(coin::balance<AptosCoin>(withdrawal_addr) == 1000, 0);
+        assert!(coin::balance<CedraCoin>(withdrawal_addr) == 1000, 0);
 
         coin::destroy_burn_cap(burn_cap);
     }
@@ -429,19 +429,19 @@ module defi::locked_coins {
         aptos_account::create_account(recipient_2_addr);
         aptos_account::create_account(withdrawal_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, withdrawal_addr);
-        batch_add_locked_coins<AptosCoin>(
+        initialize_sponsor<CedraCoin>(sponsor, withdrawal_addr);
+        batch_add_locked_coins<CedraCoin>(
             sponsor,
             vector[recipient_1_addr, recipient_2_addr],
             vector[1000, 1000],
             1000
         );
-        batch_cancel_lockup<AptosCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr]);
-        let locks = borrow_global_mut<Locks<AptosCoin>>(sponsor_address);
+        batch_cancel_lockup<CedraCoin>(sponsor, vector[recipient_1_addr, recipient_2_addr]);
+        let locks = borrow_global_mut<Locks<CedraCoin>>(sponsor_address);
         assert!(!table::contains(&locks.locks, recipient_1_addr), 0);
         assert!(!table::contains(&locks.locks, recipient_2_addr), 0);
         // Funds from canceled locks should be sent to the withdrawal address.
-        assert!(coin::balance<AptosCoin>(withdrawal_addr) == 2000, 0);
+        assert!(coin::balance<CedraCoin>(withdrawal_addr) == 2000, 0);
         coin::destroy_burn_cap(burn_cap);
     }
 
@@ -459,9 +459,9 @@ module defi::locked_coins {
         aptos_account::create_account(recipient_addr);
         aptos_account::create_account(withdrawal_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, withdrawal_addr);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
-        update_withdrawal_address<AptosCoin>(sponsor, sponsor_address);
+        initialize_sponsor<CedraCoin>(sponsor, withdrawal_addr);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
+        update_withdrawal_address<CedraCoin>(sponsor, sponsor_address);
         coin::destroy_burn_cap(burn_cap);
     }
 
@@ -478,12 +478,12 @@ module defi::locked_coins {
         aptos_account::create_account(recipient_addr);
         aptos_account::create_account(withdrawal_addr);
         let sponsor_address = signer::address_of(sponsor);
-        initialize_sponsor<AptosCoin>(sponsor, withdrawal_addr);
-        assert!(withdrawal_address<AptosCoin>(sponsor_address) == withdrawal_addr, 0);
-        add_locked_coins<AptosCoin>(sponsor, recipient_addr, 1000, 1000);
-        cancel_lockup<AptosCoin>(sponsor, recipient_addr);
-        update_withdrawal_address<AptosCoin>(sponsor, sponsor_address);
-        assert!(withdrawal_address<AptosCoin>(sponsor_address) == sponsor_address, 0);
+        initialize_sponsor<CedraCoin>(sponsor, withdrawal_addr);
+        assert!(withdrawal_address<CedraCoin>(sponsor_address) == withdrawal_addr, 0);
+        add_locked_coins<CedraCoin>(sponsor, recipient_addr, 1000, 1000);
+        cancel_lockup<CedraCoin>(sponsor, recipient_addr);
+        update_withdrawal_address<CedraCoin>(sponsor, sponsor_address);
+        assert!(withdrawal_address<CedraCoin>(sponsor_address) == sponsor_address, 0);
         coin::destroy_burn_cap(burn_cap);
     }
 }

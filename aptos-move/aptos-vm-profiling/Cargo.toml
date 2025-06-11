@@ -1,9 +1,9 @@
 [package]
 name = "aptos-vm-profiling"
 version = "0.1.0"
-authors = ["Aptos Labs <opensource@aptoslabs.com>"]
-repository = "https://github.com/aptos-labs/aptos-core"
-homepage = "https://aptoslabs.com"
+authors = ["Cedra Labs <opensource@cedra.network>"]
+repository = "https://github.com/cedra-labs/cedra"
+homepage = "https://cedra.dev"
 license = "Apache-2.0"
 publish = false
 edition = "2021"

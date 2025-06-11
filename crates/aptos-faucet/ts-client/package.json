@@ -17,16 +17,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aptos-labs/aptos-core.git"
+    "url": "https://github.com/cedra-labs/cedra.git"
   },
-  "homepage": "https://github.com/aptos-labs/aptos-core",
+  "homepage": "https://github.com/cedra-labs/cedra",
   "bugs": {
-    "url": "https://github.com/aptos-labs/aptos-core/issues"
+    "url": "https://github.com/cedra-labs/cedra/issues"
   },
   "author": "aptoslabs.com",
   "keywords": [
     "Aptos",
-    "Aptos Labs"
+    "Cedra Labs"
   ],
   "dependencies": {
     "axios": "1.8.2",

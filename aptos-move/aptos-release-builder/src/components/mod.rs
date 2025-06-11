@@ -10,7 +10,7 @@ use crate::{
     },
 };
 use anyhow::{anyhow, bail, Context, Result};
-use aptos::governance::GenerateExecutionHash;
+use cedra::governance::GenerateExecutionHash;
 use aptos_crypto::HashValue;
 use aptos_gas_schedule::LATEST_GAS_FEATURE_VERSION;
 use aptos_infallible::duration_since_epoch;
@@ -106,7 +106,7 @@ pub struct ProposalMetadata {
 }
 
 fn default_url() -> String {
-    "https://github.com/aptos-labs/aptos-core".to_string()
+    "https://github.com/cedra-labs/cedra".to_string()
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Eq, PartialEq)]
@@ -166,7 +166,7 @@ impl<'de> Deserialize<'de> for GasScheduleLocator {
     {
         struct GasScheduleLocatorVisitor;
 
-        impl Visitor<'_> for GasScheduleLocatorVisitor {
+        impl<'de> Visitor<'de> for GasScheduleLocatorVisitor {
             type Value = GasScheduleLocator;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {

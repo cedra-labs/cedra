@@ -31,9 +31,9 @@
 /// There are four well-supported networks for integrating with the Aptos blockchain:
 ///
 /// 1. [Localnet](http://127.0.0.1:8080) -- our standalone tool for local development against a known version of the codebase with no external network.
-/// 1. [Devnet](https://fullnode.devnet.aptoslabs.com/v1/spec#/) -- a shared resource for the community, data resets weekly, weekly update from aptos-core main branch.
-/// 1. [Testnet](https://fullnode.testnet.aptoslabs.com/v1/spec#/) -- a shared resource for the community, data will be preserved, network configuration will mimic Mainnet.
-/// 1. [Mainnet](https://fullnode.mainnet.aptoslabs.com/v1/spec#/) -- a production network with real assets.
+/// 1. [Devnet](https://devnet.cedra.dev/v1/spec#/) -- a shared resource for the community, data resets weekly, weekly update from aptos-core main branch.
+/// 1. [Testnet](https://testnet.cedra.dev/v1/spec#/) -- a shared resource for the community, data will be preserved, network configuration will mimic Mainnet.
+/// 1. [Mainnet](https://mainnet.cedra.dev/v1/spec#/) -- a production network with real assets.
 ///
 /// See [Aptos Blockchain Networks](../nodes/networks.md) for full details on each environment.
 ///
@@ -50,26 +50,26 @@
 /// <Tabs groupId="networks">
 ///   <TabItem value="devnet" label="Devnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.devnet.aptoslabs.com/v1">https://fullnode.devnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.devnet.aptoslabs.com/v1/spec#/">https://fullnode.devnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://devnet.cedra.dev/v1">https://devnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://devnet.cedra.dev/v1/spec#/">https://devnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.devnet.aptoslabs.com/v1/graphql">https://api.devnet.aptoslabs.com/v1/graphql</a></li>
-///       <li>Faucet API: <a href="https://faucet.devnet.aptoslabs.com">https://faucet.devnet.aptoslabs.com</a></li>
+///       <li>Faucet API: <a href="https://faucet-api.cedra.dev">https://faucet-api.cedra.dev</a></li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.devnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
 ///     </ul>
 ///   </TabItem>
 ///   <TabItem value="testnet" label="Testnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.testnet.aptoslabs.com/v1">https://fullnode.testnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.testnet.aptoslabs.com/v1/spec#/">https://fullnode.testnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://testnet.cedra.dev/v1">https://testnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://testnet.cedra.dev/v1/spec#/">https://testnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.testnet.aptoslabs.com/v1/graphql">https://api.testnet.aptoslabs.com/v1/graphql</a></li>
-///       <li>Faucet API: <a href="https://faucet.testnet.aptoslabs.com">https://faucet.testnet.aptoslabs.com</a></li>
+///       <li>Faucet API: <a href="https://faucet-api.cedra.dev">https://faucet-api.cedra.dev</a></li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.testnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
 ///     </ul>
 ///   </TabItem>
 ///   <TabItem value="mainnet" label="Mainnet">
 ///     <ul>
-///       <li>REST API: <a href="https://fullnode.mainnet.aptoslabs.com/v1">https://fullnode.mainnet.aptoslabs.com/v1</a></li>
-///       <li>REST API Spec: <a href="https://fullnode.mainnet.aptoslabs.com/v1/spec#/">https://fullnode.mainnet.aptoslabs.com/v1/spec#/</a></li>
+///       <li>REST API: <a href="https://mainnet.cedra.dev/v1">https://mainnet.cedra.dev/v1</a></li>
+///       <li>REST API Spec: <a href="https://mainnet.cedra.dev/v1/spec#/">https://mainnet.cedra.dev/v1/spec#/</a></li>
 ///       <li>Indexer API: <a href="https://api.mainnet.aptoslabs.com/v1/graphql">https://api.mainnet.aptoslabs.com/v1/graphql</a></li>
 ///       <li>Faucet: N/A</li>
 ///       <li><a href="https://cloud.hasura.io/public/graphiql?endpoint=https://api.mainnet.aptoslabs.com/v1/graphql">Indexer GraphQL</a></li>
@@ -90,7 +90,7 @@
 ///
 ///
 /// At creation, an [Aptos account](https://github.com/aptos-labs/aptos-core/blob/88c9aab3982c246f8aa75eb2caf8c8ab1dcab491/aptos-move/framework/aptos-framework/sources/account.move#L23) contains:
-/// * A [resource containing Aptos Coin](https://github.com/aptos-labs/aptos-core/blob/60751b5ed44984178c7163933da3d1b18ad80388/aptos-move/framework/aptos-framework/sources/coin.move#L50) and deposit and withdrawal of coins from that resource.
+/// * A [resource containing Cedra Coin](https://github.com/aptos-labs/aptos-core/blob/60751b5ed44984178c7163933da3d1b18ad80388/aptos-move/framework/aptos-framework/sources/coin.move#L50) and deposit and withdrawal of coins from that resource.
 /// * An authentication key associated with their current public, private key(s).
 /// * A strictly increasing [sequence number](../concepts/accounts.md#account-sequence-number) that represents the account's next transaction's sequence number to prevent replay attacks.
 /// * A strictly increasing number that represents the next distinct GUID creation number.
@@ -128,9 +128,9 @@
 /// - An entry point (formerly known as script function)
 /// - A script (payload)
 ///
-/// Both [Python](https://github.com/aptos-labs/aptos-core/blob/3973311dac6bb9348bfc81cf983c2a1be11f1b48/ecosystem/python/sdk/aptos_sdk/client.py#L256) and [TypeScript](https://github.com/aptos-labs/aptos-core/blob/3973311dac6bb9348bfc81cf983c2a1be11f1b48/ecosystem/typescript/sdk/src/aptos_client.test.ts#L93) support the generation of transactions that target entry points. This guide points out many of those entry points, such as `aptos_account::transfer` and `aptos_account::create_account`.
+/// Both [Python](https://github.com/cedra-labs/cedra/blob/3973311dac6bb9348bfc81cf983c2a1be11f1b48/ecosystem/python/sdk/aptos_sdk/client.py#L256) and [TypeScript](https://github.com/cedra-labs/cedra/blob/3973311dac6bb9348bfc81cf983c2a1be11f1b48/ecosystem/typescript/sdk/src/aptos_client.test.ts#L93) support the generation of transactions that target entry points. This guide points out many of those entry points, such as `aptos_account::transfer` and `aptos_account::create_account`.
 ///
-/// Most basic operations on the Aptos blockchain should be available via entry point calls. While one could submit multiple transactions calling entry points in series, such operations benefit from being called atomically from a single transaction. A script payload transaction can call any public (entry) function defined within any module. Here's an example [Move script](https://github.com/aptos-labs/aptos-core/tree/main/aptos-move/move-examples/scripts/two_by_two_transfer) that uses a MultiAgent transaction to extract funds from two accounts and deposit them into two other accounts. This is a [Python example](https://github.com/aptos-labs/aptos-core/blob/main/ecosystem/python/sdk/examples/transfer-two-by-two.py) that uses the bytecode generated by compiling that script. Currently there is limited support for script payloads in TypeScript.
+/// Most basic operations on the Aptos blockchain should be available via entry point calls. While one could submit multiple transactions calling entry points in series, such operations benefit from being called atomically from a single transaction. A script payload transaction can call any public (entry) function defined within any module. Here's an example [Move script](https://github.com/cedra-labs/cedra/tree/main/aptos-move/move-examples/scripts/two_by_two_transfer) that uses a MultiAgent transaction to extract funds from two accounts and deposit them into two other accounts. This is a [Python example](https://github.com/cedra-labs/cedra/blob/main/ecosystem/python/sdk/examples/transfer-two-by-two.py) that uses the bytecode generated by compiling that script. Currently there is limited support for script payloads in TypeScript.
 ///
 /// ### Status of a transaction
 ///
@@ -142,7 +142,7 @@
 /// To facilitate evaluation of transactions as well as gas estimation, Aptos supports a simulation API that does not require and should not contain valid signatures on transactions.
 ///
 ///
-/// Both the [Typescript SDK](https://github.com/aptos-labs/aptos-core/blob/9b85d41ed8ef4a61a9cd64f9de511654fcc02024/ecosystem/typescript/sdk/src/aptos_client.ts#L413) and [Python SDK](https://github.com/aptos-labs/aptos-core/blob/main/ecosystem/python/sdk/examples/simulate-transfer-coin.py) support the simulation API. Note the output and gas used may change based upon the state of the account. For gas estimations, we recommend that the maximum gas amount be larger than the amount quoted by this API.
+/// Both the [Typescript SDK](https://github.com/cedra-labs/cedra/blob/9b85d41ed8ef4a61a9cd64f9de511654fcc02024/ecosystem/typescript/sdk/src/aptos_client.ts#L413) and [Python SDK](https://github.com/cedra-labs/cedra/blob/main/ecosystem/python/sdk/examples/simulate-transfer-coin.py) support the simulation API. Note the output and gas used may change based upon the state of the account. For gas estimations, we recommend that the maximum gas amount be larger than the amount quoted by this API.
 ///
 /// ## Viewing current and historical state
 ///
@@ -159,23 +159,23 @@
 ///
 /// While either of these may be disabled, storing the state versions is not particularly sustainable.
 ///
-/// Events and transactions pruning can be disabled via setting the [`enable_ledger_pruner`](https://github.com/aptos-labs/aptos-core/blob/cf0bc2e4031a843cdc0c04e70b3f7cd92666afcf/config/src/config/storage_config.rs#L141) to `false`. This is default behavior in Mainnet. In the near future, Aptos will provide indexers that mitigate the need to directly query from a node.
+/// Events and transactions pruning can be disabled via setting the [`enable_ledger_pruner`](https://github.com/cedra-labs/cedra/blob/cf0bc2e4031a843cdc0c04e70b3f7cd92666afcf/config/src/config/storage_config.rs#L141) to `false`. This is default behavior in Mainnet. In the near future, Aptos will provide indexers that mitigate the need to directly query from a node.
 ///
 /// The REST API offers querying transactions and events in these ways:
 ///
-/// * [Transactions for an account](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_account_transactions)
-/// * [Transactions by version](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_transaction_by_version)
-/// * [Events by event handle](https://fullnode.devnet.aptoslabs.com/v1/spec#/operations/get_events_by_event_handle)
+/// * [Transactions for an account](https://devnet.cedra.dev/v1/spec#/operations/get_account_transactions)
+/// * [Transactions by version](https://devnet.cedra.dev/v1/spec#/operations/get_transaction_by_version)
+/// * [Events by event handle](https://devnet.cedra.dev/v1/spec#/operations/get_events_by_event_handle)
 ///
 /// ## Exchanging and tracking coins
 ///
-/// Aptos has a standard [Coin type](https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/aptos-framework/sources/coin.move). Different types of coins can be represented in this type through the use of distinct structs that represent the type parameter or generic for `Coin<T>`.
+/// Aptos has a standard [Coin type](https://github.com/cedra-labs/cedra/blob/main/aptos-move/framework/aptos-framework/sources/coin.move). Different types of coins can be represented in this type through the use of distinct structs that represent the type parameter or generic for `Coin<T>`.
 ///
-/// Coins are stored within an account under the resource `CoinStore<T>`. At account creation, each user has the resource `CoinStore<0x1::aptos_coin::AptosCoin>` or `CoinStore<AptosCoin>`, for short. Within this resource is the Aptos coin: `Coin<AptosCoin>`.
+/// Coins are stored within an account under the resource `CoinStore<T>`. At account creation, each user has the resource `CoinStore<0x1::cedra_coin::CedraCoin>` or `CoinStore<CedraCoin>`, for short. Within this resource is the Aptos coin: `Coin<CedraCoin>`.
 ///
 /// ### Transferring coins between users
 ///
-/// Coins can be transferred between users via the [`coin::transfer`](https://github.com/aptos-labs/aptos-core/blob/36a7c00b29a457469264187d8e44070b2d5391fe/aptos-move/framework/aptos-framework/sources/coin.move#L307) function for all coins and [`aptos_account::transfer`](https://github.com/aptos-labs/aptos-core/blob/88c9aab3982c246f8aa75eb2caf8c8ab1dcab491/aptos-move/framework/aptos-framework/sources/aptos_account.move#L18) for Aptos coins. The advantage of the latter function is that it creates the destination account if it does not exist.
+/// Coins can be transferred between users via the [`coin::transfer`](https://github.com/cedra-labs/cedra/blob/36a7c00b29a457469264187d8e44070b2d5391fe/aptos-move/framework/aptos-framework/sources/coin.move#L307) function for all coins and [`aptos_account::transfer`](https://github.com/cedra-labs/cedra/blob/88c9aab3982c246f8aa75eb2caf8c8ab1dcab491/aptos-move/framework/aptos-framework/sources/aptos_account.move#L18) for Aptos coins. The advantage of the latter function is that it creates the destination account if it does not exist.
 ///
 /// :::caution
 /// It is important to note that if an account has not registered a `CoinStore<T>` for a given `T`, then any transfer of type `T` to that account will fail.
@@ -183,11 +183,11 @@
 ///
 /// ### Current balance for a coin
 ///
-/// The current balance for a `Coin<T>` where `T` is the Aptos coin is available at the account resources URL: `https://{rest_api_server}/accounts/{address}/resource/0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>`. The balance is stored within `coin::amount`. The resource also contains the total number of deposit and withdraw events, and the `counter` value within `deposit_events` and `withdraw_events`, respectively.
+/// The current balance for a `Coin<T>` where `T` is the Aptos coin is available at the account resources URL: `https://{rest_api_server}/accounts/{address}/resource/0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>`. The balance is stored within `coin::amount`. The resource also contains the total number of deposit and withdraw events, and the `counter` value within `deposit_events` and `withdraw_events`, respectively.
 ///
 /// ```
 /// {
-///   "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+///   "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
 ///   "data": {
 ///     "coin": {
 ///       "value": "3927"
@@ -232,7 +232,7 @@
 ///     {
 ///       "address": "0xb258b91eee04111039320a85b0c24a2dd433909e14a6b5c32ee722e0fdecfddc",
 ///       "data": {
-///         "type": "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
+///         "type": "0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>",
 ///         "data": {
 ///           "coin": {
 ///             "value": "1000"
@@ -261,7 +261,7 @@
 ///   "payload": {
 ///     "function": "0x1::coin::transfer",
 ///     "type_arguments": [
-///       "0x1::aptos_coin::AptosCoin"
+///       "0x1::cedra_coin::CedraCoin"
 ///     ],
 ///     "arguments": [
 ///       "0x5098df8e7969b58ab3bd2d440c6203f64c60a1fd5c08b9d4abe6ae4216246c3e",
@@ -332,7 +332,7 @@
 ///
 /// Aptos provides clear and canonical events for all withdraw and deposit of coins. This can be used in coordination with the associated transactions to present to a user the change of their account balance over time, when that happened, and what caused it. With some amount of additional parsing, metadata such as the transaction type and the other parties involved can also be shared.
 ///
-/// Query events by handle URL: `https://{rest_api_server}/accounts/{address}/events/0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>/withdraw_events`
+/// Query events by handle URL: `https://{rest_api_server}/accounts/{address}/events/0x1::coin::CoinStore<0x1::cedra_coin::CedraCoin>/withdraw_events`
 ///
 /// ```
 /// [
@@ -359,7 +359,7 @@
 ///
 /// :::tip
 ///
-/// When tracking full movement of coins, normally events are sufficient. `0x1::aptos_coin::AptosCoin`, however, requires considering `gas_used` for each transaction sent from the given account since it represents gas in Aptos. To reduce unnecessary overhead, extracting gas fees due to transactions does not emit an event. All transactions for an account can be retrieved from this API: `https://{rest_server_api}/accounts/{address}/transactions`
+/// When tracking full movement of coins, normally events are sufficient. `0x1::cedra_coin::CedraCoin`, however, requires considering `gas_used` for each transaction sent from the given account since it represents gas in Aptos. To reduce unnecessary overhead, extracting gas fees due to transactions does not emit an event. All transactions for an account can be retrieved from this API: `https://{rest_server_api}/accounts/{address}/transactions`
 ///
 /// :::
 ///
@@ -453,7 +453,7 @@
 /// There are three balance changes in this transaction:
 /// 1. A withdrawal of `1000` of `0x1337::my_coin::MyCoin` from the transaction sending account `0x810026ca8291dd88b5b30a1d3ca2edd683d33d06c4a7f7c451d96f6d47bc5e8b`
 /// 2. A deposit of `1000` of `0x1337::my_coin::MyCoin` to receiving account `0x5098df8e7969b58ab3bd2d440c6203f64c60a1fd5c08b9d4abe6ae4216246c3e`
-/// 3. A gas fee `2200` of `0x1::aptos_coin::AptosCoin` from the sending account `0x810026ca8291dd88b5b30a1d3ca2edd683d33d06c4a7f7c451d96f6d47bc5e8b`
+/// 3. A gas fee `2200` of `0x1::cedra_coin::CedraCoin` from the sending account `0x810026ca8291dd88b5b30a1d3ca2edd683d33d06c4a7f7c451d96f6d47bc5e8b`
 ///
 /// To retrieve the withdrawal information:
 /// 1. Scan the `changes` for `0x1::coin::CoinStore<CoinType>`.  Note the `CoinType` is a generic signifying which coin is stored in the store.  In this example, the `CoinType` is `0x1337::my_coin::MyCoin`.
@@ -468,7 +468,7 @@
 ///
 /// To retrieve the gas fee:
 /// 1. The `gas_used` field must be multiplied times the `gas_unit_price`.  In this example, `gas_used=20` and `gas_unit_price=110` so the total gas coins withdrawn is `2200`.
-/// 2. Gas is always: `0x1::aptos_coin::AptosCoin`
+/// 2. Gas is always: `0x1::cedra_coin::CedraCoin`
 ///
 /// To retrieve information about the number of decimals of the coin:
 /// 1. You can retrieve the number of decimals for a coin via its: `0x1::coin::CoinInfo<CoinType>`
@@ -492,14 +492,14 @@
 ///
 /// ## Integrating with the faucet
 ///
-/// This tutorial is for SDK and wallet developers who want to integrate with the [Aptos Faucet](https://github.com/aptos-labs/aptos-core/tree/main/crates/aptos-faucet). If you are a dapp developer, you should access the faucet through an existing [SDK](../tutorials/first-transaction.md) or [CLI](../tools/aptos-cli-tool/use-aptos-cli#initialize-local-configuration-and-create-an-account) instead.
+/// This tutorial is for SDK and wallet developers who want to integrate with the [Aptos Faucet](https://github.com/cedra-labs/cedra/tree/main/crates/aptos-faucet). If you are a dapp developer, you should access the faucet through an existing [SDK](../tutorials/first-transaction.md) or [CLI](../tools/aptos-cli-tool/use-aptos-cli#initialize-local-configuration-and-create-an-account) instead.
 ///
 /// ### Differences between devnet and testnet
 /// What are the differences between devnet and testnet? Effectively none. In the past, the testnet faucet had a Captcha in front of it, making it unqueryable by normal means. This is no longer true.
 ///
 /// The endpoints for each faucet are:
-/// - Devnet: https://faucet.devnet.aptoslabs.com
-/// - Testnet: https://faucet.testnet.aptoslabs.com
+/// - Devnet: https://faucet-api.cedra.dev
+/// - Testnet: https://faucet-api.cedra.dev
 ///
 /// ### Calling the faucet: JavaScript / TypeScript
 /// If you are building a client in JavaScript or TypeScript, you should make use of the [@aptos-labs/aptos-faucet-client](https://www.npmjs.com/package/@aptos-labs/aptos-faucet-client) package. This client is generated based on the OpenAPI spec published by the faucet service.
@@ -512,7 +512,7 @@
 /// } from "@aptos-labs/aptos-faucet-client";
 ///
 /// async function callFaucet(amount: number, address: string): Promise<string[]> {
-///   const faucetClient = new AptosFaucetClient({BASE: "https://faucet.devnet.aptoslabs.com"});
+///   const faucetClient = new AptosFaucetClient({BASE: "https://faucet-api.cedra.dev"});
 ///   const request: FundRequest = {
 ///     amount,
 ///     address,
@@ -524,12 +524,12 @@
 ///
 /// ### Calling the faucet: Other languages
 /// If you are trying to call the faucet in other languages, you have two options:
-/// 1. Generate a client from the [OpenAPI spec](https://github.com/aptos-labs/aptos-core/blob/main/crates/aptos-faucet/doc/spec.yaml).
+/// 1. Generate a client from the [OpenAPI spec](https://github.com/cedra-labs/cedra/blob/main/crates/aptos-faucet/doc/spec.yaml).
 /// 2. Call the faucet on your own.
 ///
 /// For the latter, you will want to build a query similar to this:
 /// ```
-/// curl -X POST 'https://faucet.devnet.aptoslabs.com/mint?amount=10000&address=0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6'
+/// curl -X POST 'https://faucet-api.cedra.dev/mint?amount=10000&address=0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6'
 /// ```
 ///
 /// This means mint 10000 OCTA to address `0xd0f523c9e73e6f3d68c16ae883a9febc616e484c4998a72d8899a1009e5a89d6`.
